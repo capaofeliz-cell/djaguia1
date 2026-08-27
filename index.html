@@ -475,6 +475,66 @@ section + section { border-top: 1px solid var(--sky-line); }
   border: 1px solid var(--sky-line); border-radius: 999px; padding: 3px 10px;
 }
 
+.video-card { cursor: pointer; }
+.video-card .thumb svg { transition: transform .2s; }
+.video-card:hover .thumb svg,
+.video-card:focus-visible .thumb svg { transform: scale(1.15); }
+.video-card:focus-visible { outline: 2px solid var(--gold-dim); outline-offset: 3px; }
+
+/* ---------- modal de vídeo ---------- */
+.video-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+.video-modal[hidden] {
+  display: none !important;
+}
+.video-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(4, 5, 12, 0.88);
+  backdrop-filter: blur(4px);
+}
+.video-modal-box {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  aspect-ratio: 16/9;
+  background: #000;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--sky-line);
+  box-shadow: 0 20px 60px rgba(0,0,0,.6);
+}
+.video-modal-frame, .video-modal-frame iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+.video-modal-close {
+  position: absolute;
+  top: -44px;
+  right: 0;
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.08);
+  border: 1px solid var(--sky-line);
+  color: var(--text-high);
+  font-size: 1rem;
+  cursor: pointer;
+  z-index: 2;
+}
+.video-modal-close:hover { background: rgba(232,197,104,.15); border-color: var(--gold-dim); }
+@media (max-width: 720px) {
+  .video-modal-close { top: -40px; right: 0; }
+}
+
 .card .body { padding: 18px 20px 22px; }
 .card .date { font-size: 0.72rem; color: var(--text-low); letter-spacing: .04em; text-transform: uppercase; margin-bottom: 8px; display:block; }
 .card h4 { font-family: var(--font-display); font-size: 1.18rem; color: var(--text-high); margin: 0 0 8px; line-height: 1.3; }
@@ -669,6 +729,7 @@ footer.site-footer {
   flex: 1;
   min-width: 0;
 }
+.player-bar .player-custom[hidden] { display: none !important; }
 
 .player-bar .player-external {
   display: flex;
@@ -677,6 +738,7 @@ footer.site-footer {
   flex: 1;
   min-width: 0;
 }
+.player-bar .player-external[hidden] { display: none !important; }
 
 .player-bar .ext-frame {
   width: 0;
@@ -824,6 +886,7 @@ footer.site-footer {
       <a href="#ao-vivo">Ao Vivo</a>
       <a href="#programacao">Programação</a>
       <a href="#noticias">Notícias</a>
+      <a href="#videos">Vídeos</a>
       <a href="#participe">Participe</a>
       <a href="#sobre">Sobre</a>
     </nav>
@@ -857,20 +920,19 @@ footer.site-footer {
       <p>Acompanhe quem está no comando da programação e o que está tocando neste exato momento.</p>
     </div>
 
-  <div class="track-strip">
+    <div class="onair">
+      <div>
+        <div class="now-label">No microfone</div>
+        <h3>Jorge de Deus</h3>
+        <div class="role">Locutor — DJ ÁGUIA1</div>
+
+        <div class="track-strip">
           <div class="eq"><span></span><span></span><span></span><span></span></div>
           <div class="meta">
             <strong>Asas da Manhã (Autoral)</strong>
             <span>DJ Renato Bravo · Dance Worship</span>
           </div>
         </div>
-
-     
-    <div class="onair">
-      <div>
-        <div class="now-label">No microfone</div>
-        <h3>Jorge de Deus</h3>
-        <div class="role">Locutor — DJ ÁGUIA1</div>
 
         <div class="mini-stat-row">
           <div class="mini-stat"><strong>128</strong><span>kbps</span></div>
@@ -895,15 +957,19 @@ footer.site-footer {
       </div>
       <p>Veja a transmissão do estúdio direto do canal DJ ÁGUIA1 no YouTube.</p>
     </div>
-    <!-- Link direto para a aba "Ao vivo" do canal no YouTube.
-         Quando o canal tiver uma live ativa com ID fixo, é possível trocar
-         este cartão por um <iframe> de embed usando o ID do vídeo. -->
-    <a class="webcam-box webcam-link" href="https://www.youtube.com/@djaguia1/streams" target="_blank" rel="noopener">
+    <!-- Abre a transmissão ao vivo do canal (ID: UC5haMU-qX0of6SpRd4kvGVg)
+         dentro do modal de vídeo dessa página. Se o canal não estiver ao
+         vivo no momento, o próprio YouTube mostra esse aviso dentro do
+         player embutido. -->
+    <div class="webcam-box webcam-link video-card" data-channel-id="UC5haMU-qX0of6SpRd4kvGVg" tabindex="0" role="button" aria-label="Assistir à transmissão ao vivo do estúdio">
       <span class="webcam-play">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
       </span>
-      <span class="webcam-caption">Assistir ao vivo no canal do YouTube</span>
-    </a>
+      <span class="webcam-caption">Assistir ao vivo do estúdio</span>
+    </div>
+    <p style="text-align:center; margin-top:18px;">
+      <a class="readmore" href="https://www.youtube.com/@djaguia1/streams" target="_blank" rel="noopener">Prefere abrir direto no YouTube? →</a>
+    </p>
   </div>
 </section>
 
@@ -990,6 +1056,30 @@ footer.site-footer {
   <div class="wrap">
     <div class="section-head">
       <div>
+        <span class="eyebrow">Canal DJ ÁGUIA1</span>
+        <h2>Vídeos</h2>
+      </div>
+      <p>Os últimos lançamentos e sessões ao vivo do canal no YouTube.</p>
+    </div>
+    <div class="grid-3">
+      <article class="card video-card" data-video-id="COLOQUE_O_ID_DO_VIDEO_1" tabindex="0" role="button" aria-label="Assistir: Asas da Manhã — Videoclipe Oficial">
+        <div class="thumb"><span class="tag">Autoral</span><svg viewBox="0 0 24 24" fill="#e8c568"><path d="M8 5v14l11-7z"/></svg></div>
+        <div class="body"><h4>Asas da Manhã — Videoclipe Oficial</h4><p>Dance Worship autoral</p></div>
+      </article>
+      <article class="card video-card" data-video-id="COLOQUE_O_ID_DO_VIDEO_2" tabindex="0" role="button" aria-label="Assistir: Sessão ao vivo no estúdio — Trance de Adoração">
+        <div class="thumb"><span class="tag">Ao vivo</span><svg viewBox="0 0 24 24" fill="#e8c568"><path d="M8 5v14l11-7z"/></svg></div>
+        <div class="body"><h4>Sessão ao vivo no estúdio — Trance de Adoração</h4><p>Gravado direto da rádio</p></div>
+      </article>
+      <article class="card video-card" data-video-id="COLOQUE_O_ID_DO_VIDEO_3" tabindex="0" role="button" aria-label="Assistir: O Som dos Céus — Faixa tema">
+        <div class="thumb"><span class="tag">Autoral</span><svg viewBox="0 0 24 24" fill="#e8c568"><path d="M8 5v14l11-7z"/></svg></div>
+        <div class="body"><h4>O Som dos Céus — Faixa tema</h4><p>Produção original DJ ÁGUIA1</p></div>
+      </article>
+    </div>
+    <p style="text-align:center; margin-top:34px;">
+      <a class="btn btn-outline" href="https://www.youtube.com/@djaguia1" target="_blank" rel="noopener">Ver canal completo no YouTube</a>
+    </p>
+  </div>
+</section>
 
 <!-- ============ TOP 5 + OUVINTE DA SEMANA ============ -->
 <section id="top5">
@@ -1088,6 +1178,7 @@ footer.site-footer {
           <li><a href="#ao-vivo">Ao vivo</a></li>
           <li><a href="#programacao">Programação</a></li>
           <li><a href="#noticias">Notícias</a></li>
+          <li><a href="#videos">Vídeos</a></li>
           <li><a href="#sobre">Sobre</a></li>
         </ul>
       </div>
@@ -1120,9 +1211,9 @@ footer.site-footer {
     <div class="info">
       <div class="top-row">
         <strong>O Som dos Céus</strong>
-        <span class="live-tag"><span class="live-dot"></span> AO VIVO</span>
+        <span class="live-tag"><span class="live-dot"></span> NO AR</span>
       </div>
-      <span class="sub">JOVEM GOSPEL · RETRANS</span>
+      <span class="sub">DJ Renato Bravo · Dance Worship · Asas da Manhã</span>
     </div>
     <div class="volume">
       <span aria-hidden="true">🔊</span>
@@ -1140,16 +1231,25 @@ footer.site-footer {
     <div class="ext-frame" id="extFrame"></div>
     <div class="info">
       <div class="top-row">
-        <strong>ESTÚDIO</strong>
-        <span class="live-tag"><span class="live-dot"></span> AO VIVO</span>
+        <strong>O Som dos Céus</strong>
+        <span class="live-tag"><span class="live-dot"></span> NO AR</span>
       </div>
-      <span class="sub">JORGE DE DEUS · </span>
+      <span class="sub">DJ Renato Bravo · Dance Worship</span>
     </div>
   </div>
 
   <div class="clock">
     <strong id="nowClock">--:--</strong>
     <span id="nowDate">carregando…</span>
+  </div>
+</div>
+
+<!-- ============ MODAL DE VÍDEO (abre os vídeos do YouTube dentro do site) ============ -->
+<div class="video-modal" id="videoModal" hidden>
+  <div class="video-modal-backdrop" id="videoModalBackdrop"></div>
+  <div class="video-modal-box">
+    <button class="video-modal-close" id="videoModalClose" aria-label="Fechar vídeo">✕</button>
+    <div class="video-modal-frame" id="videoModalFrame"></div>
   </div>
 </div>
 
@@ -1173,7 +1273,7 @@ footer.site-footer {
    ============================================================ */
 var PLAYER_MODE = 'external'; // 'external' ou 'custom'
 
-var EXTERNAL_PLAYER_URL = 'https://servidor26-5.brlogic.com:8038/live?source=website';
+var EXTERNAL_PLAYER_URL = 'https://djaguia1.ismyradio.com/player';
 var STREAM_URL = 'https://servidor26-5.brlogic.com:8038/live?source=website';
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -1257,7 +1357,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   } else {
     /* ---- modo player próprio (stream direto) ---- */
-    if (playerCustomEl) playerCustomEl.hidden = true;
+    if (playerCustomEl) playerCustomEl.hidden = false;
     if (playerExternalEl) playerExternalEl.hidden = true;
 
     var audio = new Audio();
@@ -1309,6 +1409,53 @@ document.addEventListener('DOMContentLoaded', function () {
       setPlayingUI(false);
     });
   }
+
+  /* ---- modal de vídeos (abre os vídeos do canal dentro do site) ---- */
+  var videoModal = document.getElementById('videoModal');
+  var videoModalFrame = document.getElementById('videoModalFrame');
+  var videoModalClose = document.getElementById('videoModalClose');
+  var videoModalBackdrop = document.getElementById('videoModalBackdrop');
+  var videoCards = document.querySelectorAll('.video-card');
+
+  function openVideoModal(embedSrc) {
+    if (!videoModal || !videoModalFrame || !embedSrc) return;
+    var iframe = document.createElement('iframe');
+    iframe.src = embedSrc;
+    iframe.title = 'Player — DJ ÁGUIA1';
+    iframe.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+    iframe.allowFullscreen = true;
+    videoModalFrame.appendChild(iframe);
+    videoModal.hidden = false;
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeVideoModal() {
+    if (!videoModal || !videoModalFrame) return;
+    videoModal.hidden = true;
+    videoModalFrame.innerHTML = '';
+    document.body.style.overflow = '';
+  }
+
+  videoCards.forEach(function (card) {
+    var videoId = card.getAttribute('data-video-id');
+    var channelId = card.getAttribute('data-channel-id');
+    var embedSrc = videoId
+      ? 'https://www.youtube-nocookie.com/embed/' + videoId + '?autoplay=1&rel=0'
+      : (channelId ? 'https://www.youtube.com/embed/live_stream?channel=' + channelId + '&autoplay=1' : null);
+    card.addEventListener('click', function () { openVideoModal(embedSrc); });
+    card.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        openVideoModal(embedSrc);
+      }
+    });
+  });
+
+  if (videoModalClose) videoModalClose.addEventListener('click', closeVideoModal);
+  if (videoModalBackdrop) videoModalBackdrop.addEventListener('click', closeVideoModal);
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && videoModal && !videoModal.hidden) closeVideoModal();
+  });
 
   /* ---- request form (participação do ouvinte) ---- */
   var reqForm = document.getElementById('requestForm');
