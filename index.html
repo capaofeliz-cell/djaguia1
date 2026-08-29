@@ -46,6 +46,7 @@ const WORKER_URL='https://jorge-pastor.capaofeliz.workers.dev/';
 // Histórico da conversa (memória real) — enviado inteiro a cada pergunta,
 // para que o Jorge responda levando em conta o que já foi dito antes,
 // como uma conversa de verdade entre duas pessoas.
+// sempre finalizando com um amém no final.
 let conversationHistory=[{role:'assistant',content:'A paz do Senhor esteja com você, meu irmão(ã). Que alegria ter você aqui. Como posso ouvir e acolher você hoje?'}];
 
 function answerFallback(q){const s=q.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');if(s.includes('paz')||s.includes('dificuldade')||s.includes('ansiedade'))return answers.paz;if(s.includes('perd'))return answers.perdao;if(s.includes('ora'))return answers.oracao;if(s.includes('jesus')||s.includes('cristo'))return answers.jesus;if(s.includes('medo')||s.includes('angustia'))return answers.medo;return answers.default}
