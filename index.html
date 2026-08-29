@@ -95,7 +95,8 @@ function copyLink(){
 // ---- Narrador virtual com ElevenLabs; SpeechSynthesis fica como reserva local ----
 let currentNarrationAudio=null;
 let currentNarrationButton=null;
-const ELEVENLABS_TTS_URL='https://jorge-pastor.capaofeliz.workers.dev/';
+const WORKER_URL='https://jorge-pastor.capaofeliz.workers.dev/';
+const ELEVENLABS_TTS_URL=WORKER_URL;
 
 function stopNarration(){
   if(currentNarrationAudio){
@@ -120,13 +121,29 @@ function setNarrationButton(btn, playing){
   btn.dataset.wasPlaying=playing?'1':'';
 }
 
+function prepareTextForSpeech(text){
+  if(!text)return text;
+  return text.replace(/(\d+):(\d+)(-(\d+))?/g,function(_,cap,verse,__,verseEnd){
+    return verseEnd?' capítulo '+cap+', versículos '+verse+' a '+verseEnd:' capítulo '+cap+', versículo '+verse;
+  });
+}
+
+function prepareTextForElevenLabs(text){
+  let prepared=prepareTextForSpeech(text);
+  // Quebras e pontuação dão espaço para respiração e entonação mais naturais.
+  prepared=prepared.replace(/\s*—\s*/g,' ... ');
+  prepared=prepared.replace(/([.!?])\s+/g,'$1\n');
+  prepared=prepared.replace(/,\s+/g,', ');
+  return prepared.trim();
+}
+
 function speakWithBrowser(text,btn){
   if(!('speechSynthesis' in window)){
     alert('A narração não está disponível no momento.');
     return;
   }
   const utter=new SpeechSynthesisUtterance(prepareTextForSpeech(text));
-  utter.lang='pt-BR'; utter.rate=0.86; utter.pitch=0.68; utter.volume=1;
+  utter.lang='pt-BR'; utter.rate=0.92; utter.pitch=0.58; utter.volume=1;
   utter.onend=()=>setNarrationButton(btn,false);
   utter.onerror=()=>setNarrationButton(btn,false);
   setNarrationButton(btn,true);
@@ -145,23 +162,28 @@ async function speakText(text,btn){
     const response=await fetch(ELEVENLABS_TTS_URL,{
       method:'POST',
       headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({action:'tts',text:prepareTextForSpeech(text)})
+      body:JSON.stringify({action:'tts',text:prepareTextForElevenLabs(text)})
     });
-    if(!response.ok)throw new Error('Falha no serviço de narração.');
+    if(!response.ok){
+      let detail='Falha no serviço de narração.';
+      try{ const problem=await response.json(); detail=problem.details||problem.error||detail; }catch(e){}
+      throw new Error(detail+' (HTTP '+response.status+')');
+    }
+    const contentType=response.headers.get('content-type')||'';
+    if(!contentType.includes('audio/')) throw new Error('O Worker não retornou áudio da ElevenLabs. (Content-Type: '+contentType+')');
     const blob=await response.blob();
     const audio=new Audio(URL.createObjectURL(blob));
+    audio.playbackRate=1.03;
     currentNarrationAudio=audio;
     audio.onended=()=>{ URL.revokeObjectURL(audio.src); stopNarration(); };
-    audio.onerror=()=>{ URL.revokeObjectURL(audio.src); stopNarration(); speakWithBrowser(text,btn); };
+    audio.onerror=()=>{ URL.revokeObjectURL(audio.src); stopNarration(); alert('Não foi possível reproduzir o áudio da ElevenLabs. Verifique o Worker.'); };
     await audio.play();
   }catch(error){
-    console.warn('[Pastor Virtual Jorge] ElevenLabs indisponível; usando voz local.',error);
+    console.error('[Pastor Virtual Jorge] Falha na ElevenLabs:',error);
     stopNarration();
-    speakWithBrowser(text,btn);
+    alert('Narração ElevenLabs: '+error.message+'\n\nCole o Worker atualizado, salve o segredo ELEVENLABS_API_KEY e clique em Deploy.');
   }
 }
-
-const WORKER_URL='https://jorge-pastor.capaofeliz.workers.dev/';
 
 // ---- Versículo que muda a cada abertura do site ----
 const DAILY_VERSES=[
