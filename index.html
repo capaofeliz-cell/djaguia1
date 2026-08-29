@@ -54,16 +54,10 @@ function toggleMic(){if(!recognition){alert('O reconhecimento de voz não é com
 
 // ---- Compartilhar nas redes sociais ----
 function toggleShareMenu(e){
+  e.preventDefault();
   e.stopPropagation();
-  if(navigator.share){
-    navigator.share({
-      title:'Pastor Virtual Jorge',
-      text:'Converse com o Pastor Virtual Jorge — respostas acolhedoras baseadas na Palavra de Deus 🙏📖',
-      url:location.href
-    }).catch(()=>{});
-    return;
-  }
-  document.getElementById('shareMenu').classList.toggle('open');
+  const menu=document.getElementById('shareMenu');
+  if(menu) menu.classList.toggle('open');
 }
 document.addEventListener('click',function(e){
   const menu=document.getElementById('shareMenu');
@@ -72,24 +66,24 @@ document.addEventListener('click',function(e){
   }
 });
 function shareVia(network){
-  const url=encodeURIComponent(location.href);
-  const text=encodeURIComponent('Converse com o Pastor Virtual Jorge — respostas acolhedoras baseadas na Palavra de Deus 🙏📖');
+  const pageUrl=location.href;
+  const encodedUrl=encodeURIComponent(pageUrl);
+  const message='Converse com o Pastor Virtual Jorge — respostas acolhedoras baseadas na Palavra de Deus';
+  const encodedMessage=encodeURIComponent(message);
   let shareUrl='';
-  if(network==='whatsapp') shareUrl='https://wa.me/?text='+text+'%20'+url;
-  else if(network==='facebook') shareUrl='https://www.facebook.com/sharer/sharer.php?u='+url;
-  else if(network==='twitter') shareUrl='https://twitter.com/intent/tweet?text='+text+'&url='+url;
-  else if(network==='telegram') shareUrl='https://t.me/share/url?url='+url+'&text='+text;
-  else if(network==='instagram'){
-    document.getElementById('shareMenu').classList.remove('open');
-    if(navigator.share){
-      navigator.share({title:'Pastor Virtual Jorge',text:text,url:location.href}).catch(()=>{});
-    }else{
-      copyLink('Link copiado! Agora cole o link na bio, story ou mensagem do Instagram.');
-    }
+  if(network==='whatsapp') shareUrl='https://api.whatsapp.com/send?text='+encodedMessage+'%20'+encodedUrl;
+  if(network==='facebook') shareUrl='https://www.facebook.com/sharer/sharer.php?u='+encodedUrl;
+  if(network==='twitter') shareUrl='https://x.com/intent/post?text='+encodedMessage+'&url='+encodedUrl;
+  if(network==='telegram') shareUrl='https://t.me/share/url?url='+encodedUrl+'&text='+encodedMessage;
+  if(network==='instagram'){
+    copyLink('Link copiado! Agora cole o link no Instagram.');
+    setTimeout(function(){window.open('https://www.instagram.com/','_blank','noopener,noreferrer');},300);
     return;
   }
-  window.open(shareUrl,'_blank','noopener,noreferrer,width=600,height=520');
-  document.getElementById('shareMenu').classList.remove('open');
+  if(!shareUrl){alert('Rede social não configurada.');return;}
+  window.open(shareUrl,'_blank','noopener,noreferrer,width=650,height=650');
+  const menu=document.getElementById('shareMenu');
+  if(menu) menu.classList.remove('open');
 }
 function copyLink(message='Link copiado!'){
   const finish=()=>{ document.getElementById('shareMenu').classList.remove('open'); };
