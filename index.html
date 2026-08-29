@@ -92,74 +92,73 @@ function copyLink(){
   }
 }
 
-// ---- Narrador virtual (Text-to-Speech), com voz mais grave e ritmo humano ----
-let ptVoicesCache=null;
-if('speechSynthesis' in window){
-  window.speechSynthesis.onvoiceschanged=function(){
-    ptVoicesCache=window.speechSynthesis.getVoices().filter(v=>v.lang && v.lang.toLowerCase().startsWith('pt'));
-  };
-  // dispara uma vez também, caso as vozes já estejam prontas
-  ptVoicesCache=window.speechSynthesis.getVoices().filter(v=>v.lang && v.lang.toLowerCase().startsWith('pt'));
+// ---- Narrador virtual com ElevenLabs; SpeechSynthesis fica como reserva local ----
+let currentNarrationAudio=null;
+let currentNarrationButton=null;
+const ELEVENLABS_TTS_URL='https://jorge-pastor.capaofeliz.workers.dev/';
+
+function stopNarration(){
+  if(currentNarrationAudio){
+    currentNarrationAudio.pause();
+    currentNarrationAudio.currentTime=0;
+    currentNarrationAudio.src='';
+    currentNarrationAudio=null;
+  }
+  if('speechSynthesis' in window) window.speechSynthesis.cancel();
+  document.querySelectorAll('.narrate-btn.playing').forEach(b=>{
+    b.classList.remove('playing');
+    b.textContent='🔊 Ouvir esta resposta';
+    b.dataset.wasPlaying='';
+  });
+  currentNarrationButton=null;
 }
 
-function pickNarratorVoice(){
-  const voices=(ptVoicesCache && ptVoicesCache.length) ? ptVoicesCache : (('speechSynthesis' in window) ? window.speechSynthesis.getVoices().filter(v=>v.lang && v.lang.toLowerCase().startsWith('pt')) : []);
-  if(!voices.length) return null;
-  // As vozes "Google" (quando disponíveis no Chrome/Android) costumam soar
-  // bem menos robóticas que as vozes padrão do sistema operacional.
-  const googleMasc=voices.find(v=>/google/i.test(v.name) && /male|masculin|ricardo|daniel|felipe|diego|jorge|antonio|fernando/i.test(v.name));
-  const anyGoogleBR=voices.find(v=>/google/i.test(v.name) && v.lang.toLowerCase()==='pt-br');
-  const masc=voices.find(v=>/male|masculin|ricardo|daniel|felipe|diego|jorge|antonio|fernando/i.test(v.name));
-  const brVoices=voices.filter(v=>v.lang.toLowerCase()==='pt-br');
-  return googleMasc || anyGoogleBR || masc || brVoices[0] || voices[0];
+function setNarrationButton(btn, playing){
+  if(!btn)return;
+  btn.classList.toggle('playing',playing);
+  btn.textContent=playing?'⏸ Parar narração':'🔊 Ouvir esta resposta';
+  btn.dataset.wasPlaying=playing?'1':'';
 }
 
-// Corrige a leitura de referências bíblicas (ex.: "João 14:9") para que o
-// narrador fale "capítulo 14, versículo 9" em vez de interpretar como hora.
-function prepareTextForSpeech(text){
-  if(!text) return text;
-  return text
-    .replace(/(\d+):(\d+)(-(\d+))?/g, function(_, cap, verse, __, verseEnd){
-      return verseEnd
-        ? 'capítulo ' + cap + ', versículos ' + verse + ' a ' + verseEnd
-        : 'capítulo ' + cap + ', versículo ' + verse;
-    })
-    .replace(/(\d+):(\d+),(\d+)/g, 'capítulo $1, versículos $2 e $3');
-}
-
-function speakText(text, btn){
+function speakWithBrowser(text,btn){
   if(!('speechSynthesis' in window)){
-    alert('Seu navegador não suporta narração de voz. Tente usar o Google Chrome.');
+    alert('A narração não está disponível no momento.');
     return;
   }
-  // Se já está narrando (esse ou outro botão), clicar de novo interrompe.
-  if(window.speechSynthesis.speaking){
-    window.speechSynthesis.cancel();
-    document.querySelectorAll('.narrate-btn.playing').forEach(b=>{ b.classList.remove('playing'); b.textContent='🔊 Ouvir esta resposta'; });
-    if(btn && btn.dataset.wasPlaying==='1'){ btn.dataset.wasPlaying=''; return; }
-  }
-
   const utter=new SpeechSynthesisUtterance(prepareTextForSpeech(text));
-  utter.lang='pt-BR';
-  utter.rate=0.86;     // ritmo mais pausado, para soar menos robótico
-  utter.pitch=0.68;    // tom mais grave, impactante
-  utter.volume=1;
-
-  const voice=pickNarratorVoice();
-  if(voice) utter.voice=voice;
-
-  if(btn){
-    btn.classList.add('playing');
-    btn.textContent='⏸ Parar narração';
-    btn.dataset.wasPlaying='1';
-  }
-  utter.onend=function(){
-    if(btn){ btn.classList.remove('playing'); btn.textContent='🔊 Ouvir esta resposta'; btn.dataset.wasPlaying=''; }
-  };
-  utter.onerror=function(){
-    if(btn){ btn.classList.remove('playing'); btn.textContent='🔊 Ouvir esta resposta'; btn.dataset.wasPlaying=''; }
-  };
+  utter.lang='pt-BR'; utter.rate=0.86; utter.pitch=0.68; utter.volume=1;
+  utter.onend=()=>setNarrationButton(btn,false);
+  utter.onerror=()=>setNarrationButton(btn,false);
+  setNarrationButton(btn,true);
   window.speechSynthesis.speak(utter);
+}
+
+async function speakText(text,btn){
+  if(currentNarrationAudio || ('speechSynthesis' in window && window.speechSynthesis.speaking)){
+    const wasThis=currentNarrationButton===btn || (btn && btn.dataset.wasPlaying==='1');
+    stopNarration();
+    if(wasThis)return;
+  }
+  currentNarrationButton=btn;
+  setNarrationButton(btn,true);
+  try{
+    const response=await fetch(ELEVENLABS_TTS_URL,{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({action:'tts',text:prepareTextForSpeech(text)})
+    });
+    if(!response.ok)throw new Error('Falha no serviço de narração.');
+    const blob=await response.blob();
+    const audio=new Audio(URL.createObjectURL(blob));
+    currentNarrationAudio=audio;
+    audio.onended=()=>{ URL.revokeObjectURL(audio.src); stopNarration(); };
+    audio.onerror=()=>{ URL.revokeObjectURL(audio.src); stopNarration(); speakWithBrowser(text,btn); };
+    await audio.play();
+  }catch(error){
+    console.warn('[Pastor Virtual Jorge] ElevenLabs indisponível; usando voz local.',error);
+    stopNarration();
+    speakWithBrowser(text,btn);
+  }
 }
 
 const WORKER_URL='https://jorge-pastor.capaofeliz.workers.dev/';
@@ -237,7 +236,7 @@ function addPastorMessage(reply,verse){
 
 async function ask(q){
   if(!q||!q.trim())return;
-  if('speechSynthesis' in window){ window.speechSynthesis.cancel(); }
+  stopNarration();
   const list=document.getElementById('messages'),user=document.createElement('div');
   user.className='bubble you';
   user.textContent=q.trim();
@@ -293,7 +292,7 @@ function send(){const i=document.getElementById('input');if(i.value.trim()){ask(
 })();
 
 function clearChat(){
-  if('speechSynthesis' in window){ window.speechSynthesis.cancel(); }
+  stopNarration();
   document.getElementById('messages').innerHTML='<div class="bubble jorge">A conversa foi reiniciada. A paz do Senhor esteja com você. Como posso acolher você hoje?<span class="ref">"O Senhor é o meu pastor; nada me faltará." — Salmos 23:1</span></div>';
   conversationHistory=[{role:'assistant',content:'A conversa foi reiniciada. A paz do Senhor esteja com você. Como posso acolher você hoje?'}];
 }
