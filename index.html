@@ -141,7 +141,18 @@ let conversationHistory=[{role:'assistant',content:'A paz do Senhor esteja com v
 
 function answerFallback(q){const s=q.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');if(s.includes('paz')||s.includes('dificuldade')||s.includes('ansiedade'))return answers.paz;if(s.includes('perd'))return answers.perdao;if(s.includes('ora'))return answers.oracao;if(s.includes('jesus')||s.includes('cristo'))return answers.jesus;if(s.includes('medo')||s.includes('angustia'))return answers.medo;return answers.default}
 
-function addPastorMessage(reply,verse,audioBase64){
+function speakReply(text){
+  if(!('speechSynthesis' in window) || !text) return;
+  window.speechSynthesis.cancel(); // interrompe qualquer fala anterior
+  const utterance = new SpeechSynthesisUtterance(text);
+  utterance.lang = 'pt-BR';
+  const voices = window.speechSynthesis.getVoices();
+  const ptVoice = voices.find(v => v.lang && v.lang.toLowerCase().startsWith('pt'));
+  if(ptVoice) utterance.voice = ptVoice;
+  window.speechSynthesis.speak(utterance);
+}
+
+function addPastorMessage(reply,verse){
   const pastor=document.createElement('div');
   pastor.className='bubble jorge';
   const finalReply=reply||'Perdão, não consegui formular uma resposta agora.';
@@ -158,17 +169,12 @@ function addPastorMessage(reply,verse,audioBase64){
     pastor.appendChild(ref);
   }
 
-  if(audioBase64){
+  if('speechSynthesis' in window){
     const playBtn=document.createElement('button');
     playBtn.type='button';
     playBtn.textContent='🔊 Ouvir';
     playBtn.style.cssText='margin-top:9px;border:1px solid #e8cb96;background:#fffaf0;color:#886321;border-radius:999px;padding:6px 12px;font-size:11px;cursor:pointer;display:block';
-    const audioEl=new Audio('data:audio/mpeg;base64,'+audioBase64);
-    playBtn.onclick=()=>{
-      playBtn.textContent='⏸ Tocando...';
-      audioEl.play();
-    };
-    audioEl.onended=()=>{ playBtn.textContent='🔊 Ouvir de novo'; };
+    playBtn.onclick=()=>{ speakReply(finalReply); };
     pastor.appendChild(playBtn);
   }
 
@@ -203,10 +209,8 @@ async function ask(q){
       throw new Error('Resposta da IA veio em formato inesperado.');
     }
     conversationHistory.push({role:'assistant',content:data.reply});
-    list.appendChild(addPastorMessage(data.reply,data.verse,data.audio));
-    if(data.audio){
-      new Audio('data:audio/mpeg;base64,'+data.audio).play().catch(()=>{});
-    }
+    list.appendChild(addPastorMessage(data.reply,data.verse));
+    speakReply(data.reply);
   }catch(error){
     console.error('[Pastor Virtual Jorge] Falha ao chamar a IA real (Worker):',error);
     // Modo local de reserva: usa uma resposta pré-escrita por tema,
