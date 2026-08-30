@@ -173,7 +173,7 @@ function addPastorMessage(reply,verse){
     const playBtn=document.createElement('button');
     playBtn.type='button';
     playBtn.textContent='🔊 Ouvir';
-    playBtn.style.cssText='margin-top:9px;border:1px solid #e8cb96;background:#fffaf0;color:#886321;border-radius:999px;padding:6px 12px;font-size:11px;cursor:pointer;display:block';
+    playBtn.style.cssText='margin:9px auto 0;border:1px solid #e8cb96;background:#fffaf0;color:#886321;border-radius:999px;padding:6px 12px;font-size:11px;cursor:pointer;display:block;text-align:center';
     playBtn.onclick=()=>{ speakReply(finalReply); };
     pastor.appendChild(playBtn);
   }
