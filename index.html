@@ -39,7 +39,7 @@
 <main class="page"><section class="welcome"><span class="badge">Palavra · acolhimento · oração</span><h2>Fique à vontade para <em>compartilhar</em>.</h2><p>Olá, eu sou o Jorge, seu Pastor Virtual. Fui programado pelo Jorge de Deus para lhe ajudar com as coisas de Deus e de Jesus, auxiliando em sua busca e nas dúvidas sobre a Palavra de Deus.
 
 Estou aqui para ouvir seu coração e conversar sobre Deus, Jesus e a Palavra. Pergunte, reflita ou desabafe; caminharemos juntos com fé e esperança.</p><div class="quote"><q>Sede uns para com os outros benignos, misericordiosos, perdoando-vos uns aos outros.</q><cite>Efésios 4:32</cite></div></section>
-<section class="chat" aria-label="Conversa com o Pastor Virtual Jorge"><div class="chat-head"><img class="mini" src="https://media.base44.com/images/public/6a90a16a726d01b21d3bb537/1afbf6a7b_JorgedeDeus.png" alt="Jorge"><div><strong>Conversa com Jorge</strong><small>Um espaço de escuta e reflexão</small></div><span class="status">● disponível</span></div><div class="messages" id="messages"><div class="bubble jorge">A paz do Senhor esteja com você, meu irmão(ã). Que alegria ter você aqui. Como posso ouvir e acolher você hoje?<span class="ref">"O Senhor é o meu pastor; nada me faltará." — Salmos 23:1</span></div></div><div class="typing" id="typing">JORGE ESTÁ PREPARANDO UMA RESPOSTA...</div><div class="suggestions"><button class="suggestion" onclick="ask('Como posso encontrar paz em meio às dificuldades?')">Encontrar paz</button><button class="suggestion" onclick="ask('O que a Bíblia diz sobre o perdão?')">Sobre o perdão</button><button class="suggestion" onclick="ask('Quem é Jesus Cristo?')">Quem é Jesus?</button><button class="suggestion" onclick="ask('Como ter uma vida de oração mais próxima de Deus?')">Vida de oração</button><button class="suggestion" onclick="ask('Quem é o Espírito Santo e qual o Seu papel na minha vida?')">O Espírito Santo</button><button class="suggestion" onclick="ask('O que significa verdadeiramente crer em Jesus?')">Quem crê</button></div><div class="composer"><textarea id="input" placeholder="Compartilhe sua pergunta ou reflexão..." aria-label="Sua pergunta" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();send()}"></textarea><button class="mic" id="mic" onclick="toggleMic()" aria-label="Falar pergunta" title="Falar pergunta">🎙</button><button class="send" id="send" onclick="send()" aria-label="Enviar">➤</button></div></section>
+<section class="chat" aria-label="Conversa com o Pastor Virtual Jorge"><div class="chat-head"><img class="mini" src="https://media.base44.com/images/public/6a90a16a726d01b21d3bb537/1afbf6a7b_JorgedeDeus.png" alt="Jorge"><div><strong>Conversa com Jorge</strong><small>Um espaço de escuta e reflexão</small></div><span class="status">● disponível</span></div><div class="messages" id="messages"><div class="bubble jorge">A paz do Senhor esteja com você, meu irmão(ã). Que alegria ter você aqui. Como posso ouvir e acolher você hoje?<span class="ref">"O Senhor é o meu pastor; nada me faltará." — Salmos 23:1</span></div></div><div class="typing" id="typing">JORGE ESTÁ PREPARANDO UMA RESPOSTA...</div><div class="suggestions" id="suggestions" aria-label="Perguntas sugeridas"></div><div class="composer"><textarea id="input" placeholder="Compartilhe sua pergunta ou reflexão..." aria-label="Sua pergunta" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();send()}"></textarea><button class="mic" id="mic" onclick="toggleMic()" aria-label="Falar pergunta" title="Falar pergunta">🎙</button><button class="send" id="send" onclick="send()" aria-label="Enviar">➤</button></div></section>
 <section class="section"><h3>Um espaço de fé e cuidado</h3><p>🙏 Uma ferramenta criada com fé e propósito
 
 Este aplicativo/site foi criado por Jorge de Deus, inspirado pelo Espírito Santo, com o auxílio da Inteligência Artificial, com o propósito de oferecer uma ferramenta de apoio para aqueles que desejam conhecer, refletir e compreender melhor a Palavra de Deus e os ensinamentos de Jesus.
@@ -130,6 +130,39 @@ function pickRandomVerse(exclude){
   while(exclude && v.ref===exclude.ref && DAILY_VERSES.length>1);
   return v;
 }
+const SUGGESTION_POOL=[
+  ['Como posso vencer a ansiedade segundo a Bíblia?','Vencer a ansiedade'],
+  ['Qual foi a maior prova de fé de Abraão?','A fé de Abraão'],
+  ['O que aprendemos com a história de José do Egito?','José do Egito'],
+  ['Como Davi enfrentou o gigante Golias?','Davi e Golias'],
+  ['O que a Bíblia ensina sobre amar os inimigos?','Amar os inimigos'],
+  ['Por que Jesus acalmou a tempestade?','Jesus e a tempestade'],
+  ['O que significa confiar em Deus de todo o coração?','Confiar em Deus'],
+  ['Como a Bíblia orienta quem está passando por uma luta?','Em meio à luta'],
+  ['Qual foi a missão de Moisés?','A missão de Moisés'],
+  ['O que aprendemos com a perseverança de Jó?','A perseverança de Jó'],
+  ['Como ter uma vida de oração mais profunda?','Vida de oração'],
+  ['O que a ressurreição de Jesus significa para nós?','A ressurreição de Jesus'],
+  ['Quem foi Ester e que lição sua história traz?','A história de Ester'],
+  ['O que a Bíblia diz sobre perdão e reconciliação?','Perdão e reconciliação'],
+  ['Como receber consolo do Espírito Santo?','Consolo do Espírito Santo'],
+  ['Qual é a importância da sabedoria em Provérbios?','Sabedoria em Provérbios']
+];
+function shuffleSuggestions(){
+  const container=document.getElementById('suggestions');
+  if(!container)return;
+  const chosen=[...SUGGESTION_POOL].sort(()=>Math.random()-.5).slice(0,6);
+  container.replaceChildren(...chosen.map(([question,label])=>{
+    const button=document.createElement('button');
+    button.className='suggestion'; button.type='button'; button.textContent=label;
+    button.addEventListener('click',()=>ask(question));
+    return button;
+  }));
+}
+shuffleSuggestions();
+window.addEventListener('load',shuffleSuggestions);
+window.addEventListener('pageshow',shuffleSuggestions);
+
 (function rotateVersesOnLoad(){
   const heroVerse=pickRandomVerse();
   const quoteQ=document.querySelector('.quote q');
@@ -197,9 +230,8 @@ function toggleReplySpeech(button,text){
   resetSpeechButton(currentSpeechButton);
   const utterance=new SpeechSynthesisUtterance(normalizeSpeechText(text));
   utterance.lang='pt-BR';
-  // Ritmo mais ágil e tom firme, inspirado em locução de rádio e pregação intensa.
-  utterance.rate=1.18;
-  utterance.pitch=.90;
+  utterance.rate=1.06;
+  utterance.pitch=.94;
   utterance.volume=1;
   const voice=getBestPortugueseVoice();
   if(voice) utterance.voice=voice;
