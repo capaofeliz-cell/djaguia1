@@ -207,7 +207,7 @@ function normalizeSpeechText(text){
 function getBestPortugueseVoice(){
   const voices=window.speechSynthesis.getVoices();
   const pt=voices.filter(v=>/^pt(-|_)/i.test(v.lang||''));
-  const preferred=['Francisca','Daniel','Google português do Brasil','Microsoft','Antônio','Antonio'];
+  const preferred=['Daniel','Antônio','Antonio','Microsoft Daniel','Google português do Brasil','Google Brazilian Portuguese'];
   return pt.find(v=>preferred.some(name=>(v.name||'').toLowerCase().includes(name.toLowerCase())) && /pt[-_]br/i.test(v.lang||'')) || pt.find(v=>/pt[-_]br/i.test(v.lang||'')) || pt[0] || null;
 }
 function resetSpeechButton(button){
@@ -230,8 +230,8 @@ function toggleReplySpeech(button,text){
   resetSpeechButton(currentSpeechButton);
   const utterance=new SpeechSynthesisUtterance(normalizeSpeechText(text));
   utterance.lang='pt-BR';
-  utterance.rate=1.06;
-  utterance.pitch=.94;
+  utterance.rate=1.60;
+  utterance.pitch=.92;
   utterance.volume=1;
   const voice=getBestPortugueseVoice();
   if(voice) utterance.voice=voice;
