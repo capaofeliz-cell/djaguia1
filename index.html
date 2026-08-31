@@ -145,6 +145,30 @@ function pickRandomVerse(exclude){
   }
 })();
 
+const RANDOM_QUESTIONS=[
+  'Como posso encontrar paz em meio às dificuldades?',
+  'O que a Bíblia diz sobre o perdão?',
+  'Quem é Jesus Cristo?',
+  'Como ter uma vida de oração mais próxima de Deus?',
+  'Quem é o Espírito Santo e qual o Seu papel na minha vida?',
+  'O que significa verdadeiramente crer em Jesus?',
+  'Como posso fortalecer a minha fé?',
+  'O que fazer quando estou a sentir medo?',
+  'Como Deus pode ajudar-me nas minhas decisões?',
+  'Qual é o propósito da oração?',
+  'Como lidar com a ansiedade segundo a Bíblia?',
+  'Que versículo pode trazer esperança hoje?'
+];
+(function randomizeQuestionsOnLoad(){
+  const buttons=[...document.querySelectorAll('.suggestion')];
+  const shuffled=[...RANDOM_QUESTIONS].sort(()=>Math.random()-.5);
+  buttons.forEach((button,index)=>{
+    const question=shuffled[index%shuffled.length];
+    button.textContent=question;
+    button.onclick=()=>ask(question);
+  });
+})();
+
 // Histórico da conversa (memória real) — enviado inteiro a cada pergunta,
 // para que o Jorge responda levando em conta o que já foi dito antes,
 // como uma conversa de verdade entre duas pessoas.
@@ -152,15 +176,41 @@ let conversationHistory=[{role:'assistant',content:'A paz do Senhor esteja com v
 
 function answerFallback(q){const s=q.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');if(s.includes('paz')||s.includes('dificuldade')||s.includes('ansiedade'))return answers.paz;if(s.includes('perd'))return answers.perdao;if(s.includes('ora'))return answers.oracao;if(s.includes('jesus')||s.includes('cristo'))return answers.jesus;if(s.includes('medo')||s.includes('angustia'))return answers.medo;return answers.default}
 
+function speechText(text){
+  return String(text||'')
+    .replace(/\b([A-Za-zÀ-ÿ]+(?:\s+[A-Za-zÀ-ÿ]+)*)\s+(\d+)\s*[:：]\s*(\d+(?:\s*[-–—]\s*\d+)?)/g, '$1, capítulo $2, versículo $3')
+    .replace(/\bcap(?:ítulo)?\s+(\d+)\s*[:：]\s*(\d+)/gi, 'capítulo $1, versículo $2')
+    .replace(/\s+/g, ' ').trim();
+}
+
+function preferredMaleVoice(voices){
+  const pt = voices.filter(v => v.lang && /^pt(?:-|$)/i.test(v.lang));
+  const maleHints = /male|mascul|homem|jorge|daniel|carlos|ricardo|felipe|google português do brasil/i;
+  return pt.find(v => maleHints.test(v.name||'')) || pt.find(v => !/female|femin|mulher|maria|ana|luciana/i.test(v.name||'')) || pt[0] || voices[0];
+}
+
 function speakReply(text){
   if(!('speechSynthesis' in window) || !text) return;
-  window.speechSynthesis.cancel(); // interrompe qualquer fala anterior
-  const utterance = new SpeechSynthesisUtterance(text);
+  const synth=window.speechSynthesis;
+  synth.cancel(); // interrompe qualquer fala anterior
+  const utterance = new SpeechSynthesisUtterance(speechText(text));
   utterance.lang = 'pt-BR';
-  const voices = window.speechSynthesis.getVoices();
-  const ptVoice = voices.find(v => v.lang && v.lang.toLowerCase().startsWith('pt'));
-  if(ptVoice) utterance.voice = ptVoice;
-  window.speechSynthesis.speak(utterance);
+  utterance.rate = 0.8;
+  utterance.pitch = 0.85;
+  let started=false;
+  const startSpeech=()=>{
+    if(started)return;
+    started=true;
+    const voice=preferredMaleVoice(synth.getVoices());
+    if(voice)utterance.voice=voice;
+    synth.speak(utterance);
+  };
+  if(synth.getVoices().length){
+    startSpeech();
+  }else{
+    synth.addEventListener('voiceschanged',startSpeech,{once:true});
+    setTimeout(startSpeech,300);
+  }
 }
 
 function addPastorMessage(reply,verse){
@@ -185,7 +235,7 @@ function addPastorMessage(reply,verse){
     playBtn.type='button';
     playBtn.textContent='🔊 Ouvir';
     playBtn.style.cssText='margin:9px auto 0;border:1px solid #e8cb96;background:#fffaf0;color:#886321;border-radius:999px;padding:6px 12px;font-size:11px;cursor:pointer;display:block;text-align:center';
-    playBtn.onclick=()=>{ speakReply(finalReply); };
+    playBtn.onclick=()=>{ speakReply(finalReply+(verse&&verse.ref?' '+verse.ref+'. '+(verse.text||''): '')); };
     pastor.appendChild(playBtn);
   }
 
