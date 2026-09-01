@@ -189,28 +189,12 @@ function preferredMaleVoice(voices){
   return pt.find(v => maleHints.test(v.name||'')) || pt.find(v => !/female|femin|mulher|maria|ana|luciana/i.test(v.name||'')) || pt[0] || voices[0];
 }
 
-function speakReply(text){
-  if(!('speechSynthesis' in window) || !text) return;
-  const synth=window.speechSynthesis;
-  synth.cancel(); // interrompe qualquer fala anterior
+function createUtterance(text){
   const utterance = new SpeechSynthesisUtterance(speechText(text));
   utterance.lang = 'pt-BR';
   utterance.rate = 0.8;
   utterance.pitch = 0.85;
-  let started=false;
-  const startSpeech=()=>{
-    if(started)return;
-    started=true;
-    const voice=preferredMaleVoice(synth.getVoices());
-    if(voice)utterance.voice=voice;
-    synth.speak(utterance);
-  };
-  if(synth.getVoices().length){
-    startSpeech();
-  }else{
-    synth.addEventListener('voiceschanged',startSpeech,{once:true});
-    setTimeout(startSpeech,300);
-  }
+  return utterance;
 }
 
 function addPastorMessage(reply,verse){
@@ -223,11 +207,13 @@ function addPastorMessage(reply,verse){
   textSpan.textContent=finalReply;
   pastor.appendChild(textSpan);
 
+  let verseText='';
   if(verse&&verse.text){
     const ref=document.createElement('span');
     ref.className='ref';
     ref.textContent=(verse.ref?verse.ref+' — ':'')+verse.text;
     pastor.appendChild(ref);
+    verseText=' '+(verse.ref?verse.ref+'. ':'')+verse.text;
   }
 
   if('speechSynthesis' in window){
@@ -235,7 +221,50 @@ function addPastorMessage(reply,verse){
     playBtn.type='button';
     playBtn.textContent='🔊 Ouvir';
     playBtn.style.cssText='margin:9px auto 0;border:1px solid #e8cb96;background:#fffaf0;color:#886321;border-radius:999px;padding:6px 12px;font-size:11px;cursor:pointer;display:block;text-align:center';
-    playBtn.onclick=()=>{ speakReply(finalReply+(verse&&verse.ref?' '+verse.ref+'. '+(verse.text||''): '')); };
+
+    let utterance=null;
+    let state='idle'; // idle | playing | paused
+
+    const resetButton=()=>{
+      state='idle';
+      playBtn.textContent='🔊 Ouvir';
+    };
+
+    playBtn.onclick=()=>{
+      const synth=window.speechSynthesis;
+
+      if(state==='idle'){
+        synth.cancel(); // interrompe qualquer outra fala em andamento
+        utterance=createUtterance(finalReply+verseText);
+        utterance.onend=resetButton;
+        utterance.onerror=resetButton;
+
+        const startSpeech=()=>{
+          const voice=preferredMaleVoice(synth.getVoices());
+          if(voice)utterance.voice=voice;
+          synth.speak(utterance);
+        };
+        if(synth.getVoices().length) startSpeech();
+        else{
+          synth.addEventListener('voiceschanged',startSpeech,{once:true});
+          setTimeout(startSpeech,300);
+        }
+
+        state='playing';
+        playBtn.textContent='⏸ Pausar';
+
+      }else if(state==='playing'){
+        synth.pause();
+        state='paused';
+        playBtn.textContent='▶ Continuar';
+
+      }else if(state==='paused'){
+        synth.resume();
+        state='playing';
+        playBtn.textContent='⏸ Pausar';
+      }
+    };
+
     pastor.appendChild(playBtn);
   }
 
