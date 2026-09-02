@@ -230,8 +230,8 @@ function makeExchange(question){
   const download=document.createElement('button'); download.type='button'; download.className='exchange-btn'; download.textContent='Baixar';
   download.onclick=()=>downloadExchange(exchange); actions.appendChild(download);
   const shareWrap=document.createElement('div'); shareWrap.className='exchange-share-wrap';
-  const share=document.createElement('button'); share.type='button'; share.className='exchange-btn'; share.textContent='↗ Compartilhar';
-  share.onclick=(event)=>shareExchange(exchange,event); shareWrap.appendChild(share);
+  const share=document.createElement('button'); share.type='button'; share.className='exchange-btn'; share.textContent='↗ Compartilhar P&R'; share.title='Compartilhar esta pergunta e a resposta do Jorge'; share.setAttribute('aria-label','Compartilhar esta pergunta e a resposta do Jorge');
+  share.onclick=()=>shareExchange(exchange); shareWrap.appendChild(share);
   const shareMenu=document.createElement('div'); shareMenu.className='exchange-share-menu'; shareMenu.setAttribute('role','menu');
   actions.appendChild(shareWrap); exchange.appendChild(actions); exchange.appendChild(shareMenu); updateBookmarkUI(exchange); return exchange;
 }
