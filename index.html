@@ -229,6 +229,8 @@ function makeExchange(question){
   mark.onclick=()=>toggleBookmark(exchange); actions.appendChild(mark);
   const download=document.createElement('button'); download.type='button'; download.className='exchange-btn'; download.textContent='Baixar';
   download.onclick=()=>downloadExchange(exchange); actions.appendChild(download);
+  const share=document.createElement('button'); share.type='button'; share.className='exchange-btn'; share.textContent='↗ Compartilhar';
+  share.onclick=()=>shareExchange(exchange); actions.appendChild(share);
   exchange.appendChild(actions); updateBookmarkUI(exchange); return exchange;
 }
 function updateBookmarkUI(exchange){
@@ -240,6 +242,14 @@ function toggleBookmark(exchange){const id=exchange.dataset.id;if(exchange.datas
 function exchangeText(exchange){const question=exchange.querySelector('.bubble.you')?.textContent.trim()||'';const answer=exchange.querySelector('.bubble.jorge')?.textContent.trim()||'A resposta ainda está sendo preparada.';return 'PERGUNTA:\n'+question+'\n\nRESPOSTA DO JORGE:\n'+answer}
 function downloadText(filename,text){const blob=new Blob([text],{type:'text/plain;charset=utf-8'});const url=URL.createObjectURL(blob);const link=document.createElement('a');link.href=url;link.download=filename;document.body.appendChild(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),1000)}
 function downloadExchange(exchange){downloadText('pergunta-e-resposta-jorge.txt','PASTOR VIRTUAL JORGE\n\n'+exchangeText(exchange))}
+async function shareExchange(exchange){
+  const text='PASTOR VIRTUAL JORGE\n\n'+exchangeText(exchange)+'\n\n'+location.href;
+  try{
+    if(navigator.share){await navigator.share({title:'Pergunta e resposta — Pastor Virtual Jorge',text})}
+    else if(navigator.clipboard&&navigator.clipboard.writeText){await navigator.clipboard.writeText(text);alert('Pergunta e resposta copiadas. Agora você pode compartilhar onde desejar.')}
+    else{alert('Não foi possível compartilhar automaticamente. Use o botão Baixar para salvar a pergunta e a resposta.')}
+  }catch(error){if(error&&error.name!=='AbortError')alert('Não foi possível compartilhar esta resposta agora.')}
+}
 function downloadConversation(mode='all'){
   const exchanges=[...document.querySelectorAll('.exchange')].filter(ex=>mode==='all'||ex.dataset.marked==='true');
   if(!exchanges.length){alert('Ainda não há perguntas e respostas marcadas para baixar.');return}
