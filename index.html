@@ -247,7 +247,8 @@ function downloadExchange(exchange){downloadText('pergunta-e-resposta-jorge.txt'
 async function shareExchange(exchange,event){
   if(event)event.stopPropagation();
   const text='PASTOR VIRTUAL JORGE\n\n'+exchangeText(exchange),encodedText=encodeURIComponent(text),encodedUrl=encodeURIComponent(location.href);
-  if(navigator.share){
+  const isMobileDevice=/Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+  if(navigator.share&&isMobileDevice){
     try{await navigator.share({title:'Pergunta e resposta — Pastor Virtual Jorge',text:text+'\n\n'+location.href})}
     catch(error){if(error&&error.name!=='AbortError')alert('Não foi possível compartilhar esta resposta agora.')}
     return;
