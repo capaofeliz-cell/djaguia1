@@ -32,7 +32,7 @@
 .cookie-banner button{border:0;border-radius:999px;padding:8px 14px;font-size:12px;font-weight:700;cursor:pointer}
 .cookie-accept{background:#e9b94e;color:#2f2630}
 .cookie-decline{background:transparent;color:#e9e3f0;border:1px solid #ffffff40!important}
-.exchange{margin:16px 0 20px}.exchange .bubble{margin:9px 0}.exchange-actions{display:flex;justify-content:flex-end;align-items:center;gap:7px;margin:4px 0 0}.exchange-btn{border:1px solid #e8cb96;background:#fffaf0;color:#886321;border-radius:999px;padding:6px 10px;font-size:10.5px;font-weight:700;cursor:pointer}.exchange-btn:hover{background:#fff0cf}.exchange-btn.saved{background:#fff0c7;border-color:#d6a14c;color:#8b5a0c}.exchange-mark{margin-right:auto;color:#a66c14;font-size:10.5px;font-weight:700}.exchange-share-wrap{position:relative}.exchange-share-menu{position:absolute;right:0;bottom:calc(100% + 7px);display:none;flex-direction:column;gap:2px;min-width:205px;padding:7px;background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:0 14px 34px #6c4b1524;z-index:26}.exchange-share-menu.open{display:flex}.exchange-share-menu a,.exchange-share-menu button{display:flex;align-items:center;gap:9px;width:100%;padding:9px 10px;border:0;border-radius:10px;background:none;color:var(--ink);font:600 12.5px 'Inter',sans-serif;text-decoration:none;text-align:left;cursor:pointer}.exchange-share-menu a:hover,.exchange-share-menu button:hover{background:#fff3d9}.exchange-share-menu .ico{width:18px;text-align:center;flex:none}@media(max-width:650px){.cookie-banner{bottom:90px;left:8px;right:8px;padding:12px}}</style>
+.exchange{margin:16px 0 20px}.exchange .bubble{margin:9px 0}.exchange-actions{display:flex;justify-content:flex-end;align-items:center;gap:7px;margin:4px 0 0}.exchange-btn{border:1px solid #e8cb96;background:#fffaf0;color:#886321;border-radius:999px;padding:6px 10px;font-size:10.5px;font-weight:700;cursor:pointer}.exchange-btn:hover{background:#fff0cf}.exchange-btn.saved{background:#fff0c7;border-color:#d6a14c;color:#8b5a0c}.exchange-mark{margin-right:auto;color:#a66c14;font-size:10.5px;font-weight:700}.exchange-share-wrap{position:relative}.exchange-share-menu{position:static;display:none;flex-direction:column;gap:2px;width:min(100%,280px);margin:7px 0 0 auto;padding:7px;background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:0 14px 34px #6c4b1524;z-index:26}.exchange-share-menu.open{display:flex}.exchange-share-menu a,.exchange-share-menu button{display:flex;align-items:center;gap:9px;width:100%;padding:9px 10px;border:0;border-radius:10px;background:none;color:var(--ink);font:600 12.5px 'Inter',sans-serif;text-decoration:none;text-align:left;cursor:pointer}.exchange-share-menu a:hover,.exchange-share-menu button:hover{background:#fff3d9}.exchange-share-menu .ico{width:18px;text-align:center;flex:none}@media(max-width:650px){.cookie-banner{bottom:90px;left:8px;right:8px;padding:12px}}</style>
 </head>
 <body>
 <header class="top"><div class="topbar"><img class="avatar" src="https://media.base44.com/images/public/6a90a16a726d01b21d3bb537/1afbf6a7b_JorgedeDeus.png" alt="Jorge Pastor Virtual"><div class="brand"><h1>PASTOR VIRTUAL JORGE</h1><p>Respostas na visão do Jorge de Deus com base na Palavra de Deus</p></div><div class="top-actions"><button class="small-btn" onclick="downloadConversation('marked')">Baixar marcadas</button><button class="small-btn" onclick="downloadConversation('all')">Baixar conversa</button><button class="small-btn danger" onclick="clearChat()">Excluir conversa</button><div class="share-wrap"><button class="small-btn" id="shareBtn" onclick="toggleShareMenu(event)">↗ Compartilhar</button><div class="share-menu" id="shareMenu"><a href="#" onclick="shareVia('whatsapp');return false;"><span class="ico">💬</span> WhatsApp</a><a href="#" onclick="shareVia('facebook');return false;"><span class="ico">📘</span> Facebook</a><a href="#" onclick="shareVia('twitter');return false;"><span class="ico">𝕏</span> X</a><a href="#" onclick="shareVia('instagram');return false;"><span class="ico">◎</span> Instagram</a><a href="#" onclick="shareVia('telegram');return false;"><span class="ico">✈️</span> Telegram</a><button onclick="copyLink()"><span class="ico">🔗</span> Copiar link</button></div></div></div></div></header>
@@ -232,8 +232,8 @@ function makeExchange(question){
   const shareWrap=document.createElement('div'); shareWrap.className='exchange-share-wrap';
   const share=document.createElement('button'); share.type='button'; share.className='exchange-btn'; share.textContent='↗ Compartilhar';
   share.onclick=(event)=>shareExchange(exchange,event); shareWrap.appendChild(share);
-  const shareMenu=document.createElement('div'); shareMenu.className='exchange-share-menu'; shareMenu.setAttribute('role','menu'); shareWrap.appendChild(shareMenu); actions.appendChild(shareWrap);
-  exchange.appendChild(actions); updateBookmarkUI(exchange); return exchange;
+  const shareMenu=document.createElement('div'); shareMenu.className='exchange-share-menu'; shareMenu.setAttribute('role','menu');
+  actions.appendChild(shareWrap); exchange.appendChild(actions); exchange.appendChild(shareMenu); updateBookmarkUI(exchange); return exchange;
 }
 function updateBookmarkUI(exchange){
   const saved=exchange.dataset.marked==='true'; const button=exchange.querySelector('.exchange-btn'); const label=exchange.querySelector('.exchange-mark');
@@ -244,19 +244,11 @@ function toggleBookmark(exchange){const id=exchange.dataset.id;if(exchange.datas
 function exchangeText(exchange){const question=exchange.querySelector('.bubble.you')?.textContent.trim()||'';const answer=exchange.querySelector('.bubble.jorge')?.textContent.trim()||'A resposta ainda está sendo preparada.';return 'PERGUNTA:\n'+question+'\n\nRESPOSTA DO JORGE:\n'+answer}
 function downloadText(filename,text){const blob=new Blob([text],{type:'text/plain;charset=utf-8'});const url=URL.createObjectURL(blob);const link=document.createElement('a');link.href=url;link.download=filename;document.body.appendChild(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),1000)}
 function downloadExchange(exchange){downloadText('pergunta-e-resposta-jorge.txt','PASTOR VIRTUAL JORGE\n\n'+exchangeText(exchange))}
-async function shareExchange(exchange,event){
-  if(event)event.stopPropagation();
-  const text='PASTOR VIRTUAL JORGE\n\n'+exchangeText(exchange),encodedText=encodeURIComponent(text),encodedUrl=encodeURIComponent(location.href);
-  const isMobileDevice=/Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-  if(navigator.share&&isMobileDevice){
-    try{await navigator.share({title:'Pergunta e resposta — Pastor Virtual Jorge',text:text+'\n\n'+location.href})}
-    catch(error){if(error&&error.name!=='AbortError')alert('Não foi possível compartilhar esta resposta agora.')}
-    return;
-  }
+function shareExchange(exchange){
   const menu=exchange.querySelector('.exchange-share-menu');
   if(!menu)return;
   if(menu.classList.contains('open')){menu.classList.remove('open');return}
-  document.querySelectorAll('.exchange-share-menu.open').forEach(item=>item.classList.remove('open'));
+  const text='PASTOR VIRTUAL JORGE\n\n'+exchangeText(exchange),encodedText=encodeURIComponent(text),encodedUrl=encodeURIComponent(location.href);
   menu.innerHTML='';
   const options=[
     ['💬','WhatsApp','https://api.whatsapp.com/send?text='+encodedText+'%20'+encodedUrl],
@@ -275,7 +267,6 @@ async function copyShareText(text,menu){
     menu.classList.remove('open');alert('Pergunta e resposta copiadas. Agora você pode colar e compartilhar onde desejar.');
   }catch(error){alert('Não foi possível copiar. Tente usar uma das redes sociais do menu.')}
 }
-document.addEventListener('click',()=>document.querySelectorAll('.exchange-share-menu.open').forEach(item=>item.classList.remove('open')));
 function downloadConversation(mode='all'){
   const exchanges=[...document.querySelectorAll('.exchange')].filter(ex=>mode==='all'||ex.dataset.marked==='true');
   if(!exchanges.length){alert('Ainda não há perguntas e respostas marcadas para baixar.');return}
