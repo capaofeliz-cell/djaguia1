@@ -229,11 +229,9 @@ function makeExchange(question){
   mark.onclick=()=>toggleBookmark(exchange); actions.appendChild(mark);
   const download=document.createElement('button'); download.type='button'; download.className='exchange-btn'; download.textContent='Baixar';
   download.onclick=()=>downloadExchange(exchange); actions.appendChild(download);
-  const shareWrap=document.createElement('div'); shareWrap.className='exchange-share-wrap';
-  const share=document.createElement('button'); share.type='button'; share.className='exchange-btn'; share.textContent='↗ Compartilhar P&R'; share.title='Compartilhar esta pergunta e a resposta do Jorge'; share.setAttribute('aria-label','Compartilhar esta pergunta e a resposta do Jorge');
-  share.onclick=()=>shareExchange(exchange); shareWrap.appendChild(share);
-  const shareMenu=document.createElement('div'); shareMenu.className='exchange-share-menu'; shareMenu.setAttribute('role','menu');
-  actions.appendChild(shareWrap); exchange.appendChild(actions); exchange.appendChild(shareMenu); updateBookmarkUI(exchange); return exchange;
+  const share=document.createElement('button'); share.type='button'; share.className='exchange-btn'; share.textContent='↗ Compartilhar P&R'; share.title='Compartilhar somente esta pergunta e a resposta do Jorge'; share.setAttribute('aria-label','Compartilhar somente esta pergunta e a resposta do Jorge');
+  share.onclick=()=>shareExchange(exchange); actions.appendChild(share);
+  exchange.appendChild(actions); updateBookmarkUI(exchange); return exchange;
 }
 function updateBookmarkUI(exchange){
   const saved=exchange.dataset.marked==='true'; const button=exchange.querySelector('.exchange-btn'); const label=exchange.querySelector('.exchange-mark');
@@ -245,28 +243,22 @@ function exchangeText(exchange){const question=exchange.querySelector('.bubble.y
 function exchangePostText(exchange){const question=exchange.querySelector('.bubble.you')?.textContent.trim()||'';const answer=exchange.querySelector('.bubble.jorge')?.textContent.trim()||'A resposta ainda está sendo preparada.';return 'REFLEXÃO DO PASTOR VIRTUAL JORGE\n\nPergunta\n'+question+'\n\nResposta\n'+answer}
 function downloadText(filename,text){const blob=new Blob([text],{type:'text/plain;charset=utf-8'});const url=URL.createObjectURL(blob);const link=document.createElement('a');link.href=url;link.download=filename;document.body.appendChild(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),1000)}
 function downloadExchange(exchange){downloadText('pergunta-e-resposta-jorge.txt','PASTOR VIRTUAL JORGE\n\n'+exchangeText(exchange))}
-function shareExchange(exchange){
-  const menu=exchange.querySelector('.exchange-share-menu');
-  if(!menu)return;
-  if(menu.classList.contains('open')){menu.classList.remove('open');return}
-  const text=exchangePostText(exchange),encodedText=encodeURIComponent(text);
-  menu.innerHTML='';
-  const options=[
-    ['💬','WhatsApp','https://api.whatsapp.com/send?text='+encodedText],
-    ['📘','Facebook','https://www.facebook.com/sharer/sharer.php?quote='+encodedText],
-    ['𝕏','X','https://x.com/intent/post?text='+encodedText],
-    ['✈️','Telegram','https://t.me/share/url?text='+encodedText]
-  ];
-  options.forEach(([icon,label,url])=>{const link=document.createElement('a');link.href=url;link.target='_blank';link.rel='noopener noreferrer';link.setAttribute('role','menuitem');link.innerHTML='<span class="ico">'+icon+'</span> '+label;link.onclick=()=>menu.classList.remove('open');menu.appendChild(link)});
-  const copy=document.createElement('button'); copy.type='button'; copy.setAttribute('role','menuitem'); copy.innerHTML='<span class="ico">🔗</span> Copiar post';
-  copy.onclick=()=>copyShareText(text,menu); menu.appendChild(copy); menu.classList.add('open');
+async function shareExchange(exchange){
+  const text=exchangePostText(exchange);
+  const isMobileDevice=/Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+  if(navigator.share&&isMobileDevice){
+    try{await navigator.share({title:'Pergunta e resposta — Pastor Virtual Jorge',text})}
+    catch(error){if(error&&error.name!=='AbortError')alert('Não foi possível compartilhar esta resposta agora.')}
+    return;
+  }
+  await copyShareText(text);
 }
-async function copyShareText(text,menu){
+async function copyShareText(text){
   try{
     if(navigator.clipboard&&navigator.clipboard.writeText)await navigator.clipboard.writeText(text);
     else{const area=document.createElement('textarea');area.value=text;area.style.position='fixed';area.style.opacity='0';document.body.appendChild(area);area.select();document.execCommand('copy');area.remove()}
-    menu.classList.remove('open');alert('Pergunta e resposta copiadas. Agora você pode colar e compartilhar onde desejar.');
-  }catch(error){alert('Não foi possível copiar. Tente usar uma das redes sociais do menu.')}
+    alert('Pergunta e resposta copiadas. Cole o conteúdo onde quiser publicar.');
+  }catch(error){alert('Não foi possível copiar a pergunta e a resposta. Selecione e copie o texto manualmente.')}
 }
 function downloadConversation(mode='all'){
   const exchanges=[...document.querySelectorAll('.exchange')].filter(ex=>mode==='all'||ex.dataset.marked==='true');
