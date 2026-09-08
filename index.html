@@ -151,7 +151,18 @@ html,body{background:var(--cream)!important;color:var(--ink)!important}body{back
 @media(max-width:650px){.welcome{padding-top:34px!important}.chat-launch{margin-bottom:28px;padding:18px;border-radius:20px}.chat-launch strong{font-size:22px}.chat{inset:10px;width:auto;height:calc(100dvh - 20px);border-radius:22px!important}.chat-head{padding:14px 16px!important}.messages{padding:16px!important}.composer{padding:10px!important}.chat-close{width:32px;height:32px}}@media(prefers-reduced-motion:reduce){.chat.is-open,.chat-launch{animation:none;transition:none}}
 </style>
 
-</head>
+<style id="question-box-redesign">
+.chat-launch{display:block;padding:18px 20px!important;cursor:default!important}
+.chat-launch:hover{transform:none!important}
+.question-box-label{display:block;margin-bottom:8px;color:#61756a;font-size:13px;font-weight:700}
+.question-box{display:flex;align-items:center;gap:9px;width:100%}
+.question-box textarea{flex:1;min-height:50px;max-height:120px;resize:vertical;border:1px solid #d9ded8;border-radius:15px;padding:13px 14px;background:#fff;color:#2f3430;font:500 14px Inter,system-ui,sans-serif;outline:none}
+.question-box textarea::placeholder{color:#a0a6a0}.question-box textarea:focus{border-color:#9ab0a0;box-shadow:0 0 0 3px rgba(154,176,160,.18)}
+.question-box .question-mic,.question-box .question-send{width:46px;height:46px;border-radius:50%;border:0;flex:none;cursor:pointer;font-size:18px}
+.question-box .question-mic{background:#f2f7f2;color:#6d8677;border:1px solid #d0ddd1}.question-box .question-send{background:linear-gradient(145deg,#8ca494,#627c6d);color:#fff;box-shadow:0 5px 14px rgba(88,117,98,.22)}
+.question-hint{display:block;margin-top:8px;color:#9a9e98;font-size:11px}
+@media(max-width:650px){.chat-launch{padding:15px!important}.question-box{gap:6px}.question-box .question-mic,.question-box .question-send{width:42px;height:42px}.question-box textarea{font-size:13px}}
+</style></head>
 <body>
 <!-- ANUNCIOS LATERAIS ADSENSE, DESATIVADO POR ENQUANTO. Quando o AdSense aprovar: 1 troque XXXXXXXXXX pelo ID do bloco data-ad-slot criado no painel AdSense. 2 remova a marca de comentario que abre logo abaixo desta linha e a que fecha no final deste bloco.
 
@@ -589,5 +600,21 @@ function handleCookieChoice(accepted){
 })();
 </script>
 
-</body>
+<script id="question-box-behavior">
+(function(){
+ function enhance(){
+  const launch=document.querySelector('.chat-launch'), chat=document.querySelector('.chat'); if(!launch||!chat||launch.dataset.enhanced)return; launch.dataset.enhanced='1';
+  launch.innerHTML='<span class="question-box-label">Escreva sua pergunta para o Pastor Virtual</span><span class="question-box"><textarea id="questionBoxInput" placeholder="Digite sua pergunta aqui..." aria-label="Digite sua pergunta aqui"></textarea><button type="button" class="question-mic" id="questionBoxMic" aria-label="Falar pergunta" title="Falar pergunta">🎙</button><button type="button" class="question-send" id="questionBoxSend" aria-label="Enviar pergunta" title="Enviar pergunta">➤</button></span><span class="question-hint">Você pode escrever ou tocar no microfone para falar.</span>';
+  const q=document.getElementById('questionBoxInput'), original=document.getElementById('input'), sendBtn=document.getElementById('questionBoxSend');
+  function openChat(){chat.classList.add('is-open');document.body.classList.add('chat-modal-visible');setTimeout(()=>q.focus(),30)}
+  q.addEventListener('focus',openChat); q.addEventListener('click',openChat);
+  q.addEventListener('input',()=>{original.value=q.value});
+  q.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();submit()}});
+  function submit(){const value=q.value.trim();if(!value)return;original.value=value;openChat();window.send();q.value='';}
+  sendBtn.addEventListener('click',submit);
+  document.getElementById('questionBoxMic').addEventListener('click',()=>{openChat();original.focus();if(typeof window.toggleMic==='function')window.toggleMic();});
+ }
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',enhance);else enhance();
+})();
+</script></body>
 </html>
