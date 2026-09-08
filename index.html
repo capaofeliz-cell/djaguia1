@@ -138,6 +138,19 @@ body{
 .cookie-banner{background:#0d1c38;border-color:rgba(212,160,23,.45)}
 .cookie-banner p{color:#DCE6F5}
 </style>
+
+<style id="pastor-light-redesign">
+:root{--cream:#fbfaf6;--paper:#fffefa;--gold:#b97845;--gold2:#d19a69;--brown:#5f554e;--ink:#2f3430;--muted:#7d817d;--line:#e6e2d9;--dark:#61756b;--sage:#a9b9ab;--sage-deep:#6d8677;--blush:#ead9cf}
+html,body{background:var(--cream)!important;color:var(--ink)!important}body{background:radial-gradient(900px 420px at 10% -10%,#f0e6dc 0,transparent 60%),linear-gradient(180deg,#fbfaf6 0%,#f7f4ef 58%,#eef2ed 100%)!important;background-attachment:fixed}
+.top{background:rgba(251,250,246,.88)!important;border-bottom:1px solid rgba(119,132,119,.18)!important}.avatar{border-color:#d8b69a!important;box-shadow:0 4px 18px rgba(104,120,106,.16)!important}.brand h1{font-family:'Cormorant Garamond',Georgia,serif!important;color:#596d62!important;text-shadow:none!important;letter-spacing:.02em!important;font-size:23px!important}.brand p{color:#929892!important}.small-btn{border-color:#d8cfc4!important;background:#fffdf9!important;color:#6b8173!important}.small-btn.danger{color:#b87868!important;background:#fff8f5!important;border-color:#ead1ca!important}
+.welcome{padding-top:54px!important}.badge{color:#b97845!important;letter-spacing:.2em!important}.welcome h2{color:#3f4c45!important;font-family:'Cormorant Garamond',Georgia,serif!important;font-weight:600!important}.welcome h2 em{color:#b97845!important;text-shadow:none!important}.welcome p{color:#737b75!important}.quote{border-color:#e6e2d9!important;color:#68726b!important}.quote q{font-family:'Cormorant Garamond',Georgia,serif!important}.quote cite{color:#b97845!important}
+.chat-launch{display:flex;align-items:center;justify-content:space-between;gap:22px;width:min(760px,100%);margin:18px auto 42px;padding:22px 24px;border:1px solid #ddd8ce;border-radius:24px;background:rgba(255,254,250,.78);box-shadow:0 18px 44px rgba(87,103,90,.10);cursor:pointer;text-align:left;transition:transform .18s ease,box-shadow .18s ease}.chat-launch:hover{transform:translateY(-2px);box-shadow:0 22px 48px rgba(87,103,90,.16)}.chat-launch .launch-kicker{display:block;color:#b97845;font-size:10px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;margin-bottom:5px}.chat-launch strong{display:block;color:#4d5e54;font:600 24px 'Cormorant Garamond',Georgia,serif}.chat-launch p{margin:3px 0 0;color:#7c837d;font-size:12px}.launch-icon{width:48px;height:48px;display:grid;place-items:center;border-radius:50%;background:#e9efe9;color:#6d8677;font-size:25px;flex:none}.launch-arrow{color:#b97845;font-size:22px;margin-left:auto}
+.chat{display:none;position:fixed;inset:0;z-index:80;width:min(720px,calc(100% - 28px));height:min(760px,calc(100dvh - 44px));margin:auto;flex-direction:column;border:1px solid rgba(121,139,124,.28)!important;border-radius:28px!important;background:#fffefa!important;box-shadow:0 32px 90px rgba(39,53,44,.25)!important;overflow:hidden}.chat.is-open{display:flex;animation:chatIn .22s cubic-bezier(.23,1,.32,1)}.chat.is-open::before{content:"";position:fixed;inset:0;z-index:-1;background:rgba(50,62,54,.32);backdrop-filter:blur(5px)}@keyframes chatIn{from{opacity:0;transform:translateY(10px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
+.chat-head{background:linear-gradient(120deg,#f6f3ed,#fffefa)!important;border-bottom-color:#e7e3da!important;padding:18px 22px!important}.chat-head strong{color:#4d6155!important;font-family:'Cormorant Garamond',Georgia,serif!important}.chat-head small{color:#8a918b!important}.status{color:#5e8a6d!important;background:#edf6ed!important;border-color:#d1e6d4!important}.chat-close{margin-left:8px;border:0;background:#edf1ed;color:#62756a;width:34px;height:34px;border-radius:50%;font-size:20px;cursor:pointer}.messages{background:#fffefa!important;padding:24px!important;flex:1;max-height:none!important}.bubble.virtual{background:#f5f0e9!important;color:#455149!important;border-color:#e6d9cc!important}.bubble.you{background:#718a7b!important;color:#fff!important}.bubble .ref{color:#a56d49!important;border-top-color:#e6d5c6!important}.typing{color:#6d9678!important}.suggestions{background:#fffefa!important}.suggestion{border-color:#d5dfd5!important;background:#f3f7f2!important;color:#61786a!important}.suggestion:hover{background:#e8f0e8!important}.composer{background:#fbfaf7!important;border-top-color:#e7e3da!important}.composer textarea{background:#fff!important;border-color:#d9ded8!important;color:#2f3430!important}.composer textarea::placeholder{color:#a0a6a0!important}.composer textarea:focus{border-color:#9ab0a0!important;box-shadow:0 0 0 3px rgba(154,176,160,.22)!important}.mic{border-color:#d0ddd1!important;background:#f2f7f2!important;color:#6d8677!important}.send{background:linear-gradient(145deg,#8ca494,#627c6d)!important;box-shadow:0 5px 14px rgba(88,117,98,.22)!important}
+.section{background:rgba(255,254,250,.7)!important;border-color:#e6e2d9!important}.section h3{color:#56685d!important;font-family:'Cormorant Garamond',Georgia,serif!important}.section p{color:#737b75!important}.legal{color:#9a9e98!important}.legal a{color:#718875!important}.fixed-audio{background:linear-gradient(135deg,rgba(81,100,88,.98),rgba(105,129,112,.98))!important;border-color:rgba(255,255,255,.35)!important}.radio-play{background:linear-gradient(145deg,#f0d0ae,#c58a61)!important;color:#fff!important}.share-menu,.exchange-share-menu{background:#fffefa!important;border-color:#e6e2d9!important}.share-menu a,.share-menu button,.exchange-share-menu a,.exchange-share-menu button{color:#4a554e!important}.share-menu a:hover,.share-menu button:hover,.exchange-share-menu a:hover,.exchange-share-menu button:hover{background:#f0f4ef!important}.exchange-btn{border-color:#d5dfd5!important;background:#f3f7f2!important;color:#61786a!important}.exchange-btn:hover{background:#e8f0e8!important}.cookie-banner{background:#596b60!important;border-color:#c9dccd!important}.cookie-banner p{color:#eef5ef!important}.cookie-accept{background:#edc8a4!important;color:#4d5e54!important}
+@media(max-width:650px){.welcome{padding-top:34px!important}.chat-launch{margin-bottom:28px;padding:18px;border-radius:20px}.chat-launch strong{font-size:22px}.chat{inset:10px;width:auto;height:calc(100dvh - 20px);border-radius:22px!important}.chat-head{padding:14px 16px!important}.messages{padding:16px!important}.composer{padding:10px!important}.chat-close{width:32px;height:32px}}@media(prefers-reduced-motion:reduce){.chat.is-open,.chat-launch{animation:none;transition:none}}
+</style>
+
 </head>
 <body>
 <!-- ANUNCIOS LATERAIS ADSENSE, DESATIVADO POR ENQUANTO. Quando o AdSense aprovar: 1 troque XXXXXXXXXX pelo ID do bloco data-ad-slot criado no painel AdSense. 2 remova a marca de comentario que abre logo abaixo desta linha e a que fecha no final deste bloco.
@@ -556,5 +569,25 @@ function handleCookieChoice(accepted){
     });
   }
 </script>
+
+<script id="pastor-modal-redesign">
+(function(){
+  function initRedesign(){
+    const chat=document.querySelector('.chat');
+    if(!chat || document.querySelector('.chat-launch')) return;
+    const launch=document.createElement('button'); launch.type='button'; launch.className='chat-launch'; launch.setAttribute('aria-haspopup','dialog');
+    launch.innerHTML='<span><span class="launch-kicker">Um momento de escuta</span><strong>Converse com o Pastor Virtual</strong><p>Abra uma conversa reservada, leve e acolhedora.</p></span><span class="launch-icon">✦</span><span class="launch-arrow">↗</span>';
+    chat.parentNode.insertBefore(launch,chat); chat.setAttribute('role','dialog'); chat.setAttribute('aria-modal','true'); chat.setAttribute('aria-label','Conversa com o Pastor Virtual');
+    const close=document.createElement('button'); close.type='button'; close.className='chat-close'; close.innerHTML='×'; close.setAttribute('aria-label','Fechar conversa');
+    const head=chat.querySelector('.chat-head'); if(head) head.appendChild(close);
+    function open(){chat.classList.add('is-open');document.body.classList.add('chat-modal-visible');document.getElementById('input')?.focus()}
+    function shut(){chat.classList.remove('is-open');document.body.classList.remove('chat-modal-visible');launch.focus()}
+    launch.addEventListener('click',open); close.addEventListener('click',shut); chat.addEventListener('click',e=>{if(e.target===chat) shut()}); document.addEventListener('keydown',e=>{if(e.key==='Escape'&&chat.classList.contains('is-open')) shut()});
+    document.querySelectorAll('.suggestion').forEach(btn=>btn.addEventListener('click',open));
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',initRedesign); else initRedesign();
+})();
+</script>
+
 </body>
 </html>
