@@ -48,4 +48,4 @@ O testemunho também reforça uma mensagem que permanece presente entre cristão
 
 ###### Por: Redação PASTOR VIRTUAL
 
-![]()
+![](/imagens/noticias/sem-título.png)
