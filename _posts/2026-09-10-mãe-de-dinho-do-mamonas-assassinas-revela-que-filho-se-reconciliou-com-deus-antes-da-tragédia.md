@@ -47,3 +47,5 @@ O testemunho também reforça uma mensagem que permanece presente entre cristão
 ###### Imagem gerada por inteligência artificial
 
 ###### Por: Redação PASTOR VIRTUAL
+
+![]()
