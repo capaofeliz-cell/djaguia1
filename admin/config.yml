@@ -1,1 +1,54 @@
 
+backend:
+  name: github
+  repo: capaofeliz-cell/djaguia1
+  branch: main
+  base_url: https://SEU-WORKER-AQUI.workers.dev
+  auth_endpoint: auth
+
+media_folder: "imagens/noticias"
+public_folder: "/imagens/noticias"
+
+collections:
+  - name: "posts"
+    label: "Notícias"
+    folder: "_posts"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: "Título", name: "title", widget: "string" }
+      - { label: "Categoria", name: "categoria", widget: "string", required: false }
+      - { label: "Autor", name: "autor", widget: "string", required: false, default: "DJ ÁGUIA1" }
+      - { label: "Data", name: "date", widget: "datetime" }
+      - { label: "Imagem de capa", name: "imagem", widget: "image", required: false }
+      - { label: "Conteúdo", name: "body", widget: "markdown" }
+
+  - name: "top5"
+    label: "Top 5"
+    folder: "_top5"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Título", name: "title", widget: "string" }
+      - { label: "Data", name: "date", widget: "datetime" }
+      - { label: "Introdução", name: "intro", widget: "text", required: false }
+      - label: "Itens do Top 5"
+        name: "itens"
+        widget: "list"
+        fields:
+          - { label: "Título do item", name: "titulo", widget: "string" }
+          - { label: "Imagem", name: "imagem", widget: "image", required: false }
+          - { label: "Descrição", name: "descricao", widget: "text" }
+      - { label: "Conteúdo extra", name: "body", widget: "markdown", required: false }
+
+  - name: "videos"
+    label: "Vídeos"
+    folder: "_videos"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Título", name: "title", widget: "string" }
+      - { label: "Data", name: "date", widget: "datetime" }
+      - { label: "ID do YouTube (opcional)", name: "youtube_id", widget: "string", required: false, hint: "Cole só o código depois de v= no link do YouTube" }
+      - { label: "Código HTML de incorporação (opcional)", name: "embed_html", widget: "code", default_language: "html", required: false, hint: "Use isso se o vídeo não for do YouTube" }
+      - { label: "Conteúdo extra", name: "body", widget: "markdown", required: false }
