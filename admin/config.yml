@@ -1,9 +1,8 @@
-
 backend:
   name: github
   repo: capaofeliz-cell/djaguia1
   branch: main
-  base_url: https://SEU-WORKER-AQUI.workers.dev
+  base_url: https://oauth-noticias-gospel.capaofeliz.workers.dev
   auth_endpoint: auth
 
 media_folder: "imagens/noticias"
@@ -52,3 +51,14 @@ collections:
       - { label: "ID do YouTube (opcional)", name: "youtube_id", widget: "string", required: false, hint: "Cole só o código depois de v= no link do YouTube" }
       - { label: "Código HTML de incorporação (opcional)", name: "embed_html", widget: "code", default_language: "html", required: false, hint: "Use isso se o vídeo não for do YouTube" }
       - { label: "Conteúdo extra", name: "body", widget: "markdown", required: false }
+
+  - name: "fotos"
+    label: "Fotos"
+    folder: "_fotos"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: "Título", name: "title", widget: "string" }
+      - { label: "Data", name: "date", widget: "datetime" }
+      - { label: "Foto", name: "imagem", widget: "image" }
+      - { label: "Legenda / texto extra", name: "body", widget: "markdown", required: false }
