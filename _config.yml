@@ -1,1 +1,41 @@
 
+title: "DJ ÁGUIA1 — Notícias Gospel"
+description: "Notícias, vídeos e conteúdo gospel"
+url: "https://djrenatobravo.com.br"
+baseurl: ""
+
+# Faz o Jekyll processar SÓ a pasta de notícias e ignorar o resto do site
+# (o app Pastor Virtual, ícones, imagens etc. continuam funcionando exatamente como estão hoje).
+collections:
+  posts:
+    output: true
+    permalink: /noticias/:year/:month/:day/:title/
+  top5:
+    output: true
+    permalink: /noticias/top5/:title/
+  videos:
+    output: true
+    permalink: /noticias/videos/:title/
+
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "top5"
+    values:
+      layout: "top5"
+  - scope:
+      path: ""
+      type: "videos"
+    values:
+      layout: "video"
+
+exclude:
+  - README.md
+  - node_modules
+  - package.json
+  - package-lock.json
