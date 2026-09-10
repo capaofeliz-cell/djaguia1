@@ -1,14 +1,46 @@
-
 ---
 layout: base
 ---
+<div class="breadcrumb" style="font-size:12px;color:var(--muted);margin-bottom:14px">
+  <a href="/noticias/">Notícias</a> / {{ page.title }}
+</div>
+
 <article class="card">
   {% if page.categoria %}<span class="badge">{{ page.categoria }}</span>{% endif %}
-  <h1>{{ page.title }}</h1>
-  <div class="meta">{{ page.date | date: '%d/%m/%Y' }}{% if page.autor %} · por {{ page.autor }}{% endif %}</div>
-  {% if page.imagem %}<img src="{{ page.imagem }}" alt="{{ page.title }}">{% endif %}
+  <h1 style="font:700 26px Georgia,serif;margin:8px 0">{{ page.title }}</h1>
+
+  <div class="meta" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
+    <span>Publicado em {{ page.date | date: '%d/%m/%Y às %H:%M' }}{% if page.autor %} · por {{ page.autor }}{% endif %}</span>
+    <span>
+      <a href="https://api.whatsapp.com/send?text={{ page.title | url_encode }}%20{{ site.url }}{{ page.url | url_encode }}" target="_blank" rel="noopener" style="text-decoration:none;font-weight:700">↗ Compartilhar</a>
+    </span>
+  </div>
+
+  {% if page.imagem %}<img src="{{ page.imagem }}" alt="{{ page.title }}" style="margin:16px 0">{% endif %}
+
   <div class="post-body">
     {{ content }}
   </div>
+
+  {% if page.categoria %}
+  <div style="margin-top:24px;padding-top:16px;border-top:1px solid var(--line)">
+    <strong style="font-size:13px">Palavras-chave:</strong>
+    <span class="badge">{{ page.categoria }}</span>
+  </div>
+  {% endif %}
 </article>
+
+<div class="card">
+  <h4 style="font:700 15px Georgia,serif;color:#a86b0d;margin-top:0">Notícias relacionadas</h4>
+  <div class="grid cols-2">
+    {% assign relacionadas = site.posts | where_exp: "p", "p.url != page.url" | sort: "date" | reverse | slice: 0, 4 %}
+    {% for p in relacionadas %}
+      <a href="{{ p.url }}" style="text-decoration:none;color:inherit;display:flex;gap:10px;align-items:center">
+        {% if p.imagem %}<img src="{{ p.imagem }}" alt="{{ p.title }}" style="width:70px;height:70px;object-fit:cover;border-radius:8px;flex-shrink:0">{% endif %}
+        <span style="font-size:13px;font-weight:700">{{ p.title }}</span>
+      </a>
+    {% endfor %}
+  </div>
+</div>
+
 <p><a href="/noticias/">← Voltar para todas as notícias</a></p>
