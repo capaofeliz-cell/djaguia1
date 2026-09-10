@@ -1,1 +1,11 @@
-
+---
+layout: base
+---
+<article class="card">
+  <span class="badge">Foto</span>
+  <h1>{{ page.title }}</h1>
+  <div class="meta">{{ page.date | date: '%d/%m/%Y' }}</div>
+  {% if page.imagem %}<img src="{{ page.imagem }}" alt="{{ page.title }}">{% endif %}
+  <div class="post-body">{{ content }}</div>
+</article>
+<p><a href="/noticias/fotos/">← Voltar para todas as fotos</a></p>
