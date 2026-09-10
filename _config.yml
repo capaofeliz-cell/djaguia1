@@ -37,5 +37,4 @@ defaults:
       layout: "foto"
 
 exclude:
-  - admin
   - README.md
