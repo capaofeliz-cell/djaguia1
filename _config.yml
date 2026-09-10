@@ -1,4 +1,3 @@
-
 title: "DJ ÁGUIA1 — Notícias Gospel"
 description: "Notícias, vídeos e conteúdo gospel"
 url: "https://djrenatobravo.com.br"
@@ -16,6 +15,9 @@ collections:
   videos:
     output: true
     permalink: /noticias/videos/:title/
+  fotos:
+    output: true
+    permalink: /noticias/fotos/:title/
 
 defaults:
   - scope:
@@ -33,6 +35,11 @@ defaults:
       type: "videos"
     values:
       layout: "video"
+  - scope:
+      path: ""
+      type: "fotos"
+    values:
+      layout: "foto"
 
 exclude:
   - README.md
