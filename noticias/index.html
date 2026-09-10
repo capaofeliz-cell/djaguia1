@@ -1,1 +1,29 @@
 
+---
+layout: base
+title: "Notícias Gospel"
+permalink: /noticias/
+---
+<h1 style="font:700 28px Georgia,serif;color:#a86b0d">Notícias, Vídeos e Conteúdo Gospel</h1>
+<p>Fique por dentro das últimas notícias, vídeos e listas especiais do universo gospel.</p>
+
+<div class="grid cols-2">
+{% assign todos = "" | split: "" %}
+{% for post in site.posts %}{% assign todos = todos | push: post %}{% endfor %}
+{% for item in site.top5 %}{% assign todos = todos | push: item %}{% endfor %}
+{% for item in site.videos %}{% assign todos = todos | push: item %}{% endfor %}
+{% assign todos = todos | sort: "date" | reverse %}
+{% for item in todos %}
+  <a href="{{ item.url }}" style="text-decoration:none;color:inherit">
+    <div class="card">
+      {% if item.imagem %}<img src="{{ item.imagem }}" alt="{{ item.title }}">{% endif %}
+      <div class="meta">{{ item.date | date: '%d/%m/%Y' }}</div>
+      <h3>{{ item.title }}</h3>
+    </div>
+  </a>
+{% endfor %}
+</div>
+
+{% if site.posts.size == 0 and site.top5.size == 0 and site.videos.size == 0 %}
+<p>Em breve, novidades por aqui. 🙏</p>
+{% endif %}
