@@ -1,1 +1,14 @@
 
+---
+layout: base
+---
+<article class="card">
+  {% if page.categoria %}<span class="badge">{{ page.categoria }}</span>{% endif %}
+  <h1>{{ page.title }}</h1>
+  <div class="meta">{{ page.date | date: '%d/%m/%Y' }}{% if page.autor %} · por {{ page.autor }}{% endif %}</div>
+  {% if page.imagem %}<img src="{{ page.imagem }}" alt="{{ page.title }}">{% endif %}
+  <div class="post-body">
+    {{ content }}
+  </div>
+</article>
+<p><a href="/noticias/">← Voltar para todas as notícias</a></p>
