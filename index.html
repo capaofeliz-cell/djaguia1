@@ -165,8 +165,11 @@ html,body{background:var(--cream)!important;color:var(--ink)!important}body{back
 .launch-suggestions .suggestion{border-color:#d5dfd5;background:#f3f7f2;color:#61786a}
 .launch-suggestions .suggestion:hover{background:#e8f0e8}
 @media(max-width:650px){.chat-launch{padding:15px!important}.question-box{gap:6px}.question-box .question-mic,.question-box .question-send{width:42px;height:42px}.question-box textarea{font-size:13px}.launch-suggestions{gap:6px}.launch-suggestions .suggestion{font-size:10px;padding:7px 10px}}
+#offlineBanner{display:none;position:sticky;top:0;z-index:20;background:#fff3d9;color:#6c4b15;font-size:12px;font-weight:700;text-align:center;padding:8px 12px;border-bottom:1px solid #f0d9a0}
+body.is-offline #offlineBanner{display:block}
 </style></head>
 <body>
+<div id="offlineBanner">📶 Você está offline — o Pastor Virtual responde com mensagens prontas e a rádio fica indisponível até a conexão voltar.</div>
 <!-- ANUNCIOS LATERAIS ADSENSE, DESATIVADO POR ENQUANTO. Quando o AdSense aprovar: 1 troque XXXXXXXXXX pelo ID do bloco data-ad-slot criado no painel AdSense. 2 remova a marca de comentario que abre logo abaixo desta linha e a que fecha no final deste bloco.
 
 <style>
@@ -511,7 +514,7 @@ let radioMetadataTimer=null;
 function radioConfig(){return RADIO_CONFIG}
 function applyRadioConfig(){const c=radioConfig();radioAudio.src=c.stream;radioAudio.volume=.85}
 
-function toggleRadio(){if(radioAudio.paused){radioAudio.play().catch(()=>alert('Não foi possível iniciar. Confira o link do streaming e se ele permite acesso pelo navegador.'))}else radioAudio.pause()}
+function toggleRadio(){if(!navigator.onLine){document.getElementById('radioTrack').textContent='Rádio indisponível offline';document.getElementById('radioArtist').textContent='Conecte-se à internet para ouvir';return}if(radioAudio.paused){radioAudio.play().catch(()=>alert('Não foi possível iniciar. Confira o link do streaming e se ele permite acesso pelo navegador.'))}else radioAudio.pause()}
 function parseTrackName(value){if(!value)return null;let title=String(value).trim();title=title.replace(/^streamtitle\s*[:=]\s*/i,'');if(!title)return null;const parts=title.split(/\s[-–—]\s/);return{title:(parts.length>1?parts.slice(1).join(' - '):title).trim(),artist:(parts.length>1?parts[0]:'Rádio ao vivo').trim(),full:title}}
 function showTrack(value){const track=parseTrackName(value);if(!track)return;document.getElementById('radioTrack').textContent=track.title;document.getElementById('radioTrack').title=track.full;document.getElementById('radioArtist').textContent=track.artist;document.getElementById('radioCover').src=RADIO_LOGO;findCover(track.full)}
 async function findCover(track){try{const q=encodeURIComponent(track);const r=await fetch('https://itunes.apple.com/search?term='+q+'&entity=song&limit=1');const d=await r.json();if(d.results&&d.results[0]&&d.results[0].artworkUrl100){document.getElementById('radioCover').src=d.results[0].artworkUrl100.replace('100x100','600x600')}}catch(e){console.info('Capa não disponível para esta faixa.')}}
@@ -537,6 +540,12 @@ if('serviceWorker' in navigator){
     navigator.serviceWorker.register('sw.js').catch(()=>{});
   });
 }
+
+// Aviso visual de modo offline (mostra/esconde a faixa no topo).
+function updateOfflineStatus(){document.body.classList.toggle('is-offline',!navigator.onLine)}
+window.addEventListener('online',updateOfflineStatus);
+window.addEventListener('offline',updateOfflineStatus);
+updateOfflineStatus();
 
 // Se o navegador mantiver um ícone antigo em cache, o parâmetro ?v=3
 // força a nova imagem local a ser buscada novamente.
