@@ -3,7 +3,7 @@ title: MC Guimê deixa o funk e anuncia nova fase na música gospel
 categoria: NOTÍCIAS
 autor: PASTOR VIRTUAL
 date: 2026-09-10T18:05:00.000-03:00
-imagem: ""
+imagem: /imagens/noticias/mc.png
 ---
 Após 17 anos de carreira no funk, MC Guimê surpreendeu os fãs ao anunciar uma grande mudança em sua trajetória musical. O cantor revelou que pretende deixar o gênero e dedicar sua carreira à música gospel, marcando o início de uma nova fase baseada em sua fé.
 
