@@ -1,1 +1,21 @@
-
+---
+layout: base
+title: "Vídeos Gospel"
+permalink: /noticias/videos/
+---
+<h1 style="font:700 28px Georgia,serif;color:#a86b0d">Vídeos</h1>
+<div class="grid cols-2">
+{% assign lista = site.videos | sort: "date" | reverse %}
+{% for item in lista %}
+  <a href="{{ item.url }}" style="text-decoration:none;color:inherit">
+    <div class="card">
+      <div class="meta">{{ item.date | date: '%d/%m/%Y' }}</div>
+      <h3>{{ item.title }}</h3>
+    </div>
+  </a>
+{% endfor %}
+</div>
+{% if site.videos.size == 0 %}
+<p>Em breve, vídeos por aqui. 🙏</p>
+{% endif %}
+<p><a href="/noticias/">← Voltar</a></p>
