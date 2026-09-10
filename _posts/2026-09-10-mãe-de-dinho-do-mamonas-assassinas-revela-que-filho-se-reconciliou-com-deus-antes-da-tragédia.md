@@ -44,4 +44,6 @@ Para Célia, a fé foi fundamental para enfrentar a perda do filho e continuar s
 
 O testemunho também reforça uma mensagem que permanece presente entre cristãos: mesmo em meio às maiores tragédias, a fé pode ser uma fonte de esperança e consolo.
 
-**Por: Redação PASTOR VIRTUAL**
+###### Imagem gerada por inteligência artificial
+
+###### Por: Redação PASTOR VIRTUAL
