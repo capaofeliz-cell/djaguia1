@@ -37,4 +37,6 @@ Embora todos os detalhes dessa nova fase ainda não tenham sido divulgados, as p
 
 MC Guimê parece estar decidido a iniciar um novo capítulo de sua história, desta vez com a música gospel como centro de sua carreira.
 
+Imagem gerada por inteligência artificial
+
 **Por: Redação PASTOR VIRTUAL**
