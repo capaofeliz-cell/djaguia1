@@ -1,1 +1,22 @@
-
+---
+layout: base
+title: "Fotos Gospel"
+permalink: /noticias/fotos/
+---
+<h1 style="font:700 28px Georgia,serif;color:#a86b0d">Fotos</h1>
+<div class="grid cols-2">
+{% assign lista = site.fotos | sort: "date" | reverse %}
+{% for item in lista %}
+  <a href="{{ item.url }}" style="text-decoration:none;color:inherit">
+    <div class="card">
+      {% if item.imagem %}<img src="{{ item.imagem }}" alt="{{ item.title }}">{% endif %}
+      <div class="meta">{{ item.date | date: '%d/%m/%Y' }}</div>
+      <h3>{{ item.title }}</h3>
+    </div>
+  </a>
+{% endfor %}
+</div>
+{% if site.fotos.size == 0 %}
+<p>Em breve, fotos por aqui. 🙏</p>
+{% endif %}
+<p><a href="/noticias/">← Voltar</a></p>
