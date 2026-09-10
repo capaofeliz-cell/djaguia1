@@ -1,64 +1,41 @@
-backend:
-  name: github
-  repo: capaofeliz-cell/djaguia1
-  branch: main
-  base_url: https://SEU-WORKER-AQUI.workers.dev
-  auth_endpoint: auth
-
-media_folder: "imagens/noticias"
-public_folder: "/imagens/noticias"
+title: "Pastor Virtual"
+description: "Pastor Virtual — respostas acolhedoras baseadas na Palavra de Deus."
+url: "https://djrenatobravo.com.br"
+markdown: kramdown
 
 collections:
-  - name: "posts"
-    label: "Notícias"
-    folder: "_posts"
-    create: true
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
-    fields:
-      - { label: "Título", name: "title", widget: "string" }
-      - { label: "Categoria", name: "categoria", widget: "string", required: false }
-      - { label: "Autor", name: "autor", widget: "string", required: false, default: "DJ ÁGUIA1" }
-      - { label: "Data", name: "date", widget: "datetime" }
-      - { label: "Imagem de capa", name: "imagem", widget: "image", required: false }
-      - { label: "Conteúdo", name: "body", widget: "markdown" }
+  top5:
+    output: true
+    permalink: /noticias/top5/:slug/
+  videos:
+    output: true
+    permalink: /noticias/videos/:slug/
+  fotos:
+    output: true
+    permalink: /noticias/fotos/:slug/
 
-  - name: "top5"
-    label: "Top 5"
-    folder: "_top5"
-    create: true
-    slug: "{{slug}}"
-    fields:
-      - { label: "Título", name: "title", widget: "string" }
-      - { label: "Data", name: "date", widget: "datetime" }
-      - { label: "Introdução", name: "intro", widget: "text", required: false }
-      - label: "Itens do Top 5"
-        name: "itens"
-        widget: "list"
-        fields:
-          - { label: "Título do item", name: "titulo", widget: "string" }
-          - { label: "Imagem", name: "imagem", widget: "image", required: false }
-          - { label: "Descrição", name: "descricao", widget: "text" }
-      - { label: "Conteúdo extra", name: "body", widget: "markdown", required: false }
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "top5"
+    values:
+      layout: "top5"
+  - scope:
+      path: ""
+      type: "videos"
+    values:
+      layout: "video"
+  - scope:
+      path: ""
+      type: "fotos"
+    values:
+      layout: "foto"
 
-  - name: "videos"
-    label: "Vídeos"
-    folder: "_videos"
-    create: true
-    slug: "{{slug}}"
-    fields:
-      - { label: "Título", name: "title", widget: "string" }
-      - { label: "Data", name: "date", widget: "datetime" }
-      - { label: "ID do YouTube (opcional)", name: "youtube_id", widget: "string", required: false, hint: "Cole só o código depois de v= no link do YouTube" }
-      - { label: "Código HTML de incorporação (opcional)", name: "embed_html", widget: "code", default_language: "html", required: false, hint: "Use isso se o vídeo não for do YouTube" }
-      - { label: "Conteúdo extra", name: "body", widget: "markdown", required: false }
-
-  - name: "fotos"
-    label: "Fotos"
-    folder: "_fotos"
-    create: true
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
-    fields:
-      - { label: "Título", name: "title", widget: "string" }
-      - { label: "Data", name: "date", widget: "datetime" }
-      - { label: "Foto", name: "imagem", widget: "image" }
-      - { label: "Legenda / texto extra", name: "body", widget: "markdown", required: false }
+exclude:
+  - admin
+  - README.md
