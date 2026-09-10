@@ -3,7 +3,7 @@ title: Mãe de Dinho, do Mamonas Assassinas, revela que filho se reconciliou com
   Deus antes da tragédia
 categoria: NOTÍCIAS
 autor: PASTOR VIRTUAL
-date: 2026-09-10T18:29:00.000-03:00
+date: 2026-09-10T18:51:00.000-03:00
 imagem: ""
 ---
 Trinta anos após o acidente que vitimou os integrantes do Mamonas Assassinas, uma declaração da mãe de Dinho voltou a chamar a atenção do público. Célia Alves contou que o filho, que cresceu em um ambiente cristão, teria se reconciliado com Jesus pouco antes da tragédia que marcou a história da música brasileira.
