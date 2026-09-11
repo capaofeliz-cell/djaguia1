@@ -62,3 +62,32 @@ collections:
       - { label: "Data", name: "date", widget: "datetime" }
       - { label: "Foto", name: "imagem", widget: "image" }
       - { label: "Legenda / texto extra", name: "body", widget: "markdown", required: false }
+      
+  - name: "paginas"
+    label: "Páginas do Site"
+    folder: "_paginas"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Título", name: "title", widget: "string" }
+      - { label: "Conteúdo", name: "body", widget: "markdown" }
+
+  - name: "config"
+    label: "Configurações do Site"
+    files:
+      - name: "menu"
+        label: "Menus de Navegação"
+        file: "_data/menu.yml"
+        fields:
+          - label: "Menu do Topo"
+            name: "header"
+            widget: "list"
+            fields:
+              - { label: "Texto", name: "label", widget: "string" }
+              - { label: "Link", name: "url", widget: "string" }
+          - label: "Menu do Rodapé"
+            name: "footer"
+            widget: "list"
+            fields:
+              - { label: "Texto", name: "label", widget: "string" }
+              - { label: "Link", name: "url", widget: "string" }
