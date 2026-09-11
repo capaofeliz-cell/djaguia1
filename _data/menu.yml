@@ -3,6 +3,9 @@ header:
     url: "/"
   - label: "Notícias"
     url: "/noticias/"
+  - label: "Tempo"
+    url: "/tempo/"
+
 footer:
   - label: "Notícias"
     url: "/noticias/"
@@ -12,5 +15,7 @@ footer:
     url: "/noticias/top5/"
   - label: "Fotos"
     url: "/noticias/fotos/"
+  - label: "Tempo"
+    url: "/tempo/"
   - label: "Política de Privacidade"
     url: "/privacidade/"
