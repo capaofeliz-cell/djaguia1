@@ -6,12 +6,42 @@ permalink: /noticias/
 <h1 style="font:700 28px Georgia,serif;color:#a86b0d">Notícias, Vídeos e Conteúdo Gospel</h1>
 <p>Fique por dentro das últimas notícias, vídeos e listas especiais do universo gospel.</p>
 
-<div class="grid cols-2">
 {% assign todos = "" | split: "" %}
 {% for post in site.posts %}{% assign todos = todos | push: post %}{% endfor %}
 {% for item in site.top5 %}{% assign todos = todos | push: item %}{% endfor %}
 {% for item in site.videos %}{% assign todos = todos | push: item %}{% endfor %}
 {% assign todos = todos | sort: "date" | reverse %}
+
+{% assign destaque = todos | first %}
+{% assign resto = todos | slice: 1, 4 %}
+
+<div style="display:grid;grid-template-columns:1.4fr 1fr;gap:14px;margin-bottom:28px">
+
+  {% if destaque %}
+  <a href="{{ destaque.url }}" style="text-decoration:none;color:inherit;position:relative;display:block;border-radius:16px;overflow:hidden;min-height:320px;background:#000">
+    {% if destaque.imagem %}<img src="{{ destaque.imagem }}" alt="{{ destaque.title }}" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;opacity:.75">{% endif %}
+    <div style="position:absolute;left:0;right:0;bottom:0;padding:18px;background:linear-gradient(to top,rgba(0,0,0,.85),transparent)">
+      <span style="color:#f4d589;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.06em">{{ destaque.categoria | default: "Destaque" }}</span>
+      <h2 style="color:#fff;font:700 20px Georgia,serif;margin:6px 0 0">{{ destaque.title }}</h2>
+    </div>
+  </a>
+  {% endif %}
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+    {% for item in resto %}
+    <a href="{{ item.url }}" style="text-decoration:none;color:inherit;position:relative;display:block;border-radius:12px;overflow:hidden;min-height:145px;background:#000">
+      {% if item.imagem %}<img src="{{ item.imagem }}" alt="{{ item.title }}" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;opacity:.75">{% endif %}
+      <div style="position:absolute;left:0;right:0;bottom:0;padding:10px;background:linear-gradient(to top,rgba(0,0,0,.85),transparent)">
+        <span style="color:#fff;font:700 12px Georgia,serif;line-height:1.25;display:block">{{ item.title | truncate: 50 }}</span>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+
+</div>
+
+<h3 style="font:700 18px Georgia,serif;color:#a86b0d;margin:0 0 12px">Todas as publicações</h3>
+<div class="grid cols-2">
 {% for item in todos %}
   <a href="{{ item.url }}" style="text-decoration:none;color:inherit">
     <div class="card">
