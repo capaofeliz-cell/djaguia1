@@ -1,5 +1,3 @@
-[2026-09-10-bem-vindo-as-noticias-gospel.md](https://github.com/user-attachments/files/32033160/2026-09-10-bem-vindo-as-noticias-gospel.md)
-
 ---
 title: "Bem-vindo às Notícias Gospel"
 categoria: "Novidades"
