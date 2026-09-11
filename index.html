@@ -601,7 +601,7 @@ const radioAudio=document.getElementById('radioAudio');
 const radioPlayerBody=document.getElementById('radioPlayerBody');
 let radioMetadataTimer=null;
 function radioConfig(){return RADIO_CONFIG}
-function applyRadioConfig(){const c=radioConfig();radioAudio.src=c.stream;radioAudio.volume=.85}
+function applyRadioConfig(){const c=radioConfig();radioAudio.src=c.stream;const savedVol=localStorage.getItem('radioVolume');radioAudio.volume=savedVol!==null?Number(savedVol):.85;document.getElementById('radioVolume').value=radioAudio.volume}
 
 function toggleRadio(){if(!navigator.onLine){document.getElementById('radioTrack').textContent='Rádio indisponível offline';document.getElementById('radioArtist').textContent='Conecte-se à internet para ouvir';return}if(radioAudio.paused){radioAudio.play().catch(()=>alert('Não foi possível iniciar. Confira o link do streaming e se ele permite acesso pelo navegador.'))}else radioAudio.pause()}
 function parseTrackName(value){if(!value)return null;let title=String(value).trim();title=title.replace(/^streamtitle\s*[:=]\s*/i,'');if(!title)return null;const parts=title.split(/\s[-–—]\s/);return{title:(parts.length>1?parts.slice(1).join(' - '):title).trim(),artist:(parts.length>1?parts[0]:'Rádio ao vivo').trim(),full:title}}
