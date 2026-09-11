@@ -43,11 +43,12 @@ permalink: /noticias/
 <h3 style="font:700 18px Georgia,serif;color:#a86b0d;margin:0 0 12px">Todas as publicações</h3>
 <div class="grid cols-2">
 {% for item in todos %}
-  <a href="{{ item.url }}" style="text-decoration:none;color:inherit">
+      <a href="{{ item.url }}" style="text-decoration:none;color:inherit">
     <div class="card">
       {% if item.imagem %}<img src="{{ item.imagem }}" alt="{{ item.title }}">{% endif %}
       <div class="meta">{{ item.date | date: '%d/%m/%Y' }}</div>
       <h3>{{ item.title }}</h3>
+      <span style="color:#1a73e8;font-size:12px;font-weight:700">Continuar lendo →</span>
     </div>
   </a>
 {% endfor %}
