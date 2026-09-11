@@ -43,6 +43,20 @@ ol.top5 li::before{content:counter(top5);position:absolute;left:14px;top:14px;wi
 .social-row{display:flex;gap:10px;flex-wrap:wrap}
 .social-row a{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:50%;background:#fff3d9;text-decoration:none;font-size:16px}
 #tempoWidget{font-size:13px}
+  .fixed-audio{position:fixed;left:0;right:0;bottom:0;z-index:30;width:100%;background:linear-gradient(135deg,rgba(31,28,40,.98),rgba(52,44,61,.98));border-top:1px solid #d8a849;box-shadow:0 -6px 24px #0004;color:#fff}
+.radio-player{position:relative;display:flex;align-items:center;gap:10px;padding:10px 16px;min-height:64px}
+.radio-cover{width:44px;height:44px;border-radius:10px;object-fit:cover;background:#c88719;flex:none}
+.radio-player.playing .radio-cover{animation:logoSpin 4s linear infinite}
+@keyframes logoSpin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+.radio-info{min-width:0;flex:1;text-align:left}
+.radio-kicker{display:flex;align-items:center;gap:6px;color:#e9b94e;font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.08em}
+.radio-live{width:6px;height:6px;border-radius:50%;background:#51d18a;box-shadow:0 0 0 3px #51d18a22}
+.radio-track{margin:2px 0;color:#fff;font-size:13px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.radio-artist{color:#c8c0ce;font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.radio-controls{display:flex;align-items:center;gap:7px;flex:none;margin-left:auto}
+.radio-play{width:38px;height:38px;border-radius:50%;border:0;background:linear-gradient(145deg,#f1c967,#bc7612);color:#2f2630;font-size:15px;font-weight:900;cursor:pointer}
+.radio-volume{width:80px;accent-color:#e9b94e}
+body{padding-bottom:78px}
 </style>
 </head>
 <body>
@@ -108,7 +122,34 @@ ol.top5 li::before{content:counter(top5);position:absolute;left:14px;top:14px;wi
 <footer class="site">
   <div class="wrap">© {{ site.time | date: '%Y' }} DJ ÁGUIA1 — Conteúdo gospel. <a href="/privacidade/">Política de Privacidade</a></div>
 </footer>
+<div class="fixed-audio" id="radioPlayer"><div class="radio-player" id="radioPlayerBody">
+  <img class="radio-cover" id="radioCover" src="/imagens/avatar.jpg" alt="Capa">
+  <div class="radio-info">
+    <div class="radio-kicker"><span class="radio-live"></span> AO VIVO · RÁDIO</div>
+    <div class="radio-track" id="radioTrack">Áudio...</div>
+    <div class="radio-artist" id="radioArtist">Áudio Virtual</div>
+  </div>
+  <div class="radio-controls">
+    <button class="radio-play" id="radioPlay" type="button" onclick="toggleRadio()" aria-label="Tocar rádio">▶</button>
+    <input class="radio-volume" id="radioVolume" type="range" min="0" max="1" step=".01" value=".85" aria-label="Volume">
+  </div>
+  <audio id="radioAudio" preload="none" crossorigin="anonymous"></audio>
+</div></div>
 
+<script>
+const RADIO_CONFIG={stream:'https://servidor26-5.brlogic.com:8038/live'};
+const radioAudio=document.getElementById('radioAudio');
+const radioPlayerBody=document.getElementById('radioPlayerBody');
+function applyRadioConfig(){radioAudio.src=RADIO_CONFIG.stream;const savedVol=localStorage.getItem('radioVolume');radioAudio.volume=savedVol!==null?Number(savedVol):.85;document.getElementById('radioVolume').value=radioAudio.volume}
+function toggleRadio(){if(!navigator.onLine){document.getElementById('radioTrack').textContent='Rádio indisponível offline';return}if(radioAudio.paused){radioAudio.play().catch(()=>{})}else radioAudio.pause()}
+function parseTrackName(value){if(!value)return null;let title=String(value).trim();title=title.replace(/^streamtitle\s*[:=]\s*/i,'');if(!title)return null;const parts=title.split(/\s[-–—]\s/);return{title:(parts.length>1?parts.slice(1).join(' - '):title).trim(),artist:(parts.length>1?parts[0]:'Rádio ao vivo').trim()}}
+function showTrack(value){const track=parseTrackName(value);if(!track)return;document.getElementById('radioTrack').textContent=track.title;document.getElementById('radioArtist').textContent=track.artist}
+radioAudio.addEventListener('play',()=>{radioPlayerBody.classList.add('playing');document.getElementById('radioPlay').textContent='❚❚';localStorage.setItem('radioPlaying','1')});
+radioAudio.addEventListener('pause',()=>{radioPlayerBody.classList.remove('playing');document.getElementById('radioPlay').textContent='▶';localStorage.setItem('radioPlaying','0')});
+document.getElementById('radioVolume').addEventListener('input',e=>{radioAudio.volume=Number(e.target.value);localStorage.setItem('radioVolume',e.target.value)});
+applyRadioConfig();
+if(localStorage.getItem('radioPlaying')==='1'){radioAudio.play().catch(()=>{})}
+</script>
 <script>
 fetch('https://api.open-meteo.com/v1/forecast?latitude=-29.75&longitude=-50.01&current=temperature_2m,weather_code&timezone=America%2FSao_Paulo')
   .then(r=>r.json())
