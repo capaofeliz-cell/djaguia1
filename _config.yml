@@ -33,7 +33,7 @@ defaults:
       type: "videos"
     values:
       layout: "video"
-    - scope:
+  - scope:
       path: ""
       type: "fotos"
     values:
