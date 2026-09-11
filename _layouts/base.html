@@ -149,6 +149,37 @@ radioAudio.addEventListener('pause',()=>{radioPlayerBody.classList.remove('playi
 document.getElementById('radioVolume').addEventListener('input',e=>{radioAudio.volume=Number(e.target.value);localStorage.setItem('radioVolume',e.target.value)});
 applyRadioConfig();
 if(localStorage.getItem('radioPlaying')==='1'){radioAudio.play().catch(()=>{})}
+  document.addEventListener('click', function(e){
+  const a = e.target.closest('a');
+  if(!a) return;
+  if(a.target === '_blank' || a.hasAttribute('download')) return;
+  if(e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
+  let url;
+  try{ url = new URL(a.href, location.href); }catch(err){ return; }
+  if(url.origin !== location.origin) return;
+  if(url.pathname === location.pathname) return;
+  if(!url.pathname.startsWith('/noticias/')) return;
+  e.preventDefault();
+  navigateTo(url.href);
+});
+
+function navigateTo(url){
+  fetch(url).then(r=>r.text()).then(html=>{
+    const doc = new DOMParser().parseFromString(html, 'text/html');
+    const newContent = doc.getElementById('pageContent');
+    const oldContent = document.getElementById('pageContent');
+    if(newContent && oldContent){
+      oldContent.innerHTML = newContent.innerHTML;
+      document.title = doc.title;
+      history.pushState({}, '', url);
+      window.scrollTo(0,0);
+    } else {
+      location.href = url;
+    }
+  }).catch(()=>{ location.href = url; });
+}
+
+window.addEventListener('popstate', ()=>{ navigateTo(location.href); });
 </script>
 <script>
 fetch('https://api.open-meteo.com/v1/forecast?latitude=-29.75&longitude=-50.01&current=temperature_2m,weather_code&timezone=America%2FSao_Paulo')
