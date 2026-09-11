@@ -33,11 +33,16 @@ defaults:
       type: "videos"
     values:
       layout: "video"
-  - scope:
+    - scope:
       path: ""
       type: "fotos"
     values:
       layout: "foto"
+  - scope:
+      path: ""
+      type: "paginas"
+    values:
+      layout: "pagina"
 
 exclude:
   - README.md
