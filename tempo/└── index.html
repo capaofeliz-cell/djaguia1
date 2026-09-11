@@ -1,1 +1,26 @@
+---
+layout: base
+title: Tempo
+description: Previsão do tempo
+---
 
+<div class="card">
+  <h2>Tempo</h2>
+
+  <p>Confira o tempo atual em Capão da Canoa.</p>
+
+  <div id="tempoPagina">Carregando...</div>
+</div>
+
+<script>
+fetch('https://api.open-meteo.com/v1/forecast?latitude=-29.75&longitude=-50.01&current=temperature_2m,weather_code&timezone=America%2FSao_Paulo')
+  .then(r => r.json())
+  .then(d => {
+    document.getElementById('tempoPagina').innerHTML =
+      '🌡️ ' + Math.round(d.current.temperature_2m) + '°C em Capão da Canoa';
+  })
+  .catch(() => {
+    document.getElementById('tempoPagina').innerHTML =
+      'Não foi possível carregar o tempo.';
+  });
+</script>
