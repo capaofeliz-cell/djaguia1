@@ -13,6 +13,9 @@ collections:
   fotos:
     output: true
     permalink: /noticias/fotos/:slug/
+  paginas:
+    output: true
+    permalink: /:path/
 
 defaults:
   - scope:
