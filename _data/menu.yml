@@ -1,1 +1,16 @@
-
+header:
+  - label: "Pastor Virtual"
+    url: "/"
+  - label: "Notícias"
+    url: "/noticias/"
+footer:
+  - label: "Notícias"
+    url: "/noticias/"
+  - label: "Vídeos"
+    url: "/noticias/videos/"
+  - label: "Top 5"
+    url: "/noticias/top5/"
+  - label: "Fotos"
+    url: "/noticias/fotos/"
+  - label: "Política de Privacidade"
+    url: "/privacidade/"
