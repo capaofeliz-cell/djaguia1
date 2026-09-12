@@ -19,7 +19,7 @@ permalink: /noticias/
 
   <div id="heroCarousel" style="position:relative;border-radius:16px;overflow:hidden;min-height:320px;background:#000">
     {% for item in slides %}
-    <a href="{{ item.url }}" class="hero-slide" data-index="{{ forloop.index0 }}" style="text-decoration:none;color:inherit;position:absolute;inset:0;opacity:{% if forloop.first %}1{% else %}0{% endif %};transition:opacity .8s ease;pointer-events:{% if forloop.first %}auto{% else %}none{% endif %}">
+    <a href="{{ item.url }}" class="hero-slide{% if forloop.first %} is-active{% endif %}" data-index="{{ forloop.index0 }}" style="text-decoration:none;color:inherit;position:absolute;inset:0;z-index:{% if forloop.first %}2{% else %}1{% endif %}">
       {% if item.imagem %}<img src="{{ item.imagem }}" alt="{{ item.title }}" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;opacity:.75">{% endif %}
       <div style="position:absolute;left:0;right:0;bottom:0;padding:18px;background:linear-gradient(to top,rgba(0,0,0,.85),transparent)">
         <span style="color:#f4d589;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.06em">{{ item.categoria | default: "Destaque" }}</span>
@@ -29,7 +29,7 @@ permalink: /noticias/
     {% endfor %}
     <div style="position:absolute;left:0;right:0;bottom:8px;display:flex;justify-content:center;gap:6px;z-index:5">
       {% for item in slides %}
-      <span class="hero-dot" data-dot="{{ forloop.index0 }}" style="width:7px;height:7px;border-radius:50%;background:{% if forloop.first %}#f4d589{% else %}#ffffff55{% endif %};transition:background .3s"></span>
+      <span class="hero-dot{% if forloop.first %} is-active{% endif %}" data-dot="{{ forloop.index0 }}"></span>
       {% endfor %}
     </div>
   </div>
@@ -46,6 +46,13 @@ permalink: /noticias/
   </div>
 
 </div>
+
+<style>
+#heroCarousel .hero-slide{opacity:0!important;transition:opacity .8s ease;pointer-events:none!important}
+#heroCarousel .hero-slide.is-active{opacity:1!important;pointer-events:auto!important}
+#heroCarousel .hero-dot{display:block;width:7px;height:7px;border-radius:50%;background:#ffffff55;transition:background .3s}
+#heroCarousel .hero-dot.is-active{background:#f4d589}
+</style>
 
 <h3 style="font:700 18px Georgia,serif;color:#a86b0d;margin:0 0 12px">Todas as publicações</h3>
 <div class="grid cols-2">
@@ -67,17 +74,33 @@ permalink: /noticias/
 
 <script>
 (function(){
-  const carousel = document.getElementById('heroCarousel');
-  if(!carousel) return;
-  const slides = carousel.querySelectorAll('.hero-slide');
-  const dots = carousel.querySelectorAll('.hero-dot');
-  if(slides.length < 2) return;
-  let current = 0;
-  function show(i){
-    slides.forEach((s,idx)=>{ s.style.opacity = idx===i ? '1':'0'; s.style.pointerEvents = idx===i ? 'auto':'none'; });
-    dots.forEach((d,idx)=>{ d.style.background = idx===i ? '#f4d589':'#ffffff55'; });
-    current = i;
+  function startCarousel(){
+    var carousel = document.getElementById('heroCarousel');
+    if(!carousel){ return; }
+    var slides = carousel.querySelectorAll('.hero-slide');
+    var dots = carousel.querySelectorAll('.hero-dot');
+    if(slides.length < 2){ return; }
+    var current = 0;
+    function show(i){
+      for(var a=0;a<slides.length;a++){ slides[a].classList.toggle('is-active', a===i); }
+      for(var b=0;b<dots.length;b++){ dots[b].classList.toggle('is-active', b===i); }
+      current = i;
+    }
+    window.setInterval(function(){
+      show((current+1) % slides.length);
+    }, 5000);
   }
-  setInterval(()=>{ show((current+1) % slides.length); }, 5000);
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', startCarousel);
+  } else {
+    startCarousel();
+  }
+  window.addEventListener('load', function(){
+    // segunda tentativa, caso o layout base carregue algo depois do DOMContentLoaded
+    if(!window.__heroCarouselStarted){
+      window.__heroCarouselStarted = true;
+      startCarousel();
+    }
+  });
 })();
 </script>
