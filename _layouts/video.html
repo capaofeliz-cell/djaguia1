@@ -1,7 +1,7 @@
 ---
 layout: base
 ---
-<article class="card" style="max-width:1000px;margin:0 auto;overflow-wrap:break-word;word-wrap:break-word">
+<article class="card" style="max-width:900px;margin:0 auto;overflow-wrap:break-word;word-wrap:break-word">
   <span class="badge">Vídeo</span>
   <h1 style="overflow-wrap:break-word">{{ page.title }}</h1>
   <div class="meta">{{ page.date | date: '%d/%m/%Y' }}</div>
@@ -10,6 +10,6 @@ layout: base
   {% elsif page.embed_html %}
   {{ page.embed_html }}
   {% endif %}
-  <div class="post-body" style="overflow-wrap:break-word;word-wrap:break-word;max-width:100%">{{ content }}</div>
+  <div class="post-body" style="overflow-wrap:break-word;word-wrap:break-word;max-width:700px;margin:0 auto">{{ content }}</div>
 </article>
-<p style="max-width:1000px;margin:12px auto"><a href="/noticias/videos/">← Voltar para todos os vídeos</a></p>
+<p style="max-width:900px;margin:12px auto"><a href="/noticias/videos/">← Voltar para todos os vídeos</a></p>
