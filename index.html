@@ -171,64 +171,36 @@ html,body{background:var(--cream)!important;color:var(--ink)!important}body{back
 body.is-offline #offlineBanner{display:block}
 </style>
 
-<style>
-:root{--cream:#ffffff;--paper:#ffffff;--gold:#1a73e8;--gold2:#0b57d0;--brown:#333333;--ink:#111111;--muted:#5f6368;--line:#e0e0e0;--dark:#111111}
-html,body{background:#ffffff!important}
-body{background:#ffffff!important;color:#111111!important}
-a{color:#1a73e8!important;text-decoration:none;transition:color .15s}
-a:hover{color:#0b57d0!important;text-decoration:underline}
-.brand h1{color:#111111!important}
-.welcome h2{color:#111111!important}
-.welcome h2 em{color:#1a73e8!important}
-.badge{color:#1a73e8!important}
-.quote{color:#111111!important}
-.quote cite{color:#1a73e8!important}
-.section{background:#ffffff!important;border-color:#e0e0e0!important}
-.section h3{color:#111111!important}
-.section p{color:#333333!important}
-.chat{background:#ffffff!important;border-color:#e0e0e0!important}
-.chat-head{background:#ffffff!important}
-.chat-head strong{color:#111111!important}
-.bubble.virtual{background:#f5f5f5!important;color:#111111!important;border-color:#e0e0e0!important}
-.composer{background:#ffffff!important}
-.composer textarea{background:#ffffff!important;color:#111111!important;border-color:#e0e0e0!important}
-.suggestion{background:#ffffff!important;color:#1a73e8!important;border-color:#c9dff9!important}
-.suggestion:hover{background:#e8f0fe!important}
+<style id="pastor-pro-header">
+/* ===== Home mais profissional / estilo institucional, alinhada com a página de Notícias ===== */
+.top{border-bottom:3px solid #b97845!important}
+.brand h1{font-size:24px!important}
+.site-nav a{color:#7a5a3c!important;font-weight:800!important;letter-spacing:.02em;padding:6px 2px;border-bottom:2px solid transparent;transition:border-color .15s,color .15s}
+.site-nav a:hover{color:#b97845!important;border-bottom-color:#b97845!important;text-decoration:none!important}
+.pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;width:min(760px,100%);margin:8px auto 0}
+.pillar{background:rgba(255,254,250,.8);border:1px solid #e6e2d9;border-radius:18px;padding:18px 14px;text-align:center;box-shadow:0 10px 26px rgba(87,103,90,.08)}
+.pillar .pillar-ico{font-size:22px;display:block;margin-bottom:8px}
+.pillar strong{display:block;font:600 15px 'Cormorant Garamond',Georgia,serif;color:#4d5e54;margin-bottom:3px}
+.pillar span{display:block;color:#7c837d;font-size:11px;line-height:1.4}
+@media(max-width:650px){.pillars{grid-template-columns:1fr;gap:10px}}
+.section-kicker{display:block;color:#b97845;font-size:10px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;margin-bottom:6px}
 </style>
 
 </head>
 <body>
 <div id="offlineBanner">📶 Você está offline — o Pastor Virtual responde com mensagens prontas e a rádio fica indisponível até a conexão voltar.</div>
-<!-- ANUNCIOS LATERAIS ADSENSE, DESATIVADO POR ENQUANTO. Quando o AdSense aprovar: 1 troque XXXXXXXXXX pelo ID do bloco data-ad-slot criado no painel AdSense. 2 remova a marca de comentario que abre logo abaixo desta linha e a que fecha no final deste bloco.
-
-<style>
-.ad-rail{position:fixed;top:50%;transform:translateY(-50%);width:160px;height:600px;z-index:5;}
-.ad-rail-left{left:12px;}
-.ad-rail-right{right:12px;}
-@media (max-width:1100px){.ad-rail{display:none;}}
-</style>
-<div class="ad-rail ad-rail-left">
-  <ins class="adsbygoogle"
-       style="display:block;width:160px;height:600px"
-       data-ad-client="ca-pub-4764775481973440"
-       data-ad-slot="XXXXXXXXXX"></ins>
-  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-</div>
-<div class="ad-rail ad-rail-right">
-  <ins class="adsbygoogle"
-       style="display:block;width:160px;height:600px"
-       data-ad-client="ca-pub-4764775481973440"
-       data-ad-slot="XXXXXXXXXX"></ins>
-  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-</div>
--->
-<!-- ===== FIM ANÚNCIOS LATERAIS ===== -->
-<header class="top"><div class="topbar"><img class="avatar" src="imagens/avatar.jpg" alt="Virtual Pastor Virtual"><div class="brand"><h1>PASTOR VIRTUAL</h1><p>Respostas na visão do pastor virtual com base na Palavra de Deus!</p></div><nav class="site-nav" style="margin-left:auto;display:flex;gap:14px;flex-wrap:wrap;font-size:12px;font-weight:700"><a href="noticias/" style="color:#1a73e8;text-decoration:none">Notícias</a><a href="noticias/videos/" style="color:#1a73e8;text-decoration:none">Vídeos</a><a href="noticias/fotos/" style="color:#1a73e8;text-decoration:none">Fotos</a><a href="noticias/top5/" style="color:#1a73e8;text-decoration:none">Top 5</a><a href="tempo/" style="color:#1a73e8;text-decoration:none">Tempo</a></nav></div></header>
+<header class="top"><div class="topbar"><img class="avatar" src="imagens/avatar.jpg" alt="Virtual Pastor Virtual"><div class="brand"><h1>PASTOR VIRTUAL</h1><p>Respostas na visão do pastor virtual com base na Palavra de Deus!</p></div><nav class="site-nav" style="margin-left:auto;display:flex;gap:16px;flex-wrap:wrap;font-size:12px"><a href="noticias/">Notícias</a><a href="noticias/videos/">Vídeos</a><a href="noticias/fotos/">Fotos</a><a href="noticias/top5/">Top 5</a><a href="tempo/">Tempo</a></nav></div></header>
 <main class="page"><section class="welcome"><span class="badge">Palavra · acolhimento · oração</span><h2>Fique à vontade para <em>compartilhar</em>.</h2><p>Olá, eu sou o seu Pastor Virtual. Fui programado para lhe ajudar com as coisas de Deus e de Jesus, auxiliando em sua busca sobre a Palavra de Deus.
 
-Estou aqui para ouvir seu coração e conversar sobre Deus, Jesus e a Palavra. Pergunte, reflita ou desabafe; caminharemos juntos com fé e esperança.</p><div class="quote"><q>Sede uns para com os outros benignos, misericordiosos, perdoando-vos uns aos outros.</q>Efésios 4:32</div></section>
+Estou aqui para ouvir seu coração e conversar sobre Deus, Jesus e a Palavra. Pergunte, reflita ou desabafe; caminharemos juntos com fé e esperança.</p><div class="quote"><q>Sede uns para com os outros benignos, misericordiosos, perdoando-vos uns aos outros.</q>Efésios 4:32</div>
+<div class="pillars">
+  <div class="pillar"><span class="pillar-ico">📖</span><strong>Palavra</strong><span>Reflexões baseadas na Bíblia, todos os dias.</span></div>
+  <div class="pillar"><span class="pillar-ico">🤝</span><strong>Acolhimento</strong><span>Um espaço sem julgamento para desabafar.</span></div>
+  <div class="pillar"><span class="pillar-ico">🙏</span><strong>Oração</strong><span>Incentivo constante a uma vida de oração.</span></div>
+</div>
+</section>
 <section class="chat" aria-label="Conversa com o Pastor Virtual"><div class="chat-head"><img class="mini" src="imagens/avatar.jpg" alt="Virtual"><div><strong>Conversa com Virtual</strong><small>Um espaço de escuta e reflexão</small></div><span class="status">● Disponível</span></div><div class="messages" id="messages"><div class="bubble virtual">A paz do Senhor esteja com você, meu irmão(ã). Que alegria ter você aqui. Como posso ouvir e acolher você hoje?<span class="ref">"O Senhor é o meu pastor; nada me faltará." — Salmos 23:1</span></div></div><div class="typing" id="typing">O VIRTUAL ESTÁ PREPARANDO UMA RESPOSTA...</div><div class="suggestions"><button class="suggestion" onclick="ask('Como posso encontrar paz em meio às dificuldades?')">Encontrar paz</button><button class="suggestion" onclick="ask('O que a Bíblia diz sobre o perdão?')">Sobre o perdão</button><button class="suggestion" onclick="ask('Quem é Jesus Cristo?')">Quem é Jesus?</button><button class="suggestion" onclick="ask('Como ter uma vida de oração mais próxima de Deus?')">Vida de oração</button><button class="suggestion" onclick="ask('Quem é o Espírito Santo e qual o Seu papel na minha vida?')">O Espírito Santo</button><button class="suggestion" onclick="ask('O que significa verdadeiramente crer em Jesus?')">Quem crê</button></div><div class="composer"><textarea id="input" placeholder="Compartilhe sua pergunta ou reflexão..." aria-label="Sua pergunta" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();send()}"></textarea><button class="mic" id="mic" onclick="toggleMic()" aria-label="Falar pergunta" title="Falar pergunta">🎙</button><button class="send" id="send" onclick="send()" aria-label="Enviar">➤</button></div></section>
-<section class="section"><h3>Um espaço de fé e cuidado</h3><p>🙏 Uma ferramenta criada com fé e propósito
+<section class="section"><span class="section-kicker">Propósito</span><h3>Um espaço de fé e cuidado</h3><p>🙏 Uma ferramenta criada com fé e propósito
 
 Este aplicativo/site foi criado e inspirado pelo Espírito Santo, com o auxílio da IA, com o propósito de oferecer uma ferramenta de apoio para aqueles que desejam conhecer, refletir e compreender melhor a Palavra de Deus e os ensinamentos de Jesus.
 
@@ -237,28 +209,15 @@ Use esta conversa para tirar dúvidas, refletir sobre a Bíblia, encontrar encor
 As respostas são geradas pelo Pastor Virtual, com o apoio do serviço de inteligência do aplicativo. Ele foi criado para auxiliar sua jornada de fé, sempre incentivando a busca pela Bíblia, pela oração e pela direção do Espírito Santo.
 
 Que este espaço seja uma ferramenta de edificação, esperança e fé.
-Que Deus abençoe sua caminhada e que a Palavra de Deus seja sempre a verdadeira luz para sua vida. 🙏📖</p></section><section class="section"><h3>Reflexões sobre a Palavra</h3><p>📖 A fé cristã nos convida, todos os dias, a olhar para as Escrituras não apenas como um livro antigo, mas como uma carta viva, escrita para cada geração. Quando lemos os Salmos, encontramos um Deus que acolhe a dor humana sem julgamento; quando lemos os Evangelhos, encontramos um Jesus que caminha ao lado dos cansados, dos que erram e dos que buscam recomeçar.
+Que Deus abençoe sua caminhada e que a Palavra de Deus seja sempre a verdadeira luz para sua vida. 🙏📖</p></section><section class="section"><span class="section-kicker">Devocional</span><h3>Reflexões sobre a Palavra</h3><p>📖 A fé cristã nos convida, todos os dias, a olhar para as Escrituras não apenas como um livro antigo, mas como uma carta viva, escrita para cada geração. Quando lemos os Salmos, encontramos um Deus que acolhe a dor humana sem julgamento; quando lemos os Evangelhos, encontramos um Jesus que caminha ao lado dos cansados, dos que erram e dos que buscam recomeçar.
 
 Muitas pessoas chegam até este espaço com perguntas simples, mas profundas: "Por que Deus permite o sofrimento?", "Como perdoar quem me feriu?", "O que significa confiar quando tudo parece incerto?". Não existem respostas prontas para tudo, mas existe um caminho: buscar, orar, ler a Palavra com um coração aberto e permitir que ela transforme, aos poucos, a maneira como enxergamos a vida.
 
 A oração, nesse sentido, não é uma fórmula mágica, mas uma conversa honesta. É trazer a Deus as alegrias e as angústias, sem esconder nada, confiando que Ele ouve mesmo quando o silêncio parece maior que a resposta. E a comunidade — a igreja, a família, os irmãos na fé — continua sendo um dos maiores presentes de Deus para atravessarmos os tempos difíceis: ninguém foi feito para caminhar sozinho.
 
-Este espaço não substitui o cuidado pastoral presencial nem a vida em comunidade, mas deseja ser um ponto de apoio: um lugar para parar, respirar e lembrar que a graça de Deus é nova a cada manhã.</p></section><section class="section"><h3>Sobre o projeto</h3><p>O Pastor Virtual nasceu do desejo de tornar a Palavra de Deus mais acessível no dia a dia, especialmente para quem não tem, no momento, alguém por perto para conversar sobre fé. Ele foi pensado para acolher, não para substituir. Sempre que possível, o aplicativo incentiva a busca por uma igreja local, por um pastor ou líder espiritual de confiança, e pela leitura direta da Bíblia.
+Este espaço não substitui o cuidado pastoral presencial nem a vida em comunidade, mas deseja ser um ponto de apoio: um lugar para parar, respirar e lembrar que a graça de Deus é nova a cada manhã.</p></section><section class="section"><span class="section-kicker">Bastidores</span><h3>Sobre o projeto</h3><p>O Pastor Virtual nasceu do desejo de tornar a Palavra de Deus mais acessível no dia a dia, especialmente para quem não tem, no momento, alguém por perto para conversar sobre fé. Ele foi pensado para acolher, não para substituir. Sempre que possível, o aplicativo incentiva a busca por uma igreja local, por um pastor ou líder espiritual de confiança, e pela leitura direta da Bíblia.
 
 O projeto segue crescendo aos poucos, com o cuidado de manter respostas acolhedoras, fiéis ao espírito das Escrituras e distantes de qualquer julgamento. Sugestões, dúvidas e testemunhos podem ser enviados através dos canais de contato do criador do projeto.</p></section>
-<!-- 3o BLOCO DE ANUNCIO, BANNER RESPONSIVO, DESATIVADO. Ativar do mesmo jeito: troque XXXXXXXXXX pelo data-ad-slot do painel AdSense e remova as marcas de comentario no inicio e no fim deste bloco.
-
-<div style="text-align:center;margin:16px 0;">
-  <ins class="adsbygoogle"
-       style="display:block"
-       data-ad-client="ca-pub-4764775481973440"
-       data-ad-slot="XXXXXXXXXX"
-       data-ad-format="auto"
-       data-full-width-responsive="true"></ins>
-  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-</div>
--->
-<!-- ===== FIM 3º BLOCO ===== -->
 <div class="footer-actions" style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center;padding:20px 0 4px">
   <button class="small-btn danger" onclick="clearChat()">Excluir conversa</button>
   <button class="small-btn" onclick="downloadConversation('marked')">Baixar marcadas</button>
