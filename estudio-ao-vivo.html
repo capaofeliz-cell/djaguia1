@@ -619,16 +619,13 @@ footer{
 
     <!--
       IMPORTANTE:
-      SUBSTITUA SOMENTE O TEXTO ABAIXO:
-
-      COLOQUE_SEU_CHANNEL_ID_AQUI
-
-      pelo ID REAL DO CANAL, que começa com UC.
+      ID do canal DJ ÁGUIA1:
+      UC5haMU-qX0of6SpRd4kvGVg
     -->
 
     <iframe
       id="youtubeLive"
-      src="https://www.youtube.com/embed/live_stream?channel=COLOQUE_SEU_CHANNEL_ID_AQUI"
+      src="https://www.youtube-nocookie.com/embed/live_stream?channel=UC5haMU-qX0of6SpRd4kvGVg"
       title="Live YouTube DJ ÁGUIA1"
       allow="autoplay; encrypted-media; picture-in-picture"
       allowfullscreen>
@@ -853,23 +850,6 @@ audio.addEventListener(
 
 const youtubeFrame =
   document.getElementById('youtubeLive');
-
-
-/*
-   Se o ID ainda não tiver sido colocado,
-   não deixa aparecer uma URL quebrada.
-*/
-
-if(
-  youtubeFrame.src.includes(
-    'UC5haMU-qX0of6SpRd4kvGVg'
-  )
-){
-
-  youtubeFrame.src =
-    'https://www.youtube.com/@djaguia1/live';
-
-}
 
 </script>
 
