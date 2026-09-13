@@ -21,3 +21,4 @@ itens:
       Tags: gospel dance, dj renato bravo, congresso de jovens, música cristã, adoração, jesus de nazaré, força e fé, brasil usa, música eletrônica gospel, louvor alegre, produtor da verdade bíblica, música impactante, balada cristã, juventude cristã, worship dance
     titulo: " Jesus de Nazaré - As melhores do DJÁGUIA1 vc encontra aqui -"
 ---
+<iframe width="931" height="524" src="https://www.youtube.com/embed/0O523wGcxcw" title="Jesus de Nazaré" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
