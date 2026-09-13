@@ -6,15 +6,81 @@ layout: base
   <h1>{{ page.title }}</h1>
   <div class="meta">{{ page.date | date: '%d/%m/%Y' }}</div>
   {% if page.intro %}<p>{{ page.intro }}</p>{% endif %}
-  <ol class="top5">
-    {% for item in page.itens %}
-    <li>
-      <strong>{{ item.titulo }}</strong>
-      {% if item.imagem %}<br><img src="{{ item.imagem }}" alt="{{ item.titulo }}" style="max-width:100%;border-radius:8px;margin:8px 0">{% endif %}
-      <p>{{ item.descricao }}</p>
-    </li>
-    {% endfor %}
-  </ol>
+
+  <div class="top5-carousel">
+    <div class="top5-track">
+      {% for item in page.itens %}
+      <div class="top5-slide">
+        {% if item.imagem %}<img src="{{ item.imagem }}" alt="{{ item.titulo }}">{% endif %}
+        <div class="top5-caption">
+          <strong>{{ forloop.index }}. {{ item.titulo }}</strong>
+          <p>{{ item.descricao }}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <button class="top5-prev" aria-label="Anterior">‹</button>
+    <button class="top5-next" aria-label="Próximo">›</button>
+    <div class="top5-dots"></div>
+  </div>
+
   <div class="post-body">{{ content }}</div>
 </article>
 <p><a href="/noticias/">← Voltar para todas as notícias</a></p>
+
+<style>
+.top5-carousel{position:relative;max-width:600px;margin:20px auto}
+.top5-track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;border-radius:10px;-webkit-overflow-scrolling:touch}
+.top5-track::-webkit-scrollbar{display:none}
+.top5-slide{flex:0 0 100%;scroll-snap-align:center;text-align:center}
+.top5-slide img{width:100%;max-height:380px;object-fit:cover;border-radius:10px;display:block}
+.top5-caption{padding:10px 4px}
+.top5-caption p{margin:4px 0 0;font-size:14px;color:#555;word-break:break-word}
+.top5-prev,.top5-next{position:absolute;top:40%;transform:translateY(-50%);background:rgba(0,0,0,.55);color:#fff;border:none;width:36px;height:36px;border-radius:50%;font-size:20px;cursor:pointer;z-index:2}
+.top5-prev{left:6px}
+.top5-next{right:6px}
+.top5-dots{display:flex;justify-content:center;gap:6px;margin-top:8px}
+.top5-dot{width:8px;height:8px;border-radius:50%;background:#ccc;cursor:pointer}
+.top5-dot.active{background:#a86b0d}
+</style>
+
+<script>
+(function(){
+  var carousel = document.querySelector('.top5-carousel');
+  if(!carousel) return;
+  var track = carousel.querySelector('.top5-track');
+  var slides = carousel.querySelectorAll('.top5-slide');
+  var dotsWrap = carousel.querySelector('.top5-dots');
+  slides.forEach(function(_, i){
+    var dot = document.createElement('div');
+    dot.className = 'top5-dot' + (i === 0 ? ' active' : '');
+    dot.addEventListener('click', function(){ scrollToSlide(i); });
+    dotsWrap.appendChild(dot);
+  });
+  var dots = dotsWrap.querySelectorAll('.top5-dot');
+  function scrollToSlide(i){
+    track.scrollTo({ left: slides[i].offsetLeft, behavior: 'smooth' });
+  }
+  carousel.querySelector('.top5-prev').addEventListener('click', function(){
+    var i = currentIndex();
+    scrollToSlide(Math.max(0, i - 1));
+  });
+  carousel.querySelector('.top5-next').addEventListener('click', function(){
+    var i = currentIndex();
+    scrollToSlide(Math.min(slides.length - 1, i + 1));
+  });
+  function currentIndex(){
+    var pos = track.scrollLeft;
+    var closest = 0, min = Infinity;
+    slides.forEach(function(s, i){
+      var d = Math.abs(s.offsetLeft - pos);
+      if(d < min){ min = d; closest = i; }
+    });
+    return closest;
+  }
+  track.addEventListener('scroll', function(){
+    var i = currentIndex();
+    dots.forEach(function(d, idx){ d.classList.toggle('active', idx === i); });
+  });
+})();
+</script>
