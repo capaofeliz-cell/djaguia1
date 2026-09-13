@@ -10,11 +10,20 @@ layout: base
   <div class="top5-carousel">
     <div class="top5-track">
       {% for item in page.itens %}
+      {% assign partes = item.descricao | split: " — " %}
+      {% assign videourl = partes[1] %}
+      {% assign vid = videourl | split: "v=" | last | split: "&" | first %}
       <div class="top5-slide">
-        {% if item.imagem %}<img src="{{ item.imagem }}" alt="{{ item.titulo }}">{% endif %}
+        {% if vid %}
+        <div class="top5-video">
+          <iframe src="https://www.youtube.com/embed/{{ vid }}" title="{{ item.titulo }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+        {% elsif item.imagem %}
+        <img src="{{ item.imagem }}" alt="{{ item.titulo }}">
+        {% endif %}
         <div class="top5-caption">
           <strong>{{ forloop.index }}. {{ item.titulo }}</strong>
-          <p>{{ item.descricao }}</p>
+          <p>{{ partes[0] }}</p>
         </div>
       </div>
       {% endfor %}
@@ -33,6 +42,8 @@ layout: base
 .top5-track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;border-radius:10px;-webkit-overflow-scrolling:touch}
 .top5-track::-webkit-scrollbar{display:none}
 .top5-slide{flex:0 0 100%;scroll-snap-align:center;text-align:center}
+.top5-video{position:relative;width:100%;padding-top:56.25%;border-radius:10px;overflow:hidden}
+.top5-video iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0}
 .top5-slide img{width:100%;max-height:380px;object-fit:cover;border-radius:10px;display:block}
 .top5-caption{padding:10px 4px}
 .top5-caption p{margin:4px 0 0;font-size:14px;color:#555;word-break:break-word}
