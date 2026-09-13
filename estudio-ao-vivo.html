@@ -3,299 +3,874 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Estúdio Ao Vivo — DJ ÁGUIA1</title>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+
 <style>
-  :root{
-    --bg:#0E1120;
-    --surface:#171B30;
-    --surface-2:#1F2440;
-    --gold:#E8B84B;
-    --sky:#6FA3D8;
-    --text:#EDEEF5;
-    --muted:#9BA0C0;
-    --line:#2A2F52;
-    --pink:#e8365a;
-  }
-  *{box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
-  body{
-    margin:0;
-    background:radial-gradient(120% 90% at 50% -10%, #1B2044 0%, var(--bg) 55%);
-    color:var(--text);
-    font-family:'Manrope', sans-serif;
-    line-height:1.5;
-  }
-  h1,h2,h3{
-    font-family:'Fraunces', serif;
-    font-weight:600;
-    margin:0;
-  }
-  a{color:inherit;}
 
-  /* Header */
-  header{
-    padding:20px 24px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    border-bottom:1px solid var(--line);
-  }
-  .brand{display:flex;align-items:center;gap:12px;}
-  .brand-mark{
-    width:38px;height:38px;border-radius:50%;
-    background:linear-gradient(135deg, var(--gold), #B9862E);
-    display:flex;align-items:center;justify-content:center;
-    font-family:'Fraunces',serif; font-weight:700; color:#1A1300; font-size:18px;
-  }
-  .brand-name{font-family:'Fraunces',serif;font-size:19px;letter-spacing:0.3px;}
-  nav{display:flex;gap:22px;font-size:14px;color:var(--muted);}
-  nav a:hover{color:var(--gold);}
+:root{
+  --bg:#0E1120;
+  --surface:#171B30;
+  --surface-2:#1F2440;
+  --gold:#E8B84B;
+  --sky:#6FA3D8;
+  --text:#EDEEF5;
+  --muted:#9BA0C0;
+  --line:#2A2F52;
+  --pink:#e8365a;
+}
 
-  /* Hero / live status */
-  .hero{
-    padding:60px 24px 40px;
-    text-align:center;
-  }
-  .status{
-    display:inline-flex;align-items:center;gap:8px;
-    padding:7px 16px;border-radius:999px;
-    background:var(--surface);
-    border:1px solid var(--line);
-    font-size:13px;color:var(--muted);
-    margin-bottom:28px;
-  }
-  .dot{
-    width:8px;height:8px;border-radius:50%;
-    background:#4CD97B;
-    box-shadow:0 0 0 0 rgba(76,217,123,0.6);
-    animation:pulse 1.8s infinite;
-  }
-  @keyframes pulse{
-    0%{box-shadow:0 0 0 0 rgba(76,217,123,0.55);}
-    70%{box-shadow:0 0 0 9px rgba(76,217,123,0);}
-    100%{box-shadow:0 0 0 0 rgba(76,217,123,0);}
-  }
-  .hero h1{
-    font-size:clamp(32px,5vw,52px);
-    max-width:680px;margin:0 auto 14px;
-    line-height:1.15;
-  }
-  .hero h1 span{color:var(--gold);}
-  .hero p{color:var(--muted);max-width:520px;margin:0 auto;font-size:16px;}
+*{
+  box-sizing:border-box;
+}
 
-  /* Player minimalista (volume + play/pause) */
-  .player-wrap{
-    display:flex;
-    justify-content:center;
-    margin:40px auto 0;
-  }
-  .player{
-    display:flex;
-    align-items:center;
-    background:var(--surface-2);
-    border:1px solid var(--line);
-    border-radius:14px;
-    overflow:hidden;
-    box-shadow:0 10px 30px rgba(0,0,0,.4);
-  }
-  .volume{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    padding:0 18px;
-    height:54px;
-  }
-  .vol-icon{color:#e8e8ec;flex:none;}
-  .vol-icon svg{display:block;width:18px;height:18px;}
-  input[type="range"]{
-    -webkit-appearance:none;
-    width:150px;height:3px;
-    background:rgba(255,255,255,.35);
-    border-radius:999px;outline:none;
-  }
-  input[type="range"]::-webkit-slider-thumb{
-    -webkit-appearance:none;width:16px;height:16px;
-    border-radius:50%;background:#fff;cursor:pointer;
-    box-shadow:0 1px 4px rgba(0,0,0,.4);
-  }
-  input[type="range"]::-moz-range-thumb{
-    width:16px;height:16px;border:none;border-radius:50%;
-    background:#fff;cursor:pointer;
-  }
-  .play-btn{
-    display:flex;align-items:center;gap:10px;
-    height:54px;padding:0 22px;border:none;
-    background:var(--pink);color:#fff;
-    font-weight:800;font-size:14px;letter-spacing:.04em;
-    cursor:pointer;font-family:'Manrope',sans-serif;
-  }
-  .play-btn:hover{background:#f0466a;}
-  .play-btn svg{width:14px;height:14px;flex:none;}
-  .play-btn .label{white-space:nowrap;}
+html{
+  scroll-behavior:smooth;
+}
 
-  .player-links{
-    display:flex;justify-content:center;gap:14px;
-    margin-top:18px;flex-wrap:wrap;
-  }
-  .btn{
-    display:inline-flex;align-items:center;gap:8px;
-    padding:11px 20px;border-radius:10px;
-    font-size:14px;font-weight:600;text-decoration:none;
-    border:1px solid var(--line);
-  }
-  .btn-ghost{background:transparent;color:var(--text);}
-  .btn-ghost:hover{border-color:var(--sky);color:var(--sky);}
+body{
+  margin:0;
+  background:
+    radial-gradient(
+      120% 90% at 50% -10%,
+      #1B2044 0%,
+      var(--bg) 55%
+    );
+  color:var(--text);
+  font-family:'Manrope',sans-serif;
+  line-height:1.5;
+}
 
-  /* Vídeo ao vivo */
-  section{padding:56px 24px;}
-  .section-head{max-width:640px;margin:0 auto 30px;text-align:center;}
-  .section-head h2{font-size:28px;margin-bottom:8px;}
-  .section-head p{color:var(--muted);font-size:15px;}
+h1,h2,h3{
+  font-family:'Fraunces',serif;
+  font-weight:600;
+  margin:0;
+}
 
-  .video-frame{
-    max-width:860px;margin:0 auto;
-    border-radius:16px;overflow:hidden;
-    border:1px solid var(--line);
-    background:var(--surface);
-    aspect-ratio:16/9;
+a{
+  color:inherit;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+header{
+  padding:20px 24px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  border-bottom:1px solid var(--line);
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.brand-mark{
+  width:38px;
+  height:38px;
+  border-radius:50%;
+  background:linear-gradient(135deg,var(--gold),#B9862E);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-family:'Fraunces',serif;
+  font-weight:700;
+  color:#1A1300;
+  font-size:18px;
+}
+
+.brand-name{
+  font-family:'Fraunces',serif;
+  font-size:19px;
+  letter-spacing:.3px;
+}
+
+nav{
+  display:flex;
+  gap:22px;
+  font-size:14px;
+  color:var(--muted);
+}
+
+nav a:hover{
+  color:var(--gold);
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+  padding:60px 24px 40px;
+  text-align:center;
+}
+
+.status{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:7px 16px;
+  border-radius:999px;
+  background:var(--surface);
+  border:1px solid var(--line);
+  font-size:13px;
+  color:var(--muted);
+  margin-bottom:28px;
+}
+
+.dot{
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:#4CD97B;
+  box-shadow:0 0 0 0 rgba(76,217,123,.6);
+  animation:pulse 1.8s infinite;
+}
+
+@keyframes pulse{
+
+  0%{
+    box-shadow:0 0 0 0 rgba(76,217,123,.55);
   }
-  .video-frame iframe{width:100%;height:100%;border:none;display:block;}
 
-  /* Locutor + Programação */
+  70%{
+    box-shadow:0 0 0 9px rgba(76,217,123,0);
+  }
+
+  100%{
+    box-shadow:0 0 0 0 rgba(76,217,123,0);
+  }
+
+}
+
+.hero h1{
+  font-size:clamp(32px,5vw,52px);
+  max-width:680px;
+  margin:0 auto 14px;
+  line-height:1.15;
+}
+
+.hero h1 span{
+  color:var(--gold);
+}
+
+.hero p{
+  color:var(--muted);
+  max-width:520px;
+  margin:0 auto;
+  font-size:16px;
+}
+
+/* =========================
+   PLAYER
+========================= */
+
+.player-wrap{
+  display:flex;
+  justify-content:center;
+  margin:40px auto 0;
+}
+
+.player{
+  display:flex;
+  align-items:center;
+  background:var(--surface-2);
+  border:1px solid var(--line);
+  border-radius:14px;
+  overflow:hidden;
+  box-shadow:0 10px 30px rgba(0,0,0,.4);
+}
+
+.volume{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:0 18px;
+  height:54px;
+}
+
+.vol-icon{
+  color:#e8e8ec;
+  flex:none;
+}
+
+.vol-icon svg{
+  display:block;
+  width:18px;
+  height:18px;
+}
+
+input[type="range"]{
+  -webkit-appearance:none;
+  width:150px;
+  height:3px;
+  background:rgba(255,255,255,.35);
+  border-radius:999px;
+  outline:none;
+}
+
+input[type="range"]::-webkit-slider-thumb{
+  -webkit-appearance:none;
+  width:16px;
+  height:16px;
+  border-radius:50%;
+  background:#fff;
+  cursor:pointer;
+  box-shadow:0 1px 4px rgba(0,0,0,.4);
+}
+
+input[type="range"]::-moz-range-thumb{
+  width:16px;
+  height:16px;
+  border:none;
+  border-radius:50%;
+  background:#fff;
+  cursor:pointer;
+}
+
+.play-btn{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  height:54px;
+  padding:0 22px;
+  border:none;
+  background:var(--pink);
+  color:#fff;
+  font-weight:800;
+  font-size:14px;
+  letter-spacing:.04em;
+  cursor:pointer;
+  font-family:'Manrope',sans-serif;
+}
+
+.play-btn:hover{
+  background:#f0466a;
+}
+
+.play-btn svg{
+  width:14px;
+  height:14px;
+  flex:none;
+}
+
+.play-btn .label{
+  white-space:nowrap;
+}
+
+.player-links{
+  display:flex;
+  justify-content:center;
+  gap:14px;
+  margin-top:18px;
+  flex-wrap:wrap;
+}
+
+.btn{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:11px 20px;
+  border-radius:10px;
+  font-size:14px;
+  font-weight:600;
+  text-decoration:none;
+  border:1px solid var(--line);
+}
+
+.btn-ghost{
+  background:transparent;
+  color:var(--text);
+}
+
+.btn-ghost:hover{
+  border-color:var(--sky);
+  color:var(--sky);
+}
+
+/* =========================
+   VIDEO
+========================= */
+
+section{
+  padding:56px 24px;
+}
+
+.section-head{
+  max-width:640px;
+  margin:0 auto 30px;
+  text-align:center;
+}
+
+.section-head h2{
+  font-size:28px;
+  margin-bottom:8px;
+}
+
+.section-head p{
+  color:var(--muted);
+  font-size:15px;
+}
+
+.video-frame{
+  max-width:860px;
+  margin:0 auto;
+  border-radius:16px;
+  overflow:hidden;
+  border:1px solid var(--line);
+  background:#000;
+  aspect-ratio:16/9;
+}
+
+.video-frame iframe{
+  width:100%;
+  height:100%;
+  border:none;
+  display:block;
+}
+
+/* =========================
+   BOTÃO YOUTUBE
+========================= */
+
+.youtube-fallback{
+  max-width:860px;
+  margin:18px auto 0;
+  text-align:center;
+}
+
+.youtube-button{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  padding:13px 22px;
+  background:#FF0033;
+  color:white;
+  text-decoration:none;
+  border-radius:10px;
+  font-weight:700;
+  transition:.2s;
+}
+
+.youtube-button:hover{
+  transform:translateY(-2px);
+  background:#ff2852;
+}
+
+/* =========================
+   CARDS
+========================= */
+
+.grid-two{
+  max-width:900px;
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:22px;
+}
+
+@media(max-width:680px){
+
   .grid-two{
-    max-width:900px;margin:0 auto;
-    display:grid;grid-template-columns:1fr 1fr;gap:22px;
+    grid-template-columns:1fr;
   }
-  @media (max-width:680px){.grid-two{grid-template-columns:1fr;}}
 
-  .card{
-    background:var(--surface);
-    border:1px solid var(--line);
-    border-radius:16px;
-    padding:26px;
+  nav{
+    display:none;
   }
-  .card h3{font-size:19px;margin-bottom:12px;color:var(--gold);}
-  .schedule-item{
-    display:flex;justify-content:space-between;
-    padding:10px 0;border-bottom:1px solid var(--line);
-    font-size:14px;
-  }
-  .schedule-item:last-child{border-bottom:none;}
-  .schedule-item time{color:var(--sky);font-weight:600;}
 
-  footer{
-    text-align:center;padding:34px 24px;
-    color:var(--muted);font-size:13px;
-    border-top:1px solid var(--line);
+  .player{
+    max-width:95%;
   }
+
+  .volume{
+    padding:0 10px;
+  }
+
+  input[type="range"]{
+    width:100px;
+  }
+
+}
+
+.card{
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:26px;
+}
+
+.card h3{
+  font-size:19px;
+  margin-bottom:12px;
+  color:var(--gold);
+}
+
+.schedule-item{
+  display:flex;
+  justify-content:space-between;
+  padding:10px 0;
+  border-bottom:1px solid var(--line);
+  font-size:14px;
+}
+
+.schedule-item:last-child{
+  border-bottom:none;
+}
+
+.schedule-item time{
+  color:var(--sky);
+  font-weight:600;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+  text-align:center;
+  padding:34px 24px;
+  color:var(--muted);
+  font-size:13px;
+  border-top:1px solid var(--line);
+}
+
 </style>
 </head>
+
 <body>
 
 <header>
+
   <div class="brand">
-    <div class="brand-mark">A1</div>
-    <div class="brand-name">DJ ÁGUIA1</div>
+
+    <div class="brand-mark">
+      A1
+    </div>
+
+    <div class="brand-name">
+      DJ ÁGUIA1
+    </div>
+
   </div>
+
   <nav>
-    <a href="#player">Estúdio</a>
-    <a href="#locutor">Locutor</a>
-    <a href="#programacao">Programação</a>
+
+    <a href="#player">
+      Estúdio
+    </a>
+
+    <a href="#locutor">
+      Locutor
+    </a>
+
+    <a href="#programacao">
+      Programação
+    </a>
+
   </nav>
+
 </header>
 
+
 <div class="hero">
-  <div class="status"><span class="dot"></span> No ar agora</div>
-  <h1>Estúdio <span>Ao Vivo</span></h1>
-  <p>Música autoral gospel, dance e trance de adoração, transmitida direto do estúdio.</p>
+
+  <div class="status">
+    <span class="dot"></span>
+    No ar agora
+  </div>
+
+  <h1>
+    Estúdio <span>Ao Vivo</span>
+  </h1>
+
+  <p>
+    Música autoral gospel, dance e trance de adoração,
+    transmitida direto do estúdio.
+  </p>
+
 </div>
+
+
+<!-- =========================
+     PLAYER DA RÁDIO
+========================= -->
 
 <div class="player-wrap" id="player">
+
   <div class="player">
+
     <div class="volume">
+
       <span class="vol-icon">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 9v6h4l5 5V4L8 9H4z"/></svg>
+
+        <svg viewBox="0 0 24 24" fill="currentColor">
+
+          <path d="M4 9v6h4l5 5V4L8 9H4z"/>
+
+        </svg>
+
       </span>
-      <input type="range" id="volume" min="0" max="1" step="0.01" value="0.8">
+
+      <input
+        type="range"
+        id="volume"
+        min="0"
+        max="1"
+        step="0.01"
+        value="0.8"
+      >
+
       <span class="vol-icon">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 9v6h4l5 5V4L8 9H4zm11.5 3a4.5 4.5 0 0 0-2.5-4.03v8.06A4.5 4.5 0 0 0 15.5 12zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+
+        <svg viewBox="0 0 24 24" fill="currentColor">
+
+          <path d="M4 9v6h4l5 5V4L8 9H4zm11.5 3a4.5 4.5 0 0 0-2.5-4.03v8.06A4.5 4.5 0 0 0 15.5 12zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+
+        </svg>
+
       </span>
+
     </div>
-    <button class="play-btn" id="playBtn" onclick="toggleRadio()">
-      <svg id="playIcon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-      <span class="label" id="playLabel">PLAY</span>
+
+
+    <button
+      class="play-btn"
+      id="playBtn"
+      onclick="toggleRadio()"
+    >
+
+      <svg
+        id="playIcon"
+        viewBox="0 0 24 24"
+        fill="currentColor"
+      >
+
+        <path d="M8 5v14l11-7z"/>
+
+      </svg>
+
+      <span
+        class="label"
+        id="playLabel"
+      >
+        PLAY
+      </span>
+
     </button>
+
   </div>
+
 </div>
-<audio id="radioAudio" preload="none" crossorigin="anonymous"></audio>
+
+
+<audio
+  id="radioAudio"
+  preload="none"
+  crossorigin="anonymous">
+</audio>
+
 
 <div class="player-links">
-  <a class="btn btn-ghost" href="https://www.youtube.com/@djaguia1/streams" target="_blank" rel="noopener">Ver no YouTube</a>
+
+  <a
+    class="btn btn-ghost"
+    href="https://www.youtube.com/@djaguia1/streams"
+    target="_blank"
+    rel="noopener"
+  >
+    Ver no YouTube
+  </a>
+
 </div>
 
-<section>
-  <div class="section-head">
-    <h2>Transmissão em vídeo</h2>
-    <p>Acompanhe a live do estúdio também em vídeo, direto do canal no YouTube.</p>
-  </div>
-  <div class="video-frame">
-    <iframe src="https://www.youtube.com/embed/live_stream?channel=djaguia1" title="Live YouTube DJ ÁGUIA1" allowfullscreen></iframe>
-  </div>
-</section>
+
+<!-- =========================
+     YOUTUBE AO VIVO
+========================= -->
 
 <section>
-  <div class="grid-two">
-    <div class="card" id="locutor">
-      <h3>Locutor</h3>
-      <p>DJ ÁGUIA1 comanda o estúdio, apresentando músicas autorais de adoração e conduzindo a programação ao vivo.</p>
-    </div>
-    <div class="card" id="programacao">
-      <h3>Programação</h3>
-      <div class="schedule-item"><span>Manhã de Louvor</span><time>07h–09h</time></div>
-      <div class="schedule-item"><span>Gospel Dance</span><time>12h–14h</time></div>
-      <div class="schedule-item"><span>Trance de Adoração</span><time>19h–21h</time></div>
-      <div class="schedule-item"><span>Noite Autoral</span><time>22h–00h</time></div>
-    </div>
+
+  <div class="section-head">
+
+    <h2>
+      Transmissão em vídeo
+    </h2>
+
+    <p>
+      Acompanhe a live do estúdio também em vídeo,
+      direto do canal no YouTube.
+    </p>
+
   </div>
+
+
+  <div class="video-frame">
+
+    <!--
+      IMPORTANTE:
+      SUBSTITUA SOMENTE O TEXTO ABAIXO:
+
+      COLOQUE_SEU_CHANNEL_ID_AQUI
+
+      pelo ID REAL DO CANAL, que começa com UC.
+    -->
+
+    <iframe
+      id="youtubeLive"
+      src="https://www.youtube.com/embed/live_stream?channel=COLOQUE_SEU_CHANNEL_ID_AQUI"
+      title="Live YouTube DJ ÁGUIA1"
+      allow="autoplay; encrypted-media; picture-in-picture"
+      allowfullscreen>
+    </iframe>
+
+  </div>
+
+
+  <div class="youtube-fallback">
+
+    <a
+      class="youtube-button"
+      href="https://www.youtube.com/@djaguia1/streams"
+      target="_blank"
+      rel="noopener"
+    >
+
+      ▶ Assistir ao vivo no YouTube
+
+    </a>
+
+  </div>
+
 </section>
+
+
+<!-- =========================
+     LOCUTOR / PROGRAMAÇÃO
+========================= -->
+
+<section>
+
+  <div class="grid-two">
+
+
+    <div
+      class="card"
+      id="locutor"
+    >
+
+      <h3>
+        Locutor
+      </h3>
+
+      <p>
+        DJ ÁGUIA1 comanda o estúdio,
+        apresentando músicas autorais de adoração
+        e conduzindo a programação ao vivo.
+      </p>
+
+    </div>
+
+
+    <div
+      class="card"
+      id="programacao"
+    >
+
+      <h3>
+        Programação
+      </h3>
+
+
+      <div class="schedule-item">
+
+        <span>
+          Manhã de Louvor
+        </span>
+
+        <time>
+          07h–09h
+        </time>
+
+      </div>
+
+
+      <div class="schedule-item">
+
+        <span>
+          Gospel Dance
+        </span>
+
+        <time>
+          12h–14h
+        </time>
+
+      </div>
+
+
+      <div class="schedule-item">
+
+        <span>
+          Trance de Adoração
+        </span>
+
+        <time>
+          19h–21h
+        </time>
+
+      </div>
+
+
+      <div class="schedule-item">
+
+        <span>
+          Noite Autoral
+        </span>
+
+        <time>
+          22h–00h
+        </time>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
 
 <footer>
+
   DJ ÁGUIA1 — Web Rádio Gospel · djrenatobravo.com.br
+
 </footer>
 
+
 <script>
-  const STREAM_URL = 'https://servidor26-5.brlogic.com:8038/live';
-  const audio = document.getElementById('radioAudio');
-  const playIcon = document.getElementById('playIcon');
-  const playLabel = document.getElementById('playLabel');
-  const volume = document.getElementById('volume');
 
-  audio.volume = Number(volume.value);
-  audio.src = STREAM_URL;
+/* ======================================
+   RÁDIO ONLINE
+====================================== */
 
-  volume.addEventListener('input', e => {
-    audio.volume = Number(e.target.value);
-  });
+const STREAM_URL =
+  'https://servidor26-5.brlogic.com:8038/live';
 
-  function toggleRadio(){
-    if(audio.paused){
-      audio.play().catch(()=>alert('Não foi possível iniciar a transmissão.'));
-    }else{
-      audio.pause();
-    }
+const audio =
+  document.getElementById('radioAudio');
+
+const playIcon =
+  document.getElementById('playIcon');
+
+const playLabel =
+  document.getElementById('playLabel');
+
+const volume =
+  document.getElementById('volume');
+
+
+audio.volume =
+  Number(volume.value);
+
+audio.src =
+  STREAM_URL;
+
+
+volume.addEventListener(
+  'input',
+  function(e){
+
+    audio.volume =
+      Number(e.target.value);
+
+  }
+);
+
+
+function toggleRadio(){
+
+  if(audio.paused){
+
+    audio.play().catch(function(){
+
+      alert(
+        'Não foi possível iniciar a transmissão.'
+      );
+
+    });
+
+  }else{
+
+    audio.pause();
+
   }
 
-  audio.addEventListener('play', () => {
-    playIcon.innerHTML = '<rect x="6" y="5" width="4" height="14"/><rect x="14" y="5" width="4" height="14"/>';
-    playLabel.textContent = 'PAUSE';
-  });
-  audio.addEventListener('pause', () => {
-    playIcon.innerHTML = '<path d="M8 5v14l11-7z"/>';
-    playLabel.textContent = 'PLAY';
-  });
+}
+
+
+audio.addEventListener(
+  'play',
+  function(){
+
+    playIcon.innerHTML =
+      '<rect x="6" y="5" width="4" height="14"/>' +
+      '<rect x="14" y="5" width="4" height="14"/>';
+
+    playLabel.textContent =
+      'PAUSE';
+
+  }
+);
+
+
+audio.addEventListener(
+  'pause',
+  function(){
+
+    playIcon.innerHTML =
+      '<path d="M8 5v14l11-7z"/>';
+
+    playLabel.textContent =
+      'PLAY';
+
+  }
+);
+
+
+/* ======================================
+   YOUTUBE
+====================================== */
+
+const youtubeFrame =
+  document.getElementById('youtubeLive');
+
+
+/*
+   Se o ID ainda não tiver sido colocado,
+   não deixa aparecer uma URL quebrada.
+*/
+
+if(
+  youtubeFrame.src.includes(
+    'UC5haMU-qX0of6SpRd4kvGVg'
+  )
+){
+
+  youtubeFrame.src =
+    'https://www.youtube.com/@djaguia1/live';
+
+}
+
 </script>
 
 </body>
