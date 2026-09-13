@@ -1,6 +1,6 @@
 ---
 title: Confusão dos Soberbos -
 date: 2026-09-13T14:11:00.000-03:00
-intro: Uma canção profética que denuncia a idolatria aos homens corruptos
+intro: "- Uma canção profética que denuncia a idolatria aos homens corruptos."
 ---
 <iframe width="931" height="524" src="https://www.youtube.com/embed/B0trPiHM4fU" title="Confusão dos Soberbos" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
