@@ -496,81 +496,25 @@ footer{
 
 
 <!-- =========================
-     PLAYER DA RÁDIO
+     PLAYER DA RÁDIO (widget oficial Caster.fm)
 ========================= -->
 
 <div class="player-wrap" id="player">
 
-  <div class="player">
-
-    <div class="volume">
-
-      <span class="vol-icon">
-
-        <svg viewBox="0 0 24 24" fill="currentColor">
-
-          <path d="M4 9v6h4l5 5V4L8 9H4z"/>
-
-        </svg>
-
-      </span>
-
-      <input
-        type="range"
-        id="volume"
-        min="0"
-        max="1"
-        step="0.01"
-        value="0.8"
-      >
-
-      <span class="vol-icon">
-
-        <svg viewBox="0 0 24 24" fill="currentColor">
-
-          <path d="M4 9v6h4l5 5V4L8 9H4zm11.5 3a4.5 4.5 0 0 0-2.5-4.03v8.06A4.5 4.5 0 0 0 15.5 12zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
-
-        </svg>
-
-      </span>
-
-    </div>
-
-
-    <button
-      class="play-btn"
-      id="playBtn"
-      onclick="toggleRadio()"
-    >
-
-      <svg
-        id="playIcon"
-        viewBox="0 0 24 24"
-        fill="currentColor"
-      >
-
-        <path d="M8 5v14l11-7z"/>
-
-      </svg>
-
-      <span
-        class="label"
-        id="playLabel"
-      >
-        PLAY
-      </span>
-
-    </button>
-
+  <div class="cstrEmbed"
+       data-type="newStreamPlayer"
+       data-publicToken="1e0c7957-8b85-4f27-9114-d3596ba93915"
+       data-theme="light"
+       data-color="A29D11"
+       data-channelId="a29069b9-1d3f-4ebb-ab76-75e6d30d2fcb"
+       data-rendered="false">
+    <a href="https://www.caster.fm">Shoutcast Hosting</a>
+    <a href="https://www.caster.fm">Stream Hosting</a>
+    <a href="https://www.caster.fm">Radio Server Hosting</a>
   </div>
+  <script src="//cdn.cloud.caster.fm//widgets/embed.js"></script>
 
 </div>
-
-
-<audio
-  id="radioAudio"
-  preload="none">
-</audio>
 
 
 
@@ -722,94 +666,6 @@ footer{
 
 
 <script>
-
-/* ======================================
-   RÁDIO ONLINE
-====================================== */
-
-const STREAM_URL =
-  'https://morcast.caster.fm:18559/N5TeX?token=269c43836bcb440a57efc05f1a023ba4';
-
-const audio =
-  document.getElementById('radioAudio');
-
-const playIcon =
-  document.getElementById('playIcon');
-
-const playLabel =
-  document.getElementById('playLabel');
-
-const volume =
-  document.getElementById('volume');
-
-
-audio.volume =
-  Number(volume.value);
-
-audio.src =
-  STREAM_URL;
-
-
-volume.addEventListener(
-  'input',
-  function(e){
-
-    audio.volume =
-      Number(e.target.value);
-
-  }
-);
-
-
-function toggleRadio(){
-
-  if(audio.paused){
-
-    audio.play().catch(function(){
-
-      alert(
-        'Não foi possível iniciar a transmissão.'
-      );
-
-    });
-
-  }else{
-
-    audio.pause();
-
-  }
-
-}
-
-
-audio.addEventListener(
-  'play',
-  function(){
-
-    playIcon.innerHTML =
-      '<rect x="6" y="5" width="4" height="14"/>' +
-      '<rect x="14" y="5" width="4" height="14"/>';
-
-    playLabel.textContent =
-      'PAUSE';
-
-  }
-);
-
-
-audio.addEventListener(
-  'pause',
-  function(){
-
-    playIcon.innerHTML =
-      '<path d="M8 5v14l11-7z"/>';
-
-    playLabel.textContent =
-      'PLAY';
-
-  }
-);
-
 
 /* ======================================
    YOUTUBE
