@@ -46,22 +46,22 @@ ol.top5 li::before{content:counter(top5);position:absolute;left:14px;top:14px;wi
 .social-row{display:flex;gap:10px;flex-wrap:wrap}
 .social-row a{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:50%;background:#e8f0fe;text-decoration:none;font-size:16px}
 #tempoWidget{font-size:13px}
-#backToTop{position:fixed;right:20px;bottom:90px;width:44px;height:44px;border-radius:50%;border:none;background:var(--gold);color:#fff;font-size:18px;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.2);display:none;z-index:25}
+#backToTop{position:fixed;right:20px;bottom:60px;width:44px;height:44px;border-radius:50%;border:none;background:var(--gold);color:#fff;font-size:18px;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.2);display:none;z-index:25}
 #backToTop:hover{background:var(--gold2)}
 .fixed-audio{position:fixed;left:0;right:0;bottom:0;z-index:30;width:100%;background:linear-gradient(135deg,rgba(31,28,40,.98),rgba(52,44,61,.98));border-top:1px solid #d8a849;box-shadow:0 -6px 24px #0004;color:#fff}
-.radio-player{position:relative;display:flex;align-items:center;gap:10px;padding:10px 16px;min-height:64px}
-.radio-cover{width:44px;height:44px;border-radius:10px;object-fit:cover;background:#c88719;flex:none}
+.radio-player{position:relative;display:flex;align-items:center;gap:8px;padding:6px 14px;min-height:40px}
+.radio-cover{width:28px;height:28px;border-radius:7px;object-fit:cover;background:#c88719;flex:none}
 .radio-player.playing .radio-cover{animation:logoSpin 4s linear infinite}
 @keyframes logoSpin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
 .radio-info{min-width:0;flex:1;text-align:left}
-.radio-kicker{display:flex;align-items:center;gap:6px;color:#e9b94e;font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.08em}
-.radio-live{width:6px;height:6px;border-radius:50%;background:#51d18a;box-shadow:0 0 0 3px #51d18a22}
-.radio-track{margin:2px 0;color:#fff;font-size:13px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.radio-artist{color:#c8c0ce;font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.radio-controls{display:flex;align-items:center;gap:7px;flex:none;margin-left:auto}
-.radio-play{width:38px;height:38px;border-radius:50%;border:0;background:linear-gradient(145deg,#f1c967,#bc7612);color:#2f2630;font-size:15px;font-weight:900;cursor:pointer}
-.radio-volume{width:80px;accent-color:#e9b94e}
-body{padding-bottom:78px}
+.radio-kicker{display:flex;align-items:center;gap:5px;color:#e9b94e;font-size:8px;font-weight:800;text-transform:uppercase;letter-spacing:.08em}
+.radio-live{width:5px;height:5px;border-radius:50%;background:#51d18a;box-shadow:0 0 0 2px #51d18a22}
+.radio-track{margin:1px 0;color:#fff;font-size:11px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.radio-artist{color:#c8c0ce;font-size:9px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.radio-controls{display:flex;align-items:center;gap:6px;flex:none;margin-left:auto}
+.radio-play{width:28px;height:28px;border-radius:50%;border:0;background:linear-gradient(145deg,#f1c967,#bc7612);color:#2f2630;font-size:12px;font-weight:900;cursor:pointer}
+.radio-volume{width:60px;accent-color:#e9b94e}
+body{padding-bottom:52px}
 </style>
 </head>
 <body>
