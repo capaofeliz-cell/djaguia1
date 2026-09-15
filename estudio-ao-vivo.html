@@ -329,8 +329,21 @@ section{
 .video-frame iframe{
   width:100%;
   height:100%;
+  min-height:220px;
   border:none;
   display:block;
+}
+
+@media(max-width:680px){
+  .video-frame{
+    width:100%;
+    border-radius:10px;
+    aspect-ratio:16/9;
+  }
+
+  .video-frame iframe{
+    min-height:0;
+  }
 }
 
 /* =========================
@@ -723,7 +736,7 @@ footer{
 
     <iframe
       id="youtubeLive"
-      src="https://www.youtube-nocookie.com/embed/live_stream?channel=UC5haMU-qX0of6SpRd4kvGVg&enablejsapi=1&playsinline=1"
+      src="https://www.youtube-nocookie.com/embed/live_stream?channel=UC5haMU-qX0of6SpRd4kvGVg&enablejsapi=1&playsinline=1&origin=https%3A%2F%2Fdjrenatobravo.com.br&rel=0"
       title="Live YouTube DJ ÁGUIA1"
       allow="autoplay; encrypted-media; picture-in-picture"
       allowfullscreen>
@@ -858,8 +871,7 @@ const youtubeFrame = document.getElementById('youtubeLive');
 
 /*
   Fallback automático: quando a live terminar, o player muda para os vídeos
-  enviados ao canal. A playlist UU... é a playlist automática de uploads do
-  canal cujo ID público é UC5haMU-qX0of6SpRd4kvGVg.
+  enviados ao canal. A playlist configurada é usada como fallback quando a live termina ou fica indisponível.
 */
 const YOUTUBE_CHANNEL_ID = 'UC5haMU-qX0of6SpRd4kvGVg';
 const YOUTUBE_UPLOADS_PLAYLIST = 'PLZI_NxUCJ9-ChXqBKIa2whjSo12hbdaDj';
@@ -869,16 +881,22 @@ let youtubePlayer = null;
 function showYoutubeFallback() {
   if (youtubeFallbackActive || !youtubeFrame) return;
   youtubeFallbackActive = true;
+  // Não forçamos autoplay: navegadores móveis normalmente bloqueiam
+  // reprodução automática sem uma ação do usuário.
   youtubeFrame.src =
-    `https://www.youtube-nocookie.com/embed?list=${YOUTUBE_UPLOADS_PLAYLIST}` +
-    '&autoplay=1&playsinline=1&rel=0';
+    `https://www.youtube-nocookie.com/embed?listType=playlist&list=${YOUTUBE_UPLOADS_PLAYLIST}` +
+    '&enablejsapi=1&playsinline=1&origin=' + encodeURIComponent(window.location.origin) +
+    '&rel=0';
 }
 
 function onYouTubeIframeAPIReady() {
   if (!youtubeFrame || !window.YT) return;
   youtubePlayer = new YT.Player('youtubeLive', {
     events: {
-      onError: showYoutubeFallback,
+      onError: function (event) {
+        // 100/101/150: vídeo indisponível, privado ou não incorporável.
+        showYoutubeFallback();
+      },
       onStateChange: function (event) {
         // ENDED: a live ended normally; switch to the channel playlist.
         if (event.data === YT.PlayerState.ENDED) showYoutubeFallback();
