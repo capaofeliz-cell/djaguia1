@@ -508,6 +508,57 @@ footer{
   background:#fff;
 }
 
+
+
+/* =========================
+   ESPAÇOS PARA GOOGLE ADSENSE
+========================= */
+
+.adsense-slot{
+  width:100%;
+  max-width:970px;
+  min-height:90px;
+  margin:26px auto;
+  padding:10px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  color:#8a8a8a;
+  font-size:11px;
+  background:#fff;
+  border:1px solid #eeeeee;
+  border-radius:8px;
+}
+
+.adsense-slot:empty{
+  display:none;
+}
+
+.adsense-slot ins.adsbygoogle{
+  display:block;
+  width:100%;
+  min-height:90px;
+}
+
+.adsense-slot[data-status="pending"]::before{
+  content:'Espaço reservado para publicidade';
+}
+
+.adsense-slot[data-status="ready"]::before{
+  content:none;
+}
+
+@media(max-width:680px){
+  .adsense-slot{
+    min-height:100px;
+    margin:20px auto;
+    border-left:0;
+    border-right:0;
+    border-radius:0;
+  }
+}
+
 </style>
 </head>
 
@@ -542,6 +593,8 @@ footer{
   </nav>
 
 </header>
+
+<div class="adsense-slot" id="adsense-top" data-status="pending" data-ad-slot="" aria-label="Espaço reservado para publicidade"></div>
 
 
 <div class="hero">
@@ -583,6 +636,8 @@ footer{
   </div>
 
 </div>
+
+<div class="adsense-slot" id="adsense-middle" data-status="pending" data-ad-slot="" aria-label="Espaço reservado para publicidade"></div>
 
 <script src="https://cdn.cloud.caster.fm/widgets/embed.js"></script>
 
@@ -726,6 +781,8 @@ footer{
 </section>
 
 
+<div class="adsense-slot" id="adsense-bottom" data-status="pending" data-ad-slot="" aria-label="Espaço reservado para publicidade"></div>
+
 <footer>
 
   DJ ÁGUIA1 — Web Rádio Gospel · djrenatobravo.com.br
@@ -749,6 +806,50 @@ footer{
 const youtubeFrame =
   document.getElementById('youtubeLive');
 
+</script>
+
+
+
+<!--
+  ADSENSE: quando a conta for aprovada, preencha ADSENSE_CLIENT e os três
+  data-ad-slot abaixo. O carregador transforma os três espaços em anúncios.
+-->
+<script>
+  const ADSENSE_CLIENT = '';
+  const ADSENSE_SLOTS = {
+    'adsense-top': '',
+    'adsense-middle': '',
+    'adsense-bottom': ''
+  };
+
+  function loadAdSense() {
+    if (!ADSENSE_CLIENT || Object.values(ADSENSE_SLOTS).some(slot => !slot)) return;
+
+    const script = document.createElement('script');
+    script.async = true;
+    script.src = `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT}`;
+    script.crossOrigin = 'anonymous';
+    script.onload = () => {
+      Object.entries(ADSENSE_SLOTS).forEach(([id, slotId]) => {
+        const container = document.getElementById(id);
+        if (!container || container.dataset.status === 'ready') return;
+        container.dataset.status = 'ready';
+        container.textContent = '';
+        const ad = document.createElement('ins');
+        ad.className = 'adsbygoogle';
+        ad.style.display = 'block';
+        ad.dataset.adClient = ADSENSE_CLIENT;
+        ad.dataset.adSlot = slotId;
+        ad.dataset.adFormat = 'auto';
+        ad.dataset.fullWidthResponsive = 'true';
+        container.appendChild(ad);
+        (window.adsbygoogle = window.adsbygoogle || []).push({});
+      });
+    };
+    document.head.appendChild(script);
+  }
+
+  loadAdSense();
 </script>
 
 </body>
