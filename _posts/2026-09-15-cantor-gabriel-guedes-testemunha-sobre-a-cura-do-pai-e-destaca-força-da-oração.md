@@ -3,6 +3,7 @@ title: Cantor Gabriel Guedes testemunha sobre a cura do pai e destaca força da 
 categoria: TESTEMUNHO
 autor: DJ ÁGUIA1
 date: 2026-09-15T10:13:00.000-03:00
+imagem: /imagens/noticias/115.jpg
 ---
 O cantor gospel Gabriel Guedes compartilhou um testemunho marcante sobre a recuperação do pai após enfrentar uma grave doença.
 
