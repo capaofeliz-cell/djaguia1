@@ -5,7 +5,7 @@ layout: base
   <a href="/noticias/">Notícias</a> / {{ page.title }}
 </div>
 
-<article class="card">
+<article class="card" style="padding-bottom:100px">
   {% if page.categoria %}<span class="badge">{{ page.categoria }}</span>{% endif %}
   <h1 style="font:700 26px Georgia,serif;margin:8px 0">{{ page.title }}</h1>
 
@@ -30,7 +30,7 @@ layout: base
   {% endif %}
 </article>
 
-<div class="card">
+<div class="card" style="margin-bottom:100px">
   <h4 style="font:700 15px Georgia,serif;color:#a86b0d;margin-top:0">Notícias relacionadas</h4>
   <div class="grid cols-2">
     {% assign relacionadas = site.posts | where_exp: "p", "p.url != page.url" | sort: "date" | reverse | slice: 0, 4 %}
@@ -43,4 +43,4 @@ layout: base
   </div>
 </div>
 
-<p><a href="/noticias/">← Voltar para todas as notícias</a></p>
+<p style="margin-bottom:100px"><a href="/noticias/">← Voltar para todas as notícias</a></p>
