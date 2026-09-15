@@ -20,7 +20,7 @@ permalink: /noticias/
   <div id="heroCarousel" style="position:relative;border-radius:16px;overflow:hidden;min-height:320px;background:#000">
     {% for item in slides %}
     <a href="{{ item.url }}" class="hero-slide{% if forloop.first %} is-active{% endif %}" data-index="{{ forloop.index0 }}" style="text-decoration:none;color:inherit;position:absolute;inset:0;z-index:{% if forloop.first %}2{% else %}1{% endif %}">
-      {% if item.imagem %}<img src="{{ item.imagem }}" alt="{{ item.title }}" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;opacity:.75">{% endif %}
+      {% if item.imagem %}<img src="{{ item.imagem }}" alt="{{ item.title }}" style="width:100%;height:100%;object-fit:contain;object-position:center;position:absolute;inset:0;background:#000">{% endif %}
       <div style="position:absolute;left:0;right:0;bottom:0;padding:18px;background:linear-gradient(to top,rgba(0,0,0,.85),transparent)">
         <span style="color:#f4d589;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.06em">{{ item.categoria | default: "Destaque" }}</span>
         <h2 style="color:#fff;font:700 20px Georgia,serif;margin:6px 0 0">{{ item.title }}</h2>
@@ -37,7 +37,7 @@ permalink: /noticias/
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
     {% for item in resto %}
     <a href="{{ item.url }}" style="text-decoration:none;color:inherit;position:relative;display:block;border-radius:12px;overflow:hidden;min-height:145px;background:#000">
-      {% if item.imagem %}<img src="{{ item.imagem }}" alt="{{ item.title }}" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;opacity:.75">{% endif %}
+      {% if item.imagem %}<img src="{{ item.imagem }}" alt="{{ item.title }}" style="width:100%;height:100%;object-fit:contain;object-position:center;position:absolute;inset:0;background:#000">{% endif %}
       <div style="position:absolute;left:0;right:0;bottom:0;padding:10px;background:linear-gradient(to top,rgba(0,0,0,.85),transparent)">
         <span style="color:#fff;font:700 12px Georgia,serif;line-height:1.25;display:block">{{ item.title | truncate: 50 }}</span>
       </div>
@@ -96,7 +96,6 @@ permalink: /noticias/
     startCarousel();
   }
   window.addEventListener('load', function(){
-    // segunda tentativa, caso o layout base carregue algo depois do DOMContentLoaded
     if(!window.__heroCarouselStarted){
       window.__heroCarouselStarted = true;
       startCarousel();
