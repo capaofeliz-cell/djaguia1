@@ -448,12 +448,39 @@ footer{
   align-items:center;
   min-height:96px;
   margin:40px auto 0;
-  max-width:560px;
+  max-width:620px;
+  padding:14px;
+  border:1px solid rgba(232,184,75,.22);
+  border-radius:20px;
+  background:linear-gradient(145deg,rgba(31,36,64,.92),rgba(14,17,32,.96));
+  box-shadow:0 18px 45px rgba(0,0,0,.34), inset 0 1px 0 rgba(255,255,255,.04);
 }
 
 .caster-player-wrap .cstrEmbed{
   width:100%;
   max-width:560px;
+  min-height:96px;
+  overflow:hidden;
+  border-radius:12px;
+}
+
+/* Links shown only when the external widget has not rendered yet. */
+.caster-player-wrap .cstrEmbed > a{
+  color:var(--muted);
+  font-size:11px;
+  text-decoration:none;
+}
+
+.caster-player-wrap .cstrEmbed > a:hover{
+  color:var(--gold);
+}
+
+@media(max-width:680px){
+  .caster-player-wrap{
+    width:calc(100% - 24px);
+    padding:8px;
+    border-radius:16px;
+  }
 }
 
 </style>
