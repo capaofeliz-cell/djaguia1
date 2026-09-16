@@ -3,6 +3,9 @@ description: "Pastor Virtual — respostas acolhedoras baseadas na Palavra de De
 url: "https://djrenatobravo.com.br"
 markdown: kramdown
 
+plugins:
+  - jekyll-sitemap
+
 collections:
   top5:
     output: true
