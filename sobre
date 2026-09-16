@@ -1,1 +1,114 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<meta name="description" content="Conheça o Pastor Virtual — quem somos, nosso propósito e como este espaço de fé e acolhimento foi criado.">
+<link rel="icon" type="image/png" sizes="32x32" href="./icons/icon-32.png?v=3">
+<link rel="shortcut icon" href="./icons/favicon.ico?v=3">
+<title>Sobre — Pastor Virtual</title>
+<meta property="og:title" content="Sobre — Pastor Virtual">
+<meta property="og:description" content="Conheça o propósito e a história por trás do Pastor Virtual.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--gold:#b97845;--ink:#2b2b2b;--muted:#6b6b6b;--line:#eee}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:#ffffff;color:var(--ink);font-family:'Inter',system-ui,sans-serif;font-weight:500;line-height:1.7}
+.top{position:sticky;top:0;z-index:10;background:#ffffff;border-bottom:3px solid var(--gold)}
+.topbar{width:min(900px,calc(100% - 28px));min-height:75px;margin:auto;display:flex;align-items:center;gap:13px;flex-wrap:wrap}
+.avatar{width:47px;height:47px;border-radius:50%;object-fit:cover;border:2px solid var(--gold)}
+.brand{margin-right:auto}
+.brand h1{margin:0;color:var(--ink);font-size:22px;font-weight:800}
+.brand p{margin:2px 0 0;color:var(--muted);font-size:11px}
+.site-nav{margin-left:auto;display:flex;gap:16px;flex-wrap:wrap;font-size:12px}
+.site-nav a{color:#7a5a3c;font-weight:800;text-decoration:none;padding:6px 2px;border-bottom:2px solid transparent}
+.site-nav a:hover,.site-nav a.active{color:var(--gold);border-bottom-color:var(--gold)}
+.page{width:min(760px,calc(100% - 28px));margin:auto}
+.hero{text-align:center;padding:44px 0 20px}
+.badge{display:inline-block;color:var(--gold);text-transform:uppercase;letter-spacing:.2em;font-size:10px;font-weight:800}
+.hero h2{font:600 clamp(30px,5vw,46px)/1.15 'Cormorant Garamond',Georgia,serif;color:var(--ink);margin:14px 0}
+.hero h2 em{color:var(--gold);font-style:normal}
+.hero p{color:#555;font-size:15px;max-width:600px;margin:0 auto}
+.section{margin-top:24px;padding:26px;border:1px solid var(--line);border-radius:18px;background:#fff;box-shadow:0 6px 18px rgba(0,0,0,.03)}
+.section-kicker{display:block;color:var(--gold);font-size:10px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;margin-bottom:6px}
+.section h3{font:600 22px 'Cormorant Garamond',Georgia,serif;color:var(--ink);margin:0 0 8px}
+.section p{color:#444;font-size:14px;margin:0 0 10px}
+.section p:last-child{margin-bottom:0}
+.pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:18px}
+.pillar{background:#fffdf9;border:1px solid #eee2d2;border-radius:16px;padding:16px 12px;text-align:center}
+.pillar .ico{font-size:20px;display:block;margin-bottom:6px}
+.pillar strong{display:block;font:600 14px 'Cormorant Garamond',Georgia,serif;margin-bottom:2px}
+.pillar span{color:#777;font-size:11px}
+.legal{max-width:760px;margin:30px auto 0;text-align:center;color:#999;font-size:10px;line-height:1.6;padding:17px 10px 40px}
+.legal a{color:var(--gold);text-decoration:underline}
+.cta{display:inline-block;margin-top:6px;background:linear-gradient(145deg,#d19a69,#b7841c);color:#fff;text-decoration:none;font-weight:700;font-size:13px;padding:11px 20px;border-radius:999px}
+@media(max-width:650px){
+  .topbar{flex-direction:column;text-align:center;padding:14px 0}
+  .brand{margin-right:0;text-align:center;width:100%}
+  .site-nav{margin-left:0;justify-content:center;width:100%}
+  .pillars{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="topbar">
+    <img class="avatar" src="imagens/avatar.jpg" alt="Pastor Virtual">
+    <div class="brand"><h1>PASTOR VIRTUAL</h1><p>Respostas acolhedoras baseadas na Palavra de Deus</p></div>
+    <nav class="site-nav">
+      <a href="/">Início</a>
+      <a href="estudio-ao-vivo.html">Ao Vivo</a>
+      <a href="noticias/">Notícias</a>
+      <a href="sobre.html" class="active">Sobre</a>
+      <a href="contato.html">Contato</a>
+    </nav>
+  </div>
+</header>
+
+<main class="page">
+  <section class="hero">
+    <span class="badge">Quem somos</span>
+    <h2>Fé, tecnologia e <em>acolhimento</em></h2>
+    <p>O Pastor Virtual é um espaço criado para aproximar a Palavra de Deus do dia a dia das pessoas, com o apoio da inteligência artificial.</p>
+  </section>
+
+  <div class="pillars">
+    <div class="pillar"><span class="ico">📖</span><strong>Palavra</strong><span>Reflexões bíblicas diárias</span></div>
+    <div class="pillar"><span class="ico">🤝</span><strong>Acolhimento</strong><span>Um espaço sem julgamento</span></div>
+    <div class="pillar"><span class="ico">🙏</span><strong>Oração</strong><span>Incentivo à vida de oração</span></div>
+  </div>
+
+  <section class="section">
+    <span class="section-kicker">Nossa história</span>
+    <h3>Como o Pastor Virtual nasceu</h3>
+    <p>O Pastor Virtual nasceu do desejo de tornar a Palavra de Deus mais acessível no dia a dia, especialmente para quem não tem, no momento, alguém por perto para conversar sobre fé. Ele foi pensado para acolher, não para substituir.</p>
+    <p>O projeto segue crescendo aos poucos, com o cuidado de manter respostas acolhedoras, fiéis ao espírito das Escrituras e distantes de qualquer julgamento.</p>
+  </section>
+
+  <section class="section">
+    <span class="section-kicker">Propósito</span>
+    <h3>Um espaço de fé e cuidado</h3>
+    <p>Este aplicativo/site foi criado com o propósito de oferecer uma ferramenta de apoio para aqueles que desejam conhecer, refletir e compreender melhor a Palavra de Deus e os ensinamentos de Jesus.</p>
+    <p>As respostas são geradas pelo Pastor Virtual, com o apoio de inteligência artificial, sempre incentivando a busca pela Bíblia, pela oração e pela direção do Espírito Santo. Este espaço não substitui o cuidado pastoral presencial nem a vida em comunidade.</p>
+  </section>
+
+  <section class="section">
+    <span class="section-kicker">Fale com a gente</span>
+    <h3>Tem uma sugestão ou testemunho?</h3>
+    <p>Adoraríamos ouvir você. Envie sua mensagem pela nossa página de contato.</p>
+    <a class="cta" href="contato.html">Ir para Contato →</a>
+  </section>
+</main>
+
+<p class="legal">
+  O Pastor Virtual oferece apoio espiritual e reflexões baseadas na fé cristã e na Palavra de Deus. Ele não substitui o aconselhamento pastoral presencial. ©2026 PASTOR VIRTUAL — Todos os direitos reservados.
+  <br><a href="privacidade/">Política de Privacidade</a>
+</p>
+</body>
+</html>
 
