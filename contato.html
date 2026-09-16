@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<meta name="description" content="Fale com o Pastor Virtual por e-mail ou WhatsApp. Envie sua dúvida, sugestão ou testemunho.">
+<link rel="icon" type="image/png" sizes="32x32" href="./icons/icon-32.png?v=3">
+<link rel="shortcut icon" href="./icons/favicon.ico?v=3">
+<title>Contato — Pastor Virtual</title>
+<meta property="og:title" content="Contato — Pastor Virtual">
+<meta property="og:description" content="Fale com o Pastor Virtual por e-mail ou WhatsApp.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--gold:#b97845;--ink:#2b2b2b;--muted:#6b6b6b;--line:#eee}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:#ffffff;color:var(--ink);font-family:'Inter',system-ui,sans-serif;font-weight:500;line-height:1.7}
+.top{position:sticky;top:0;z-index:10;background:#ffffff;border-bottom:3px solid var(--gold)}
+.topbar{width:min(900px,calc(100% - 28px));min-height:75px;margin:auto;display:flex;align-items:center;gap:13px;flex-wrap:wrap}
+.avatar{width:47px;height:47px;border-radius:50%;object-fit:cover;border:2px solid var(--gold)}
+.brand{margin-right:auto}
+.brand h1{margin:0;color:var(--ink);font-size:22px;font-weight:800}
+.brand p{margin:2px 0 0;color:var(--muted);font-size:11px}
+.site-nav{margin-left:auto;display:flex;gap:16px;flex-wrap:wrap;font-size:12px}
+.site-nav a{color:#7a5a3c;font-weight:800;text-decoration:none;padding:6px 2px;border-bottom:2px solid transparent}
+.site-nav a:hover,.site-nav a.active{color:var(--gold);border-bottom-color:var(--gold)}
+.page{width:min(760px,calc(100% - 28px));margin:auto}
+.hero{text-align:center;padding:44px 0 20px}
+.badge{display:inline-block;color:var(--gold);text-transform:uppercase;letter-spacing:.2em;font-size:10px;font-weight:800}
+.hero h2{font:600 clamp(30px,5vw,46px)/1.15 'Cormorant Garamond',Georgia,serif;color:var(--ink);margin:14px 0}
+.hero h2 em{color:var(--gold);font-style:normal}
+.hero p{color:#555;font-size:15px;max-width:600px;margin:0 auto}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:20px}
+.contact-card{background:#fffdf9;border:1px solid #eee2d2;border-radius:18px;padding:24px;text-align:center;box-shadow:0 6px 18px rgba(0,0,0,.03);text-decoration:none;color:inherit;display:block}
+.contact-card:hover{border-color:var(--gold)}
+.contact-card .ico{font-size:28px;display:block;margin-bottom:10px}
+.contact-card strong{display:block;font:600 17px 'Cormorant Garamond',Georgia,serif;color:var(--ink);margin-bottom:4px}
+.contact-card span{color:#666;font-size:13px;word-break:break-word}
+.section{margin-top:24px;padding:26px;border:1px solid var(--line);border-radius:18px;background:#fff;box-shadow:0 6px 18px rgba(0,0,0,.03)}
+.section-kicker{display:block;color:var(--gold);font-size:10px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;margin-bottom:6px}
+.section h3{font:600 20px 'Cormorant Garamond',Georgia,serif;color:var(--ink);margin:0 0 8px}
+.section p{color:#444;font-size:14px;margin:0}
+.legal{max-width:760px;margin:30px auto 0;text-align:center;color:#999;font-size:10px;line-height:1.6;padding:17px 10px 40px}
+.legal a{color:var(--gold);text-decoration:underline}
+@media(max-width:650px){
+  .topbar{flex-direction:column;text-align:center;padding:14px 0}
+  .brand{margin-right:0;text-align:center;width:100%}
+  .site-nav{margin-left:0;justify-content:center;width:100%}
+  .contact-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="topbar">
+    <img class="avatar" src="imagens/avatar.jpg" alt="Pastor Virtual">
+    <div class="brand"><h1>PASTOR VIRTUAL</h1><p>Respostas acolhedoras baseadas na Palavra de Deus</p></div>
+    <nav class="site-nav">
+      <a href="/">Início</a>
+      <a href="estudio-ao-vivo.html">Ao Vivo</a>
+      <a href="noticias/">Notícias</a>
+      <a href="sobre.html">Sobre</a>
+      <a href="contato.html" class="active">Contato</a>
+    </nav>
+  </div>
+</header>
+
+<main class="page">
+  <section class="hero">
+    <span class="badge">Fale com a gente</span>
+    <h2>Estamos aqui para <em>ouvir você</em></h2>
+    <p>Dúvidas, sugestões ou testemunhos são muito bem-vindos. Escolha o canal que preferir.</p>
+  </section>
+
+  <div class="contact-grid">
+    <a class="contact-card" href="mailto:capaofeliz@gmail.com">
+      <span class="ico">✉️</span>
+      <strong>E-mail</strong>
+      <span>capaofeliz@gmail.com</span>
+    </a>
+    <a class="contact-card" href="https://wa.me/5551995826576" target="_blank" rel="noopener">
+      <span class="ico">💬</span>
+      <strong>WhatsApp</strong>
+      <span>+55 51 99582-6576</span>
+    </a>
+  </div>
+
+  <section class="section">
+    <span class="section-kicker">Antes de enviar</span>
+    <h3>O que você pode nos contar</h3>
+    <p>Sugestões de melhoria, testemunhos de fé, dúvidas sobre o funcionamento do Pastor Virtual ou parcerias — toda mensagem é lida com carinho, mesmo que a resposta demore um pouco.</p>
+  </section>
+</main>
+
+<p class="legal">
+  O Pastor Virtual oferece apoio espiritual e reflexões baseadas na fé cristã e na Palavra de Deus. Ele não substitui o aconselhamento pastoral presencial. ©2026 PASTOR VIRTUAL — Todos os direitos reservados.
+  <br><a href="privacidade/">Política de Privacidade</a>
+</p>
+</body>
+</html>
