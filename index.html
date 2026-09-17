@@ -96,7 +96,7 @@ color:var(--ink);
 .quote{border-top-color:var(--line);border-bottom-color:var(--line);color:var(--cream)}
 .quote q{font-family:'Cormorant Garamond',Georgia,serif}
 .quote cite{color:var(--gold2)}
-.chat{background:rgba(255,255,255,.04);border-color:var(--line);box-shadow:0 0 50px rgba(212,160,23,.08),0 17px 55px rgba(0,0,0,.45)}
+.chat,.chat-inline{background:rgba(255,255,255,.04);border-color:var(--line);box-shadow:0 0 50px rgba(212,160,23,.08),0 17px 55px rgba(0,0,0,.45)}
 .chat-head{background:linear-gradient(120deg,rgba(212,160,23,.08),transparent);border-bottom-color:var(--line)}
 .chat-head strong{color:var(--gold2);font-family:'Cormorant Garamond',Georgia,serif}
 .chat-head small{color:var(--muted)}
@@ -141,8 +141,7 @@ html,body{background:var(--cream)!important;color:var(--ink)!important}body{back
 @media(max-width:650px){.welcome{padding-top:34px!important}.chat-launch{margin-bottom:28px;padding:18px;border-radius:20px}.chat-launch strong{font-size:22px}.chat{inset:10px;width:auto;height:calc(100dvh - 20px);border-radius:22px!important}.chat-head{padding:14px 16px!important}.messages{padding:16px!important}.composer{padding:10px!important}.chat-close{width:32px;height:32px}}@media(prefers-reduced-motion:reduce){.chat.is-open,.chat-launch{animation:none;transition:none}}
 </style>
 <style id="question-box-redesign">
-.chat-launch{display:block;padding:16px 16px 12px!important;cursor:default!important;background:#f7f2ea!important;border-radius:20px!important}
-.chat-launch:hover{transform:none!important}
+.chat-inline{display:block;width:min(680px,100%);margin:8px auto 0;padding:16px 16px 12px;background:#f7f2ea;border:1px solid var(--line,#eae3d2);border-radius:20px;box-shadow:0 17px 55px #6c4b1512;text-align:left}
 .wa-topbar{display:flex;align-items:center;gap:14px;padding:6px 4px 16px}
 .wa-avatar{position:relative;width:64px;height:64px;border-radius:50%;flex:none;cursor:pointer;background:linear-gradient(145deg,#e8ddc9,#d7c8a8);display:grid;place-items:center;overflow:hidden;border:2px dashed #b9a878}
 .wa-avatar:hover{border-color:#a6935f}
@@ -151,18 +150,26 @@ html,body{background:var(--cream)!important;color:var(--ink)!important}body{back
 .wa-avatar-placeholder small{font-size:8px;font-weight:800;text-transform:uppercase;letter-spacing:.03em;max-width:52px;text-align:center;line-height:1.15}
 .wa-greeting strong{display:block;color:#2b2b2b;font:700 21px 'Cormorant Garamond',Georgia,serif}
 .wa-greeting p{margin:2px 0 0;color:#6f6a5e;font-size:12.5px}
+.chat-inline .messages{padding:2px 2px 10px;min-height:0;max-height:340px;overflow-y:auto}
+.chat-inline .typing{text-align:left;padding:0 2px 8px;font-size:11.5px;color:#8c7a4f;font-style:italic;font-weight:700;text-transform:none;letter-spacing:0}
 .wa-suggestions{display:flex;flex-direction:column;gap:8px;padding:0 0 16px;margin:0}
 .wa-suggestion{display:flex;align-items:center;gap:11px;width:100%;text-align:left;border:1px solid #eae3d2;background:#fffefb;border-radius:16px;padding:12px 14px;cursor:pointer;font:600 13px Inter,system-ui,sans-serif;color:#3a3527;transition:background .15s ease}
 .wa-suggestion:hover{background:#f2ede1}
 .wa-suggestion-ico{display:grid;place-items:center;width:26px;height:26px;flex:none;font-size:15px}
-.wa-composer{display:flex;align-items:center;gap:8px;background:#fff;border:1px solid #e5ddc9;border-radius:999px;padding:6px 8px 6px 14px}
-.wa-composer .wa-icon{font-size:19px;flex:none;color:#8c8471;cursor:default;line-height:1}
+.wa-composer{position:relative;display:flex;align-items:center;gap:8px;background:#fff;border:1px solid #e5ddc9;border-radius:999px;padding:6px 8px 6px 14px}
+.wa-composer .wa-icon{font-size:19px;flex:none;color:#8c8471;line-height:1}
+.wa-composer .wa-icon[role="button"]{cursor:pointer}
+.wa-composer .wa-icon[role="button"]:hover{color:#4f4a3c}
 .wa-composer textarea{flex:1;min-width:0;border:0;resize:none;background:transparent;outline:none;padding:8px 2px;max-height:90px;font:500 14.5px Inter,system-ui,sans-serif;color:#2f3430}
 .wa-composer textarea::placeholder{color:#a29c88}
 .wa-mic-btn,.wa-send-btn{width:40px;height:40px;border-radius:50%;border:0;flex:none;cursor:pointer;font-size:17px;display:grid;place-items:center;background:linear-gradient(145deg,#4fce6b,#2fa84e);color:#fff;box-shadow:0 4px 12px rgba(47,168,78,.32)}
 .wa-composer:not(.has-text) .wa-send-btn{display:none}
 .wa-composer.has-text .wa-mic-btn{display:none}
-@media(max-width:650px){.chat-launch{padding:14px 14px 10px!important}.wa-avatar{width:54px;height:54px}.wa-greeting strong{font-size:18px}.wa-suggestion{font-size:12px;padding:10px 12px}.wa-mic-btn,.wa-send-btn{width:36px;height:36px;font-size:15px}}
+.wa-emoji-panel{display:none;position:absolute;left:0;bottom:52px;width:236px;max-height:170px;overflow-y:auto;background:#fff;border:1px solid #e5ddc9;border-radius:14px;box-shadow:0 12px 30px rgba(60,50,20,.18);padding:8px;grid-template-columns:repeat(6,1fr);gap:2px;z-index:5}
+.wa-emoji-panel.open{display:grid}
+.wa-emoji-item{border:0;background:transparent;font-size:19px;padding:6px;border-radius:8px;cursor:pointer;line-height:1}
+.wa-emoji-item:hover{background:#f2ede1}
+@media(max-width:650px){.chat-inline{padding:14px 14px 10px}.wa-avatar{width:54px;height:54px}.wa-greeting strong{font-size:18px}.wa-suggestion{font-size:12px;padding:10px 12px}.wa-mic-btn,.wa-send-btn{width:36px;height:36px;font-size:15px}}
 #offlineBanner{display:none;position:sticky;top:0;z-index:20;background:#fff3d9;color:#6c4b15;font-size:12px;font-weight:700;text-align:center;padding:8px 12px;border-bottom:1px solid #f0d9a0}
 body.is-offline #offlineBanner{display:block}
 </style>
@@ -197,7 +204,7 @@ body{background:#ffffff!important;color:#2b2b2b!important}
 .chat-launch p{color:#777!important}
 .launch-kicker{color:#b97845!important}
 .launch-arrow{color:#b97845!important}
-.chat{background:#ffffff!important;border-color:#eee!important}
+.chat,.chat-inline{background:#ffffff!important;border-color:#eee!important}
 .chat-head{background:#fffdf9!important}
 .chat-head strong{color:#2b2b2b!important}
 .bubble.virtual{background:#faf6ee!important;color:#2b2b2b!important;border-color:#eee2d2!important}
@@ -233,14 +240,14 @@ body{background:#ffffff!important;color:#2b2b2b!important}
 <div id="offlineBanner">📶 Você está offline — o Pastor Virtual responde com mensagens prontas e a rádio fica indisponível até a conexão voltar.</div>
 <header class="top"><div class="topbar"><img class="avatar" src="imagens/avatar.jpg" alt="Virtual Pastor Virtual"><div class="brand"><h1>PASTOR VIRTUAL</h1><p>Respostas na visão do pastor virtual com base na Palavra de Deus!</p></div><nav class="site-nav" style="margin-left:auto;display:flex;gap:16px;flex-wrap:wrap;font-size:12px"><a href="estudio-ao-vivo.html">Ao Vivo</a><a href="noticias/">Notícias</a><a href="noticias/videos/">Vídeos</a><a href="noticias/fotos/">Fotos</a><a href="noticias/top5/">Top 5</a><a href="tempo/">Tempo</a><a href="sobre.html">Sobre</a><a href="contato.html">Contato</a></nav></div></header>
 <main class="page"><section class="welcome"><span class="badge">Palavra · acolhimento · oração</span><h2>Fique à vontade para <em>compartilhar</em>.</h2><p>Olá, eu sou o seu Pastor Virtual. Fui programado para lhe ajudar com as coisas de Deus e de Jesus, auxiliando em sua busca sobre a Palavra de Deus.
-Estou aqui para ouvir seu coração e conversar sobre Deus, Jesus e a Palavra. Pergunte, reflita ou desabafe; caminharemos juntos com fé e esperança.</p><div class="quote"><q>Sede uns para com os outros benignos, misericordiosos, perdoando-vos uns aos outros.</q>Efésios 4:32</div>
+Estou aqui para ouvir seu coração e conversar sobre Deus, Jesus e a Palavra. Pergunte, reflita ou desabafe; caminharemos juntos com fé e esperança.</p><section class="chat-inline" aria-label="Conversa com o Pastor Virtual"><div class="wa-topbar"><div class="wa-avatar" id="waAvatarBtn" role="button" tabindex="0" aria-label="Adicionar sua foto"><img id="waAvatarImg" alt="Sua foto" style="display:none"><span class="wa-avatar-placeholder" id="waAvatarPlaceholder">📷<small>Sua foto aqui</small></span><input type="file" id="waAvatarInput" accept="image/*" hidden></div><div class="wa-greeting"><strong id="waGreetingText">Bom dia!</strong><p>Escreva sua pergunta para o Pastor Virtual</p></div></div><div class="messages" id="messages" style="display:none"><div class="bubble virtual">A paz do Senhor esteja com você, meu irmão(ã). Que alegria ter você aqui. Como posso ouvir e acolher você hoje?<span class="ref">"O Senhor é o meu pastor; nada me faltará." — Salmos 23:1</span></div></div><div class="typing" id="typing">Jorge está preparando uma resposta...</div><div class="wa-suggestions" id="launchSuggestions"></div><div class="wa-composer" id="waComposer"><span class="wa-icon" id="waEmojiBtn" role="button" tabindex="0" aria-label="Emojis">😊</span><div class="wa-emoji-panel" id="waEmojiPanel"></div><textarea id="input" placeholder="Mensagem" aria-label="Sua pergunta" rows="1" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();send('input')}"></textarea><span class="wa-icon" aria-hidden="true">📎</span><span class="wa-icon" aria-hidden="true">📷</span><button type="button" class="wa-mic-btn" id="mic" onclick="toggleMic('input','mic')" aria-label="Falar pergunta" title="Falar pergunta">🎙</button><button type="button" class="wa-send-btn" id="send" onclick="send('input')" aria-label="Enviar">➤</button></div></section><div class="quote"><q>Sede uns para com os outros benignos, misericordiosos, perdoando-vos uns aos outros.</q>Efésios 4:32</div>
 <div class="pillars">
 <div class="pillar"><span class="pillar-ico">📖</span><strong>Palavra</strong><span>Reflexões baseadas na Bíblia, todos os dias.</span></div>
 <div class="pillar"><span class="pillar-ico">🤝</span><strong>Acolhimento</strong><span>Um espaço sem julgamento para desabafar.</span></div>
 <div class="pillar"><span class="pillar-ico">🙏</span><strong>Oração</strong><span>Incentivo constante a uma vida de oração.</span></div>
 </div>
 </section>
-<section class="chat" aria-label="Conversa com o Pastor Virtual"><div class="chat-head"><img class="mini" src="imagens/avatar.jpg" alt="Virtual"><div><strong>Conversa com Virtual</strong><small>Um espaço de escuta e reflexão</small></div><span class="status">● Disponível</span></div><div class="messages" id="messages"><div class="bubble virtual">A paz do Senhor esteja com você, meu irmão(ã). Que alegria ter você aqui. Como posso ouvir e acolher você hoje?<span class="ref">"O Senhor é o meu pastor; nada me faltará." — Salmos 23:1</span></div></div><div class="typing" id="typing">O VIRTUAL ESTÁ PREPARANDO UMA RESPOSTA...</div><div class="suggestions"><button class="suggestion" onclick="ask('Como posso encontrar paz em meio às dificuldades?')">Encontrar paz</button><button class="suggestion" onclick="ask('O que a Bíblia diz sobre o perdão?')">Sobre o perdão</button><button class="suggestion" onclick="ask('Quem é Jesus Cristo?')">Quem é Jesus?</button><button class="suggestion" onclick="ask('Como ter uma vida de oração mais próxima de Deus?')">Vida de oração</button><button class="suggestion" onclick="ask('Quem é o Espírito Santo e qual o Seu papel na minha vida?')">O Espírito Santo</button><button class="suggestion" onclick="ask('O que significa verdadeiramente crer em Jesus?')">Quem crê</button></div><div class="composer"><textarea id="input" placeholder="Compartilhe sua pergunta ou reflexão..." aria-label="Sua pergunta" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();send('input')}"></textarea><button class="mic" id="mic" onclick="toggleMic('input','mic')" aria-label="Falar pergunta" title="Falar pergunta">🎙</button><button class="send" id="send" onclick="send('input')" aria-label="Enviar">➤</button></div></section>
+
 <section class="section"><span class="section-kicker">Propósito</span><h3>Um espaço de fé e cuidado</h3><p>🙏 Uma ferramenta criada com fé e propósito
 Este aplicativo/site foi criado e inspirado pelo Espírito Santo, com o auxílio da IA, com o propósito de oferecer uma ferramenta de apoio para aqueles que desejam conhecer, refletir e compreender melhor a Palavra de Deus e os ensinamentos de Jesus.
 Use esta conversa para tirar dúvidas, refletir sobre a Bíblia, encontrar encorajamento e lembrar das promessas de Deus.
@@ -572,7 +579,7 @@ return pastor;
 }
 async function ask(q){
 if(!q||!q.trim())return;
-const chatSection=document.querySelector('.chat');if(chatSection)chatSection.scrollIntoView({behavior:'smooth',block:'start'});
+const chatSection=document.querySelector('.chat-inline');if(chatSection)chatSection.scrollIntoView({behavior:'smooth',block:'start'});
 const list=document.getElementById('messages'),exchange=makeExchange(q.trim());
 list.appendChild(exchange);
 conversationHistory.push({role:'user',content:q.trim()});
@@ -705,59 +712,41 @@ document.querySelector('#input')?.focus();
 });
 }
 </script>
-<script id="pastor-modal-redesign">
+<script id="pastor-inline-chat">
 (function(){
-function initRedesign(){
-const chat=document.querySelector('.chat');
-if(!chat || document.querySelector('.chat-launch')) return;
-const launch=document.createElement('button'); launch.type='button'; launch.className='chat-launch'; launch.setAttribute('aria-haspopup','dialog');
-launch.innerHTML='<span><span class="launch-kicker">Um momento de escuta</span><strong>Converse com o Pastor Virtual</strong><p>Abra uma conversa reservada, leve e acolhedora.</p></span><span class="launch-icon">✦</span><span class="launch-arrow">↗</span>';
-chat.parentNode.insertBefore(launch,chat); if(!launch.dataset.moved){const quote=document.querySelector('.welcome .quote'); if(quote){quote.parentNode.insertBefore(launch,quote); launch.dataset.moved='1'}} chat.setAttribute('role','dialog'); chat.setAttribute('aria-modal','true'); chat.setAttribute('aria-label','Conversa com o Pastor Virtual');
-const close=document.createElement('button'); close.type='button'; close.className='chat-close'; close.innerHTML='×'; close.setAttribute('aria-label','Fechar conversa');
-const head=chat.querySelector('.chat-head'); if(head) head.appendChild(close);
-function open(){chat.classList.add('is-open');document.body.classList.add('chat-modal-visible');document.getElementById('input')?.focus()}
-function shut(){chat.classList.remove('is-open');document.body.classList.remove('chat-modal-visible');launch.focus()}
-launch.addEventListener('click',open); close.addEventListener('click',shut); chat.addEventListener('click',e=>{if(e.target===chat) shut()}); document.addEventListener('keydown',e=>{if(e.key==='Escape'&&chat.classList.contains('is-open')) shut()});
-document.querySelectorAll('.suggestion').forEach(btn=>btn.addEventListener('click',open));
-}
-if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',initRedesign); else initRedesign();
-})();
-</script>
-<script id="question-box-behavior">
-(function(){
-function enhance(){
-const launch=document.querySelector('.chat-launch'), chat=document.querySelector('.chat'); if(!launch||!chat||launch.dataset.enhanced)return; launch.dataset.enhanced='1';
-const hour=new Date().getHours(); const greeting=hour<12?'Bom dia!':hour<18?'Boa tarde!':'Boa noite!';
-launch.innerHTML='<div class="wa-topbar"><div class="wa-avatar" id="waAvatarBtn" role="button" tabindex="0" aria-label="Adicionar sua foto"><img id="waAvatarImg" alt="Sua foto" style="display:none"><span class="wa-avatar-placeholder" id="waAvatarPlaceholder">📷<small>Sua foto aqui</small></span><input type="file" id="waAvatarInput" accept="image/*" hidden></div><div class="wa-greeting"><strong>'+greeting+'</strong><p>Escreva sua pergunta para o Pastor Virtual</p></div></div><div class="wa-suggestions" id="launchSuggestions"></div><div class="wa-composer" id="waComposer"><span class="wa-icon" aria-hidden="true">😊</span><textarea id="questionBoxInput" placeholder="Mensagem" aria-label="Digite sua pergunta aqui" rows="1"></textarea><span class="wa-icon" aria-hidden="true">📎</span><span class="wa-icon" aria-hidden="true">📷</span><button type="button" class="wa-mic-btn" id="questionBoxMic" aria-label="Falar pergunta" title="Falar pergunta">🎙</button><button type="button" class="wa-send-btn" id="questionBoxSend" aria-label="Enviar pergunta" title="Enviar pergunta">➤</button></div>';
-const q=document.getElementById('questionBoxInput'), original=document.getElementById('input'), sendBtn=document.getElementById('questionBoxSend'), composerBox=document.getElementById('waComposer');
-function openChat(){chat.classList.add('is-open');document.body.classList.add('chat-modal-visible');setTimeout(()=>q.focus(),30)}
-q.addEventListener('focus',openChat); q.addEventListener('click',openChat);
-q.addEventListener('input',()=>{original.value=q.value;composerBox.classList.toggle('has-text',q.value.trim().length>0)});
-q.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();submit()}});
-function submit(){const value=q.value.trim();if(!value)return;original.value=value;openChat();window.send();q.value='';composerBox.classList.remove('has-text')}
-sendBtn.addEventListener('click',submit);
-document.getElementById('questionBoxMic').addEventListener('click',()=>{openChat();original.focus();if(typeof window.toggleMic==='function')window.toggleMic();});
-const avatarBtn=document.getElementById('waAvatarBtn'), avatarInput=document.getElementById('waAvatarInput'), avatarImg=document.getElementById('waAvatarImg'), avatarPlaceholder=document.getElementById('waAvatarPlaceholder');
-try{const savedAvatar=localStorage.getItem('visitorAvatar');if(savedAvatar){avatarImg.src=savedAvatar;avatarImg.style.display='block';avatarPlaceholder.style.display='none'}}catch(e){}
-avatarBtn.addEventListener('click',e=>{e.stopPropagation();avatarInput.click()});
-avatarBtn.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();e.stopPropagation();avatarInput.click()}});
-avatarInput.addEventListener('click',e=>e.stopPropagation());
-avatarInput.addEventListener('change',()=>{const file=avatarInput.files&&avatarInput.files[0];if(!file)return;const reader=new FileReader();reader.onload=()=>{try{localStorage.setItem('visitorAvatar',reader.result)}catch(e){}avatarImg.src=reader.result;avatarImg.style.display='block';avatarPlaceholder.style.display='none'};reader.readAsDataURL(file)});
+const EMOJIS=['🙏','❤️','✝️','🕊️','📖','🙌','😢','🤔','🙂','😔','✨','🕯️','🤍','😇','💭','👏'];
+function init(){
+const chat=document.querySelector('.chat-inline'); if(!chat||chat.dataset.enhanced)return; chat.dataset.enhanced='1';
+const hour=new Date().getHours(); const greetingText=hour<12?'Bom dia!':hour<18?'Boa tarde!':'Boa noite!';
+const greetEl=document.getElementById('waGreetingText'); if(greetEl) greetEl.textContent=greetingText;
+const input=document.getElementById('input'), messages=document.getElementById('messages'), suggestions=document.getElementById('launchSuggestions'), composerBox=document.getElementById('waComposer'), emojiBtn=document.getElementById('waEmojiBtn'), emojiPanel=document.getElementById('waEmojiPanel');
+function revealThread(){messages.style.display='block';suggestions.style.display='none'}
+if(messages.querySelectorAll('.bubble').length>1) revealThread();
+input.addEventListener('input',()=>{composerBox.classList.toggle('has-text',input.value.trim().length>0)});
+const originalSend=window.send;
+window.send=function(id){const before=messages.querySelectorAll('.bubble').length;originalSend(id);revealThread();composerBox.classList.remove('has-text');};
 if(Array.isArray(window.RANDOM_QUESTIONS)){
-const box=document.getElementById('launchSuggestions');
 const icons=['📖','🙏','✝️','❤️','🕊️','💭'];
 const shuffled=[...window.RANDOM_QUESTIONS].sort(()=>Math.random()-.5).slice(0,4);
 shuffled.forEach((question,i)=>{
 const btn=document.createElement('button');
 btn.type='button'; btn.className='wa-suggestion';
 btn.innerHTML='<span class="wa-suggestion-ico">'+icons[i%icons.length]+'</span><span>'+question+'</span>';
-btn.addEventListener('click',e=>{e.stopPropagation();original.value=question;openChat();window.send();});
-box.appendChild(btn);
+btn.addEventListener('click',()=>{input.value=question;window.send('input');});
+suggestions.appendChild(btn);
 });
 }
+const avatarBtn=document.getElementById('waAvatarBtn'), avatarInput=document.getElementById('waAvatarInput'), avatarImg=document.getElementById('waAvatarImg'), avatarPlaceholder=document.getElementById('waAvatarPlaceholder');
+try{const savedAvatar=localStorage.getItem('visitorAvatar');if(savedAvatar){avatarImg.src=savedAvatar;avatarImg.style.display='block';avatarPlaceholder.style.display='none'}}catch(e){}
+avatarBtn.addEventListener('click',()=>avatarInput.click());
+avatarBtn.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();avatarInput.click()}});
+avatarInput.addEventListener('change',()=>{const file=avatarInput.files&&avatarInput.files[0];if(!file)return;const reader=new FileReader();reader.onload=()=>{try{localStorage.setItem('visitorAvatar',reader.result)}catch(e){}avatarImg.src=reader.result;avatarImg.style.display='block';avatarPlaceholder.style.display='none'};reader.readAsDataURL(file)});
+if(emojiPanel){EMOJIS.forEach(em=>{const b=document.createElement('button');b.type='button';b.className='wa-emoji-item';b.textContent=em;b.addEventListener('click',()=>{const start=input.selectionStart||input.value.length,end=input.selectionEnd||input.value.length;input.value=input.value.slice(0,start)+em+input.value.slice(end);input.focus();input.selectionStart=input.selectionEnd=start+em.length;composerBox.classList.add('has-text');emojiPanel.classList.remove('open')});emojiPanel.appendChild(b)})}
+if(emojiBtn&&emojiPanel){emojiBtn.addEventListener('click',e=>{e.stopPropagation();emojiPanel.classList.toggle('open')});document.addEventListener('click',e=>{if(!emojiPanel.contains(e.target)&&e.target!==emojiBtn)emojiPanel.classList.remove('open')})}
 }
-if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',enhance);else enhance();
+if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',init); else init();
 })();
+</script>
 </script>
 
 <!-- ===== ANUNCIOS ADSENSE (LATERAIS) - DESATIVADOS ATE A APROVACAO =====
