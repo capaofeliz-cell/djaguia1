@@ -141,19 +141,28 @@ html,body{background:var(--cream)!important;color:var(--ink)!important}body{back
 @media(max-width:650px){.welcome{padding-top:34px!important}.chat-launch{margin-bottom:28px;padding:18px;border-radius:20px}.chat-launch strong{font-size:22px}.chat{inset:10px;width:auto;height:calc(100dvh - 20px);border-radius:22px!important}.chat-head{padding:14px 16px!important}.messages{padding:16px!important}.composer{padding:10px!important}.chat-close{width:32px;height:32px}}@media(prefers-reduced-motion:reduce){.chat.is-open,.chat-launch{animation:none;transition:none}}
 </style>
 <style id="question-box-redesign">
-.chat-launch{display:block;padding:18px 20px!important;cursor:default!important}
+.chat-launch{display:block;padding:16px 16px 12px!important;cursor:default!important;background:#f7f2ea!important;border-radius:20px!important}
 .chat-launch:hover{transform:none!important}
-.question-box-label{display:block;margin-bottom:8px;color:#61756a;font-size:13px;font-weight:700}
-.question-box{display:flex;align-items:center;gap:9px;width:100%}
-.question-box textarea{flex:1;min-height:50px;max-height:120px;resize:vertical;border:1px solid #d9ded8;border-radius:15px;padding:13px 14px;background:#fff;color:#2f3430;font:500 14px Inter,system-ui,sans-serif;outline:none}
-.question-box textarea::placeholder{color:#a0a6a0}.question-box textarea:focus{border-color:#9ab0a0;box-shadow:0 0 0 3px rgba(154,176,160,.18)}
-.question-box .question-mic,.question-box .question-send{width:46px;height:46px;border-radius:50%;border:0;flex:none;cursor:pointer;font-size:18px}
-.question-box .question-mic{background:#f2f7f2;color:#6d8677;border:1px solid #d0ddd1}.question-box .question-send{background:linear-gradient(145deg,#8ca494,#627c6d);color:#fff;box-shadow:0 5px 14px rgba(88,117,98,.22)}
-.question-hint{display:block;margin-top:8px;color:#6f746f;font-size:11px}
-.launch-suggestions{display:flex!important;flex-wrap:wrap;gap:8px;justify-content:flex-start;padding:14px 0 0!important;margin:0}
-.launch-suggestions .suggestion{border-color:#d5dfd5;background:#f3f7f2;color:#61786a}
-.launch-suggestions .suggestion:hover{background:#e8f0e8}
-@media(max-width:650px){.chat-launch{padding:15px!important}.question-box{gap:6px}.question-box .question-mic,.question-box .question-send{width:42px;height:42px}.question-box textarea{font-size:13px}.launch-suggestions{gap:6px}.launch-suggestions .suggestion{font-size:10px;padding:7px 10px}}
+.wa-topbar{display:flex;align-items:center;gap:14px;padding:6px 4px 16px}
+.wa-avatar{position:relative;width:64px;height:64px;border-radius:50%;flex:none;cursor:pointer;background:linear-gradient(145deg,#e8ddc9,#d7c8a8);display:grid;place-items:center;overflow:hidden;border:2px dashed #b9a878}
+.wa-avatar:hover{border-color:#a6935f}
+.wa-avatar img{width:100%;height:100%;object-fit:cover;border-radius:50%}
+.wa-avatar-placeholder{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;color:#8c7a4f;font-size:19px;line-height:1}
+.wa-avatar-placeholder small{font-size:8px;font-weight:800;text-transform:uppercase;letter-spacing:.03em;max-width:52px;text-align:center;line-height:1.15}
+.wa-greeting strong{display:block;color:#2b2b2b;font:700 21px 'Cormorant Garamond',Georgia,serif}
+.wa-greeting p{margin:2px 0 0;color:#6f6a5e;font-size:12.5px}
+.wa-suggestions{display:flex;flex-direction:column;gap:8px;padding:0 0 16px;margin:0}
+.wa-suggestion{display:flex;align-items:center;gap:11px;width:100%;text-align:left;border:1px solid #eae3d2;background:#fffefb;border-radius:16px;padding:12px 14px;cursor:pointer;font:600 13px Inter,system-ui,sans-serif;color:#3a3527;transition:background .15s ease}
+.wa-suggestion:hover{background:#f2ede1}
+.wa-suggestion-ico{display:grid;place-items:center;width:26px;height:26px;flex:none;font-size:15px}
+.wa-composer{display:flex;align-items:center;gap:8px;background:#fff;border:1px solid #e5ddc9;border-radius:999px;padding:6px 8px 6px 14px}
+.wa-composer .wa-icon{font-size:19px;flex:none;color:#8c8471;cursor:default;line-height:1}
+.wa-composer textarea{flex:1;min-width:0;border:0;resize:none;background:transparent;outline:none;padding:8px 2px;max-height:90px;font:500 14.5px Inter,system-ui,sans-serif;color:#2f3430}
+.wa-composer textarea::placeholder{color:#a29c88}
+.wa-mic-btn,.wa-send-btn{width:40px;height:40px;border-radius:50%;border:0;flex:none;cursor:pointer;font-size:17px;display:grid;place-items:center;background:linear-gradient(145deg,#4fce6b,#2fa84e);color:#fff;box-shadow:0 4px 12px rgba(47,168,78,.32)}
+.wa-composer:not(.has-text) .wa-send-btn{display:none}
+.wa-composer.has-text .wa-mic-btn{display:none}
+@media(max-width:650px){.chat-launch{padding:14px 14px 10px!important}.wa-avatar{width:54px;height:54px}.wa-greeting strong{font-size:18px}.wa-suggestion{font-size:12px;padding:10px 12px}.wa-mic-btn,.wa-send-btn{width:36px;height:36px;font-size:15px}}
 #offlineBanner{display:none;position:sticky;top:0;z-index:20;background:#fff3d9;color:#6c4b15;font-size:12px;font-weight:700;text-align:center;padding:8px 12px;border-bottom:1px solid #f0d9a0}
 body.is-offline #offlineBanner{display:block}
 </style>
@@ -224,14 +233,14 @@ body{background:#ffffff!important;color:#2b2b2b!important}
 <div id="offlineBanner">📶 Você está offline — o Pastor Virtual responde com mensagens prontas e a rádio fica indisponível até a conexão voltar.</div>
 <header class="top"><div class="topbar"><img class="avatar" src="imagens/avatar.jpg" alt="Virtual Pastor Virtual"><div class="brand"><h1>PASTOR VIRTUAL</h1><p>Respostas na visão do pastor virtual com base na Palavra de Deus!</p></div><nav class="site-nav" style="margin-left:auto;display:flex;gap:16px;flex-wrap:wrap;font-size:12px"><a href="estudio-ao-vivo.html">Ao Vivo</a><a href="noticias/">Notícias</a><a href="noticias/videos/">Vídeos</a><a href="noticias/fotos/">Fotos</a><a href="noticias/top5/">Top 5</a><a href="tempo/">Tempo</a><a href="sobre.html">Sobre</a><a href="contato.html">Contato</a></nav></div></header>
 <main class="page"><section class="welcome"><span class="badge">Palavra · acolhimento · oração</span><h2>Fique à vontade para <em>compartilhar</em>.</h2><p>Olá, eu sou o seu Pastor Virtual. Fui programado para lhe ajudar com as coisas de Deus e de Jesus, auxiliando em sua busca sobre a Palavra de Deus.
-Estou aqui para ouvir seu coração e conversar sobre Deus, Jesus e a Palavra. Pergunte, reflita ou desabafe; caminharemos juntos com fé e esperança.</p><div class="composer" style="max-width:680px;margin:8px auto 0"><textarea id="inputTop" placeholder="Compartilhe sua pergunta ou reflexão..." aria-label="Sua pergunta" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();send('inputTop')}"></textarea><button class="mic" id="micTop" onclick="toggleMic('inputTop','micTop')" aria-label="Falar pergunta" title="Falar pergunta">🎙</button><button class="send" id="sendTop" onclick="send('inputTop')" aria-label="Enviar">➤</button></div><div class="suggestions"><button class="suggestion" onclick="ask('Como posso encontrar paz em meio às dificuldades?')">Encontrar paz</button><button class="suggestion" onclick="ask('O que a Bíblia diz sobre o perdão?')">Sobre o perdão</button><button class="suggestion" onclick="ask('Quem é Jesus Cristo?')">Quem é Jesus?</button><button class="suggestion" onclick="ask('Como ter uma vida de oração mais próxima de Deus?')">Vida de oração</button><button class="suggestion" onclick="ask('Quem é o Espírito Santo e qual o Seu papel na minha vida?')">O Espírito Santo</button><button class="suggestion" onclick="ask('O que significa verdadeiramente crer em Jesus?')">Quem crê</button></div><div class="quote"><q>Sede uns para com os outros benignos, misericordiosos, perdoando-vos uns aos outros.</q>Efésios 4:32</div>
+Estou aqui para ouvir seu coração e conversar sobre Deus, Jesus e a Palavra. Pergunte, reflita ou desabafe; caminharemos juntos com fé e esperança.</p><div class="quote"><q>Sede uns para com os outros benignos, misericordiosos, perdoando-vos uns aos outros.</q>Efésios 4:32</div>
 <div class="pillars">
 <div class="pillar"><span class="pillar-ico">📖</span><strong>Palavra</strong><span>Reflexões baseadas na Bíblia, todos os dias.</span></div>
 <div class="pillar"><span class="pillar-ico">🤝</span><strong>Acolhimento</strong><span>Um espaço sem julgamento para desabafar.</span></div>
 <div class="pillar"><span class="pillar-ico">🙏</span><strong>Oração</strong><span>Incentivo constante a uma vida de oração.</span></div>
 </div>
 </section>
-<section class="chat" aria-label="Conversa com o Pastor Virtual"><div class="chat-head"><img class="mini" src="imagens/avatar.jpg" alt="Virtual"><div><strong>Conversa com Virtual</strong><small>Um espaço de escuta e reflexão</small></div><span class="status">● Disponível</span></div><div class="messages" id="messages"><div class="bubble virtual">A paz do Senhor esteja com você, meu irmão(ã). Que alegria ter você aqui. Como posso ouvir e acolher você hoje?<span class="ref">"O Senhor é o meu pastor; nada me faltará." — Salmos 23:1</span></div></div><div class="typing" id="typing">O VIRTUAL ESTÁ PREPARANDO UMA RESPOSTA...</div><div class="composer"><textarea id="input" placeholder="Compartilhe sua pergunta ou reflexão..." aria-label="Sua pergunta" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();send('input')}"></textarea><button class="mic" id="mic" onclick="toggleMic('input','mic')" aria-label="Falar pergunta" title="Falar pergunta">🎙</button><button class="send" id="send" onclick="send('input')" aria-label="Enviar">➤</button></div></section>
+<section class="chat" aria-label="Conversa com o Pastor Virtual"><div class="chat-head"><img class="mini" src="imagens/avatar.jpg" alt="Virtual"><div><strong>Conversa com Virtual</strong><small>Um espaço de escuta e reflexão</small></div><span class="status">● Disponível</span></div><div class="messages" id="messages"><div class="bubble virtual">A paz do Senhor esteja com você, meu irmão(ã). Que alegria ter você aqui. Como posso ouvir e acolher você hoje?<span class="ref">"O Senhor é o meu pastor; nada me faltará." — Salmos 23:1</span></div></div><div class="typing" id="typing">O VIRTUAL ESTÁ PREPARANDO UMA RESPOSTA...</div><div class="suggestions"><button class="suggestion" onclick="ask('Como posso encontrar paz em meio às dificuldades?')">Encontrar paz</button><button class="suggestion" onclick="ask('O que a Bíblia diz sobre o perdão?')">Sobre o perdão</button><button class="suggestion" onclick="ask('Quem é Jesus Cristo?')">Quem é Jesus?</button><button class="suggestion" onclick="ask('Como ter uma vida de oração mais próxima de Deus?')">Vida de oração</button><button class="suggestion" onclick="ask('Quem é o Espírito Santo e qual o Seu papel na minha vida?')">O Espírito Santo</button><button class="suggestion" onclick="ask('O que significa verdadeiramente crer em Jesus?')">Quem crê</button></div><div class="composer"><textarea id="input" placeholder="Compartilhe sua pergunta ou reflexão..." aria-label="Sua pergunta" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();send('input')}"></textarea><button class="mic" id="mic" onclick="toggleMic('input','mic')" aria-label="Falar pergunta" title="Falar pergunta">🎙</button><button class="send" id="send" onclick="send('input')" aria-label="Enviar">➤</button></div></section>
 <section class="section"><span class="section-kicker">Propósito</span><h3>Um espaço de fé e cuidado</h3><p>🙏 Uma ferramenta criada com fé e propósito
 Este aplicativo/site foi criado e inspirado pelo Espírito Santo, com o auxílio da IA, com o propósito de oferecer uma ferramenta de apoio para aqueles que desejam conhecer, refletir e compreender melhor a Palavra de Deus e os ensinamentos de Jesus.
 Use esta conversa para tirar dúvidas, refletir sobre a Bíblia, encontrar encorajamento e lembrar das promessas de Deus.
@@ -703,7 +712,7 @@ const chat=document.querySelector('.chat');
 if(!chat || document.querySelector('.chat-launch')) return;
 const launch=document.createElement('button'); launch.type='button'; launch.className='chat-launch'; launch.setAttribute('aria-haspopup','dialog');
 launch.innerHTML='<span><span class="launch-kicker">Um momento de escuta</span><strong>Converse com o Pastor Virtual</strong><p>Abra uma conversa reservada, leve e acolhedora.</p></span><span class="launch-icon">✦</span><span class="launch-arrow">↗</span>';
-chat.parentNode.insertBefore(launch,chat); chat.setAttribute('role','dialog'); chat.setAttribute('aria-modal','true'); chat.setAttribute('aria-label','Conversa com o Pastor Virtual');
+chat.parentNode.insertBefore(launch,chat); if(!launch.dataset.moved){const quote=document.querySelector('.welcome .quote'); if(quote){quote.parentNode.insertBefore(launch,quote); launch.dataset.moved='1'}} chat.setAttribute('role','dialog'); chat.setAttribute('aria-modal','true'); chat.setAttribute('aria-label','Conversa com o Pastor Virtual');
 const close=document.createElement('button'); close.type='button'; close.className='chat-close'; close.innerHTML='×'; close.setAttribute('aria-label','Fechar conversa');
 const head=chat.querySelector('.chat-head'); if(head) head.appendChild(close);
 function open(){chat.classList.add('is-open');document.body.classList.add('chat-modal-visible');document.getElementById('input')?.focus()}
@@ -718,21 +727,30 @@ if(document.readyState==='loading') document.addEventListener('DOMContentLoaded'
 (function(){
 function enhance(){
 const launch=document.querySelector('.chat-launch'), chat=document.querySelector('.chat'); if(!launch||!chat||launch.dataset.enhanced)return; launch.dataset.enhanced='1';
-launch.innerHTML='<span class="question-box-label">Escreva sua pergunta para o Pastor Virtual</span><span class="question-box"><textarea id="questionBoxInput" placeholder="Digite sua pergunta aqui..." aria-label="Digite sua pergunta aqui"></textarea><button type="button" class="question-mic" id="questionBoxMic" aria-label="Falar pergunta" title="Falar pergunta">🎙</button><button type="button" class="question-send" id="questionBoxSend" aria-label="Enviar pergunta" title="Enviar pergunta">➤</button></span><span class="question-hint">Você pode escrever ou tocar no microfone para falar.</span><span class="suggestions launch-suggestions" id="launchSuggestions"></span>';
-const q=document.getElementById('questionBoxInput'), original=document.getElementById('input'), sendBtn=document.getElementById('questionBoxSend');
+const hour=new Date().getHours(); const greeting=hour<12?'Bom dia!':hour<18?'Boa tarde!':'Boa noite!';
+launch.innerHTML='<div class="wa-topbar"><div class="wa-avatar" id="waAvatarBtn" role="button" tabindex="0" aria-label="Adicionar sua foto"><img id="waAvatarImg" alt="Sua foto" style="display:none"><span class="wa-avatar-placeholder" id="waAvatarPlaceholder">📷<small>Sua foto aqui</small></span><input type="file" id="waAvatarInput" accept="image/*" hidden></div><div class="wa-greeting"><strong>'+greeting+'</strong><p>Escreva sua pergunta para o Pastor Virtual</p></div></div><div class="wa-suggestions" id="launchSuggestions"></div><div class="wa-composer" id="waComposer"><span class="wa-icon" aria-hidden="true">😊</span><textarea id="questionBoxInput" placeholder="Mensagem" aria-label="Digite sua pergunta aqui" rows="1"></textarea><span class="wa-icon" aria-hidden="true">📎</span><span class="wa-icon" aria-hidden="true">📷</span><button type="button" class="wa-mic-btn" id="questionBoxMic" aria-label="Falar pergunta" title="Falar pergunta">🎙</button><button type="button" class="wa-send-btn" id="questionBoxSend" aria-label="Enviar pergunta" title="Enviar pergunta">➤</button></div>';
+const q=document.getElementById('questionBoxInput'), original=document.getElementById('input'), sendBtn=document.getElementById('questionBoxSend'), composerBox=document.getElementById('waComposer');
 function openChat(){chat.classList.add('is-open');document.body.classList.add('chat-modal-visible');setTimeout(()=>q.focus(),30)}
 q.addEventListener('focus',openChat); q.addEventListener('click',openChat);
-q.addEventListener('input',()=>{original.value=q.value});
+q.addEventListener('input',()=>{original.value=q.value;composerBox.classList.toggle('has-text',q.value.trim().length>0)});
 q.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();submit()}});
-function submit(){const value=q.value.trim();if(!value)return;original.value=value;openChat();window.send();q.value='';}
+function submit(){const value=q.value.trim();if(!value)return;original.value=value;openChat();window.send();q.value='';composerBox.classList.remove('has-text')}
 sendBtn.addEventListener('click',submit);
 document.getElementById('questionBoxMic').addEventListener('click',()=>{openChat();original.focus();if(typeof window.toggleMic==='function')window.toggleMic();});
+const avatarBtn=document.getElementById('waAvatarBtn'), avatarInput=document.getElementById('waAvatarInput'), avatarImg=document.getElementById('waAvatarImg'), avatarPlaceholder=document.getElementById('waAvatarPlaceholder');
+try{const savedAvatar=localStorage.getItem('visitorAvatar');if(savedAvatar){avatarImg.src=savedAvatar;avatarImg.style.display='block';avatarPlaceholder.style.display='none'}}catch(e){}
+avatarBtn.addEventListener('click',e=>{e.stopPropagation();avatarInput.click()});
+avatarBtn.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();e.stopPropagation();avatarInput.click()}});
+avatarInput.addEventListener('click',e=>e.stopPropagation());
+avatarInput.addEventListener('change',()=>{const file=avatarInput.files&&avatarInput.files[0];if(!file)return;const reader=new FileReader();reader.onload=()=>{try{localStorage.setItem('visitorAvatar',reader.result)}catch(e){}avatarImg.src=reader.result;avatarImg.style.display='block';avatarPlaceholder.style.display='none'};reader.readAsDataURL(file)});
 if(Array.isArray(window.RANDOM_QUESTIONS)){
 const box=document.getElementById('launchSuggestions');
-const shuffled=[...window.RANDOM_QUESTIONS].sort(()=>Math.random()-.5).slice(0,6);
-shuffled.forEach(question=>{
+const icons=['📖','🙏','✝️','❤️','🕊️','💭'];
+const shuffled=[...window.RANDOM_QUESTIONS].sort(()=>Math.random()-.5).slice(0,4);
+shuffled.forEach((question,i)=>{
 const btn=document.createElement('button');
-btn.type='button'; btn.className='suggestion'; btn.textContent=question;
+btn.type='button'; btn.className='wa-suggestion';
+btn.innerHTML='<span class="wa-suggestion-ico">'+icons[i%icons.length]+'</span><span>'+question+'</span>';
 btn.addEventListener('click',e=>{e.stopPropagation();original.value=question;openChat();window.send();});
 box.appendChild(btn);
 });
