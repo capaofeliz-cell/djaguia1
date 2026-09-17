@@ -697,8 +697,6 @@ q.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefau
 function submit(){const value=q.value.trim();if(!value)return;original.value=value;openChat();window.send();q.value='';}
 sendBtn.addEventListener('click',submit);
 document.getElementById('questionBoxMic').addEventListener('click',()=>{openChat();original.focus();if(typeof window.toggleMic==='function')window.toggleMic();});
-// Perguntas automáticas aleatórias, visíveis já na tela inicial,
-// sorteadas novamente a cada recarregamento da página.
 if(Array.isArray(window.RANDOM_QUESTIONS)){
 const box=document.getElementById('launchSuggestions');
 const shuffled=[...window.RANDOM_QUESTIONS].sort(()=>Math.random()-.5).slice(0,6);
@@ -714,12 +712,12 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 })();
 </script>
 
-<!-- ===== ANÚNCIOS ADSENSE (LATERAIS) — DESATIVADOS ATÉ A APROVAÇÃO =====
+<!-- ===== ANUNCIOS ADSENSE (LATERAIS) - DESATIVADOS ATE A APROVACAO =====
      Quando o site djrenatobravo.com.br for aprovado no AdSense:
      1) Pegue o data-ad-slot real de cada bloco no painel do AdSense.
-     2) Substitua "XXXXXXXXXX" pelo slot correspondente em cada <ins>.
-     3) Remova as marcações <!-- e --> que envolvem os dois blocos abaixo.
-     O script do AdSense já está ativo no <head>; só falta a aprovação.
+     2) Substitua "XXXXXXXXXX" pelo slot correspondente em cada ins.
+     3) Remova as marcacoes de comentario que envolvem os dois blocos abaixo.
+     O script do AdSense ja esta ativo no head; so falta a aprovacao.
 
 <style>
 .ad-lateral{position:fixed;top:200px;width:160px;height:600px;z-index:15}
@@ -743,7 +741,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
        data-ad-slot="XXXXXXXXXX"></ins>
   <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 </div>
-===== FIM DO BLOCO DE ANÚNCIOS ===== -->
+===== FIM DO BLOCO DE ANUNCIOS ===== -->
 
 </body>
 </html>
