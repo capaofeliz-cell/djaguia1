@@ -1,5 +1,5 @@
 header:
-  - label: "Pastor Virtual"
+  - label: "Início"
     url: "/"
   - label: "Notícias"
     url: "/noticias/"
