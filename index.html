@@ -163,10 +163,8 @@ html,body{background:var(--cream)!important;color:var(--ink)!important}body{back
 .wa-composer textarea{flex:1;min-width:0;border:0;resize:none;background:transparent;outline:none;padding:8px 2px;max-height:90px;font:500 14.5px Inter,system-ui,sans-serif;color:#2f3430}
 .wa-composer textarea::placeholder{color:#a29c88}
 .wa-mic-btn,.wa-send-btn{width:40px;height:40px;border-radius:50%;border:0;flex:none;cursor:pointer;font-size:17px;display:grid;place-items:center;background:linear-gradient(145deg,#4fce6b,#2fa84e);color:#fff;box-shadow:0 4px 12px rgba(47,168,78,.32)}
-/* Microfone e botão de enviar (➤) sempre visíveis, lado a lado */
-.wa-composer .wa-mic-btn,.wa-composer .wa-send-btn{display:grid}
-.wa-send-btn{background:linear-gradient(145deg,#d19a69,#b97845);box-shadow:0 4px 12px rgba(185,120,69,.32)}
-.wa-send-btn:disabled{opacity:.45;cursor:not-allowed}
+.wa-composer:not(.has-text) .wa-send-btn{display:none}
+.wa-composer.has-text .wa-mic-btn{display:none}
 .wa-emoji-panel{display:none;position:absolute;left:0;bottom:52px;width:236px;max-height:170px;overflow-y:auto;background:#fff;border:1px solid #e5ddc9;border-radius:14px;box-shadow:0 12px 30px rgba(60,50,20,.18);padding:8px;grid-template-columns:repeat(6,1fr);gap:2px;z-index:5}
 .wa-emoji-panel.open{display:grid}
 .wa-emoji-item{border:0;background:transparent;font-size:19px;padding:6px;border-radius:8px;cursor:pointer;line-height:1}
@@ -219,6 +217,11 @@ body{background:#ffffff!important;color:#2b2b2b!important}
 .legal a{color:#b97845!important}
 </style>
 <style id="mobile-center-fix">
+/* Portal gospel: carrossel, atalhos e leitura editorial compacta */
+.portal-shell{margin:38px auto 0;max-width:1100px}
+.portal-heading{display:flex;align-items:end;justify-content:space-between;gap:16px;margin-bottom:14px}.portal-kicker{color:#a66c14;text-transform:uppercase;letter-spacing:.18em;font-size:10px;font-weight:800}.portal-heading h3{margin:5px 0 0;font:700 28px Georgia,serif;color:#3d3037}.portal-heading p{margin:0;color:#857b80;font-size:12px;max-width:340px;text-align:right}
+.news-carousel{position:relative;min-height:250px;border-radius:24px;overflow:hidden;background:#2f2b39;box-shadow:0 18px 48px #4d342218}.news-slide{display:none;min-height:250px;padding:30px 34px;color:#fff;position:relative;background:linear-gradient(110deg,#342b3e,#8d5e37)}.news-slide.active{display:flex;align-items:end}.news-slide:nth-child(2){background:linear-gradient(110deg,#273e4b,#6c8d8f)}.news-slide:nth-child(3){background:linear-gradient(110deg,#4b3046,#b27743)}.news-slide:after{content:'✦';position:absolute;right:30px;top:18px;color:#f7d58a;font-size:70px;opacity:.45}.news-slide-content{max-width:620px;position:relative;z-index:1}.news-tag{display:inline-block;border:1px solid #f6d88d99;background:#ffffff18;border-radius:999px;padding:6px 10px;color:#ffe4a8;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.12em}.news-slide h4{margin:14px 0 8px;font:700 clamp(25px,4vw,42px)/1.05 Georgia,serif}.news-slide p{margin:0;color:#f7edf0;font-size:13px;line-height:1.6;max-width:560px}.news-slide a{display:inline-block;margin-top:18px;padding:9px 14px;border-radius:999px;background:#f1c967;color:#352a31;font-size:11px;font-weight:800}.carousel-nav{position:absolute;right:20px;bottom:18px;display:flex;gap:6px;z-index:2}.carousel-dot{width:9px;height:9px;border:0;border-radius:50%;background:#ffffff66;cursor:pointer}.carousel-dot.active{width:25px;border-radius:9px;background:#f1c967}.portal-grid{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(260px,.8fr);gap:18px;margin-top:18px}.portal-card{border:1px solid var(--line);border-radius:20px;background:#fffdf9;padding:22px;box-shadow:0 8px 26px #6c4b150b}.portal-card h4{margin:0 0 5px;color:#4d3e46;font:700 22px Georgia,serif}.portal-card .sub{margin:0 0 14px;color:#8b8086;font-size:11px}.portal-list{display:grid;gap:10px}.portal-link{display:flex;align-items:center;gap:12px;padding:12px;border-radius:14px;background:#fff8e9;border:1px solid #f1e0bd;color:var(--ink);text-decoration:none}.portal-link:hover{background:#fff0cf;text-decoration:none}.portal-icon{width:38px;height:38px;display:grid;place-items:center;border-radius:12px;background:#f0d79b;color:#6d4c19;font-size:18px;flex:none}.portal-link strong{display:block;font-size:12px}.portal-link span{display:block;color:#8c7f80;font-size:11px;margin-top:2px}.video-card{display:flex;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}.video-card:last-child{border-bottom:0}.video-thumb{width:86px;height:56px;border-radius:10px;display:grid;place-items:center;background:linear-gradient(135deg,#50354d,#c28b50);color:#fff;font-size:22px;flex:none}.video-card strong{font-size:12px;line-height:1.35}.video-card span{display:block;color:#978b8d;font-size:10px;margin-top:4px}.mini-weather{display:flex;align-items:center;justify-content:space-between;margin-top:16px;padding:14px;border-radius:14px;background:#eef7f3;color:#477661}.mini-weather strong{font-size:25px}.portal-note{margin-top:18px;padding:16px 18px;border-left:3px solid #d6a14c;background:#fff8e9;border-radius:0 14px 14px 0;color:#65585b;font:italic 15px Georgia,serif;line-height:1.45}
+@media(max-width:760px){.portal-heading{display:block}.portal-heading p{text-align:left;margin-top:6px}.portal-grid{grid-template-columns:1fr}.news-slide{padding:24px;min-height:270px}.news-slide h4{font-size:30px}}
 @media(max-width:650px){
 .topbar{flex-direction:column;justify-content:center;text-align:center;gap:8px;padding:16px 0}
 .brand{margin-right:0!important;text-align:center;width:100%}
@@ -242,7 +245,7 @@ body{background:#ffffff!important;color:#2b2b2b!important}
 <div id="offlineBanner">📶 Você está offline — o Pastor Virtual responde com mensagens prontas e a rádio fica indisponível até a conexão voltar.</div>
 <header class="top"><div class="topbar"><img class="avatar" src="imagens/avatar.jpg" alt="Virtual Pastor Virtual"><div class="brand"><h1>PASTOR VIRTUAL</h1><p>Respostas na visão do pastor virtual com base na Palavra de Deus!</p></div><nav class="site-nav" style="margin-left:auto;display:flex;gap:16px;flex-wrap:wrap;font-size:12px"><a href="estudio-ao-vivo.html">Ao Vivo</a><a href="noticias/">Notícias</a><a href="noticias/videos/">Vídeos</a><a href="noticias/fotos/">Fotos</a><a href="noticias/top5/">Top 5</a><a href="tempo/">Tempo</a><a href="sobre.html">Sobre</a><a href="contato.html">Contato</a></nav></div></header>
 <main class="page"><section class="welcome"><span class="badge">Palavra · acolhimento · oração</span><h2>Fique à vontade para <em>compartilhar</em>.</h2><p>Olá, eu sou o seu Pastor Virtual. Fui programado para lhe ajudar com as coisas de Deus e de Jesus, auxiliando em sua busca sobre a Palavra de Deus.
-Estou aqui para ouvir seu coração e conversar sobre Deus, Jesus e a Palavra. Pergunte, reflita ou desabafe; caminharemos juntos com fé e esperança.</p><section class="chat-inline" aria-label="Conversa com o Pastor Virtual"><div class="wa-topbar"><div class="wa-avatar" id="waAvatarBtn" role="button" tabindex="0" aria-label="Adicionar sua foto"><img id="waAvatarImg" alt="Sua foto" style="display:none"><span class="wa-avatar-placeholder" id="waAvatarPlaceholder">📷<small>Sua foto aqui</small></span><input type="file" id="waAvatarInput" accept="image/*" hidden></div><div class="wa-greeting"><strong id="waGreetingText">Bom dia!</strong><p>Escreva sua pergunta para o Pastor Virtual</p></div></div><div class="messages" id="messages" style="display:none"><div class="bubble virtual">A paz do Senhor esteja com você, meu irmão(ã). Que alegria ter você aqui. Como posso ouvir e acolher você hoje?<span class="ref">"O Senhor é o meu pastor; nada me faltará." — Salmos 23:1</span></div></div><div class="typing" id="typing">Jorge está preparando uma resposta...</div><div class="wa-suggestions" id="launchSuggestions"></div><div class="wa-composer" id="waComposer"><span class="wa-icon" id="waEmojiBtn" role="button" tabindex="0" aria-label="Emojis">😊</span><div class="wa-emoji-panel" id="waEmojiPanel"></div><textarea id="input" placeholder="Mensagem" aria-label="Sua pergunta" rows="1" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();send('input')}"></textarea><span class="wa-icon" aria-hidden="true">📎</span><span class="wa-icon" aria-hidden="true">📷</span><button type="button" class="wa-mic-btn" id="mic" onclick="toggleMic('input','mic')" aria-label="Falar pergunta" title="Falar pergunta">🎙</button><button type="button" class="wa-send-btn" id="send" onclick="send('input')" aria-label="Enviar pergunta" title="Enviar pergunta">➤</button></div></section><div class="quote"><q>Sede uns para com os outros benignos, misericordiosos, perdoando-vos uns aos outros.</q>Efésios 4:32</div>
+Estou aqui para ouvir seu coração e conversar sobre Deus, Jesus e a Palavra. Pergunte, reflita ou desabafe; caminharemos juntos com fé e esperança.</p><section class="chat-inline" aria-label="Conversa com o Pastor Virtual"><div class="wa-topbar"><div class="wa-avatar" id="waAvatarBtn" role="button" tabindex="0" aria-label="Adicionar sua foto"><img id="waAvatarImg" alt="Sua foto" style="display:none"><span class="wa-avatar-placeholder" id="waAvatarPlaceholder">📷<small>Sua foto aqui</small></span><input type="file" id="waAvatarInput" accept="image/*" hidden></div><div class="wa-greeting"><strong id="waGreetingText">Bom dia!</strong><p>Escreva sua pergunta para o Pastor Virtual</p></div></div><div class="messages" id="messages" style="display:none"><div class="bubble virtual">A paz do Senhor esteja com você, meu irmão(ã). Que alegria ter você aqui. Como posso ouvir e acolher você hoje?<span class="ref">"O Senhor é o meu pastor; nada me faltará." — Salmos 23:1</span></div></div><div class="typing" id="typing">Jorge está preparando uma resposta...</div><div class="wa-suggestions" id="launchSuggestions"></div><div class="wa-composer" id="waComposer"><span class="wa-icon" id="waEmojiBtn" role="button" tabindex="0" aria-label="Emojis">😊</span><div class="wa-emoji-panel" id="waEmojiPanel"></div><textarea id="input" placeholder="Mensagem" aria-label="Sua pergunta" rows="1" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();send('input')}"></textarea><span class="wa-icon" aria-hidden="true">📎</span><span class="wa-icon" aria-hidden="true">📷</span><button type="button" class="wa-mic-btn" id="mic" onclick="toggleMic('input','mic')" aria-label="Falar pergunta" title="Falar pergunta">🎙</button><button type="button" class="wa-send-btn" id="send" onclick="send('input')" aria-label="Enviar">➤</button></div></section><div class="quote"><q>Sede uns para com os outros benignos, misericordiosos, perdoando-vos uns aos outros.</q>Efésios 4:32</div>
 <div class="pillars">
 <div class="pillar"><span class="pillar-ico">📖</span><strong>Palavra</strong><span>Reflexões baseadas na Bíblia, todos os dias.</span></div>
 <div class="pillar"><span class="pillar-ico">🤝</span><strong>Acolhimento</strong><span>Um espaço sem julgamento para desabafar.</span></div>
@@ -250,7 +253,28 @@ Estou aqui para ouvir seu coração e conversar sobre Deus, Jesus e a Palavra. P
 </div>
 </section>
 
-<section class="section"><span class="section-kicker">Propósito</span><h3>Um espaço de fé e cuidado</h3><p>🙏 Criado com fé e auxílio da IA para ajudar você a refletir sobre a Palavra de Deus. Tire dúvidas, encontre encorajamento e lembre das promessas de Deus. Que a Bíblia seja sempre a sua luz. 🙏📖</p></section><section class="section"><span class="section-kicker">Devocional</span><h3>Reflexões sobre a Palavra</h3><p>📖 A Bíblia é uma carta viva para você. Leia com o coração aberto, ore com sinceridade e não caminhe sozinho. A graça de Deus é nova a cada manhã.</p></section><section class="section"><span class="section-kicker">Bastidores</span><h3>Sobre o projeto</h3><p>O Pastor Virtual nasceu do desejo de tornar a Palavra de Deus mais acessível no dia a dia, especialmente para quem não tem, no momento, alguém por perto para conversar sobre fé. Ele foi pensado para acolher, não para substituir. Sempre que possível, o aplicativo incentiva a busca por uma igreja local, por um pastor ou líder espiritual de confiança, e pela leitura direta da Bíblia.
+<section class="portal-shell" aria-label="Portal gospel">
+  <div class="portal-heading"><div><span class="portal-kicker">Portal gospel · em destaque</span><h3>Notícias que edificam</h3></div><p>Conteúdo curto para acompanhar sua fé, sua comunidade e a programação da Web Rádio.</p></div>
+  <div class="news-carousel" id="newsCarousel">
+    <article class="news-slide active"><div class="news-slide-content"><span class="news-tag">Agenda gospel</span><h4>Aviva Tremembé: fé, música e comunhão</h4><p>Confira os destaques da programação gospel e acompanhe as notícias que movimentam a comunidade cristã.</p><a href="noticias/">Ler notícias</a></div></article>
+    <article class="news-slide"><div class="news-slide-content"><span class="news-tag">Reflexão do dia</span><h4>Uma pausa para ouvir a Palavra</h4><p>Entre uma tarefa e outra, encontre um momento de oração, esperança e acolhimento no Pastor Virtual.</p><a href="#input">Começar conversa</a></div></article>
+    <article class="news-slide"><div class="news-slide-content"><span class="news-tag">Web Rádio DJ ÁGUIA1</span><h4>Louvor para acompanhar seu dia</h4><p>Ative o player na base da tela e leve música gospel com você enquanto navega pelo portal.</p><a href="estudio-ao-vivo.html">Abrir estúdio</a></div></article>
+    <div class="carousel-nav" aria-label="Navegação do carrossel"><button class="carousel-dot active" type="button" aria-label="Notícia 1"></button><button class="carousel-dot" type="button" aria-label="Notícia 2"></button><button class="carousel-dot" type="button" aria-label="Notícia 3"></button></div>
+  </div>
+  <div class="portal-grid">
+    <section class="portal-card"><h4>Explore o portal</h4><p class="sub">Acesse rapidamente os conteúdos mais procurados.</p><div class="portal-list"><a class="portal-link" href="noticias/"><span class="portal-icon">📰</span><span><strong>Notícias Gospel</strong><span>Atualidades, eventos e histórias de fé.</span></span></a><a class="portal-link" href="noticias/videos/"><span class="portal-icon">▶</span><span><strong>Vídeos selecionados</strong><span>Louvores, mensagens e conteúdos para assistir.</span></span></a><a class="portal-link" href="noticias/top5/"><span class="portal-icon">★</span><span><strong>Top 5 da semana</strong><span>Listas rápidas para descobrir novos temas.</span></span></a><a class="portal-link" href="tempo/"><span class="portal-icon">☀</span><span><strong>Tempo e programação</strong><span>Consulte a previsão e organize seu dia.</span></span></a></div><div class="portal-note">“A tua palavra é lâmpada para os meus pés e luz para o meu caminho.”<br><small>Salmos 119:105</small></div></section>
+    <aside class="portal-card"><h4>Em alta</h4><p class="sub">Conteúdo para assistir e ouvir hoje.</p><div class="video-card"><div class="video-thumb">▶</div><div><strong>Louvores para fortalecer a fé</strong><span>Vídeo em destaque · assistir agora</span></div></div><div class="video-card"><div class="video-thumb">✝</div><div><strong>Mensagem de esperança</strong><span>Reflexão curta para o seu dia</span></div></div><div class="video-card"><div class="video-thumb">🎧</div><div><strong>Web Rádio DJ ÁGUIA1</strong><span>Programação gospel ao vivo</span></div></div><div class="mini-weather"><span>Tempo em Capão da Canoa</span><strong id="portalTemp">—°</strong></div></aside>
+  </div>
+</section>
+<section class="section"><span class="section-kicker">Propósito</span><h3>Um espaço de fé e cuidado</h3><p>🙏 Uma ferramenta criada com fé e propósito
+Este aplicativo/site foi criado e inspirado pelo Espírito Santo, com o auxílio da IA, com o propósito de oferecer uma ferramenta de apoio para aqueles que desejam conhecer, refletir e compreender melhor a Palavra de Deus e os ensinamentos de Jesus.
+Use esta conversa para tirar dúvidas, refletir sobre a Bíblia, encontrar encorajamento e lembrar das promessas de Deus.
+As respostas são geradas pelo Pastor Virtual, com o apoio do serviço de inteligência do aplicativo. Ele foi criado para auxiliar sua jornada de fé, sempre incentivando a busca pela Bíblia, pela oração e pela direção do Espírito Santo.
+Que este espaço seja uma ferramenta de edificação, esperança e fé.
+Que Deus abençoe sua caminhada e que a Palavra de Deus seja sempre a verdadeira luz para sua vida. 🙏📖</p></section><section class="section"><span class="section-kicker">Devocional</span><h3>Reflexões sobre a Palavra</h3><p>📖 A fé cristã nos convida, todos os dias, a olhar para as Escrituras não apenas como um livro antigo, mas como uma carta viva, escrita para cada geração. Quando lemos os Salmos, encontramos um Deus que acolhe a dor humana sem julgamento; quando lemos os Evangelhos, encontramos um Jesus que caminha ao lado dos cansados, dos que erram e dos que buscam recomeçar.
+Muitas pessoas chegam até este espaço com perguntas simples, mas profundas: "Por que Deus permite o sofrimento?", "Como perdoar quem me feriu?", "O que significa confiar quando tudo parece incerto?". Não existem respostas prontas para tudo, mas existe um caminho: buscar, orar, ler a Palavra com um coração aberto e permitir que ela transforme, aos poucos, a maneira como enxergamos a vida.
+A oração, nesse sentido, não é uma fórmula mágica, mas uma conversa honesta. É trazer a Deus as alegrias e as angústias, sem esconder nada, confiando que Ele ouve mesmo quando o silêncio parece maior que a resposta. E a comunidade — a igreja, a família, os irmãos na fé — continua sendo um dos maiores presentes de Deus para atravessarmos os tempos difíceis: ninguém foi feito para caminhar sozinho.
+Este espaço não substitui o cuidado pastoral presencial nem a vida em comunidade, mas deseja ser um ponto de apoio: um lugar para parar, respirar e lembrar que a graça de Deus é nova a cada manhã.</p></section><section class="section"><span class="section-kicker">Bastidores</span><h3>Sobre o projeto</h3><p>O Pastor Virtual nasceu do desejo de tornar a Palavra de Deus mais acessível no dia a dia, especialmente para quem não tem, no momento, alguém por perto para conversar sobre fé. Ele foi pensado para acolher, não para substituir. Sempre que possível, o aplicativo incentiva a busca por uma igreja local, por um pastor ou líder espiritual de confiança, e pela leitura direta da Bíblia.
 O projeto segue crescendo aos poucos, com o cuidado de manter respostas acolhedoras, fiéis ao espírito das Escrituras e distantes de qualquer julgamento. Sugestões, dúvidas e testemunhos podem ser enviados através dos canais de contato do criador do projeto.</p></section>
 <div class="footer-actions" style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center;padding:20px 0 4px">
 <button class="small-btn danger" onclick="clearChat()">Excluir conversa</button>
@@ -750,37 +774,13 @@ if(emojiBtn&&emojiPanel){emojiBtn.addEventListener('click',e=>{e.stopPropagation
 if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',init); else init();
 })();
 </script>
-
-<!-- ===== ANUNCIOS ADSENSE (LATERAIS) - DESATIVADOS ATE A APROVACAO =====
-     Quando o site djrenatobravo.com.br for aprovado no AdSense:
-     1) Pegue o data-ad-slot real de cada bloco no painel do AdSense.
-     2) Substitua "XXXXXXXXXX" pelo slot correspondente em cada ins.
-     3) Remova as marcacoes de comentario que envolvem os dois blocos abaixo.
-     O script do AdSense ja esta ativo no head; so falta a aprovacao.
-
-<style>
-.ad-lateral{position:fixed;top:200px;width:160px;height:600px;z-index:15}
-.ad-esquerda{left:10px}
-.ad-direita{right:10px}
-@media(max-width:1100px){.ad-lateral{display:none}}
-</style>
-
-<div class="ad-lateral ad-esquerda">
-  <ins class="adsbygoogle"
-       style="display:inline-block;width:160px;height:600px"
-       data-ad-client="ca-pub-4764775481973440"
-       data-ad-slot="XXXXXXXXXX"></ins>
-  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-</div>
-
-<div class="ad-lateral ad-direita">
-  <ins class="adsbygoogle"
-       style="display:inline-block;width:160px;height:600px"
-       data-ad-client="ca-pub-4764775481973440"
-       data-ad-slot="XXXXXXXXXX"></ins>
-  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-</div>
-===== FIM DO BLOCO DE ANUNCIOS ===== -->
+<script>
+(()=>{
+  const slides=[...document.querySelectorAll('.news-slide')], dots=[...document.querySelectorAll('.carousel-dot')];
+  if(slides.length){let current=0,timer;const show=i=>{current=(i+slides.length)%slides.length;slides.forEach((s,n)=>s.classList.toggle('active',n===current));dots.forEach((d,n)=>d.classList.toggle('active',n===current))};const restart=()=>{clearInterval(timer);timer=setInterval(()=>show(current+1),7000)};dots.forEach((d,n)=>d.addEventListener('click',()=>{show(n);restart()}));restart()}
+  fetch('https://api.open-meteo.com/v1/forecast?latitude=-29.75&longitude=-50.01&current=temperature_2m&timezone=America%2FSao_Paulo').then(r=>r.json()).then(d=>{const el=document.getElementById('portalTemp');if(el)el.textContent=Math.round(d.current.temperature_2m)+'°'}).catch(()=>{});
+})();
+</script>
 
 </body>
 </html>
