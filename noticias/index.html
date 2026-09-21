@@ -3,103 +3,85 @@ layout: base
 title: "Notícias Gospel"
 permalink: /noticias/
 ---
-<h1 style="font:700 28px Georgia,serif;color:#a86b0d">Notícias, Vídeos e Conteúdo Gospel</h1>
-<p>Fique por dentro das últimas notícias, vídeos e listas especiais do universo gospel.</p>
+<section class="news-intro">
+  <span class="eyebrow">PORTAL GOSPEL · NOTÍCIAS REAIS</span>
+  <h1>Notícias, vídeos e conteúdo gospel</h1>
+  <p>Fique por dentro das histórias, testemunhos, eventos e mensagens que ajudam a informar e edificar.</p>
+</section>
 
 {% assign todos = "" | split: "" %}
 {% for post in site.posts %}{% assign todos = todos | push: post %}{% endfor %}
 {% for item in site.top5 %}{% assign todos = todos | push: item %}{% endfor %}
 {% for item in site.videos %}{% assign todos = todos | push: item %}{% endfor %}
 {% assign todos = todos | sort: "date" | reverse %}
-
 {% assign slides = todos | slice: 0, 5 %}
 {% assign resto = todos | slice: 1, 4 %}
 
-<div style="display:grid;grid-template-columns:1.4fr 1fr;gap:14px;margin-bottom:28px">
-
-  <div id="heroCarousel" style="position:relative;border-radius:16px;overflow:hidden;min-height:320px;background:#000">
+{% if todos.size > 0 %}
+<div class="news-lead-layout">
+  <div id="heroCarousel" class="hero-carousel">
     {% for item in slides %}
-    <a href="{{ item.url }}" class="hero-slide{% if forloop.first %} is-active{% endif %}" data-index="{{ forloop.index0 }}" style="text-decoration:none;color:inherit;position:absolute;inset:0;z-index:{% if forloop.first %}2{% else %}1{% endif %}">
-      {% if item.imagem %}<img src="{{ item.imagem }}" alt="{{ item.title }}" style="width:100%;height:100%;object-fit:contain;object-position:center;position:absolute;inset:0;background:#000">{% endif %}
-      <div style="position:absolute;left:0;right:0;bottom:0;padding:18px;background:linear-gradient(to top,rgba(0,0,0,.85),transparent)">
-        <span style="color:#f4d589;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.06em">{{ item.categoria | default: "Destaque" }}</span>
-        <h2 style="color:#fff;font:700 20px Georgia,serif;margin:6px 0 0">{{ item.title }}</h2>
+    {% assign thumb = item.imagem | default: "/imagens/noticias/sem-título.png" %}
+    <a href="{{ item.url }}" class="hero-slide{% if forloop.first %} is-active{% endif %}" data-index="{{ forloop.index0 }}">
+      <img src="{{ thumb }}" alt="{{ item.title }}" loading="{% if forloop.first %}eager{% else %}lazy{% endif %}">
+      <div class="hero-overlay">
+        <span>{{ item.categoria | default: "Destaque" }}</span>
+        <h2>{{ item.title }}</h2>
+        <small>Continuar lendo →</small>
       </div>
     </a>
     {% endfor %}
-    <div style="position:absolute;left:0;right:0;bottom:8px;display:flex;justify-content:center;gap:6px;z-index:5">
-      {% for item in slides %}
-      <span class="hero-dot{% if forloop.first %} is-active{% endif %}" data-dot="{{ forloop.index0 }}"></span>
+    <div class="hero-dots">
+      {% for item in slides %}<span class="hero-dot{% if forloop.first %} is-active{% endif %}" data-dot="{{ forloop.index0 }}"></span>{% endfor %}
+    </div>
+  </div>
+
+  <div class="side-stories">
+    {% for item in resto %}
+    {% assign thumb = item.imagem | default: "/imagens/noticias/sem-título.png" %}
+    <a href="{{ item.url }}" class="side-story">
+      <img src="{{ thumb }}" alt="{{ item.title }}" loading="lazy">
+      <div><span>{{ item.categoria | default: "Conteúdo gospel" }}</span><strong>{{ item.title | truncate: 72 }}</strong></div>
+    </a>
+    {% endfor %}
+  </div>
+</div>
+
+<div class="news-content-layout">
+  <section>
+    <div class="section-heading"><div><span class="eyebrow">ATUALIZAÇÕES</span><h2>Todas as publicações</h2></div><span class="count">{{ todos.size }} conteúdos</span></div>
+    <div class="news-grid">
+      {% for item in todos %}
+      {% assign thumb = item.imagem | default: "/imagens/noticias/sem-título.png" %}
+      <a href="{{ item.url }}" class="news-card">
+        <div class="news-card-media"><img src="{{ thumb }}" alt="{{ item.title }}" loading="lazy"><span>{{ item.categoria | default: "Gospel" }}</span></div>
+        <div class="news-card-body"><time datetime="{{ item.date | date_to_xmlschema }}">{{ item.date | date: "%d/%m/%Y" }}</time><h3>{{ item.title }}</h3><p>{{ item.excerpt | strip_html | strip_newlines | truncate: 110 | default: "Leia a matéria completa e acompanhe esta história." }}</p><strong>Continuar lendo →</strong></div>
+      </a>
       {% endfor %}
     </div>
-  </div>
+  </section>
 
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
-    {% for item in resto %}
-    <a href="{{ item.url }}" style="text-decoration:none;color:inherit;position:relative;display:block;border-radius:12px;overflow:hidden;min-height:145px;background:#000">
-      {% if item.imagem %}<img src="{{ item.imagem }}" alt="{{ item.title }}" style="width:100%;height:100%;object-fit:contain;object-position:center;position:absolute;inset:0;background:#000">{% endif %}
-      <div style="position:absolute;left:0;right:0;bottom:0;padding:10px;background:linear-gradient(to top,rgba(0,0,0,.85),transparent)">
-        <span style="color:#fff;font:700 12px Georgia,serif;line-height:1.25;display:block">{{ item.title | truncate: 50 }}</span>
-      </div>
-    </a>
-    {% endfor %}
-  </div>
-
-</div>
-
-<style>
-#heroCarousel .hero-slide{opacity:0!important;transition:opacity .8s ease;pointer-events:none!important}
-#heroCarousel .hero-slide.is-active{opacity:1!important;pointer-events:auto!important}
-#heroCarousel .hero-dot{display:block;width:7px;height:7px;border-radius:50%;background:#ffffff55;transition:background .3s}
-#heroCarousel .hero-dot.is-active{background:#f4d589}
-</style>
-
-<h3 style="font:700 18px Georgia,serif;color:#a86b0d;margin:0 0 12px">Todas as publicações</h3>
-<div class="grid cols-2">
-{% for item in todos %}
-  <a href="{{ item.url }}" style="text-decoration:none;color:inherit">
-    <div class="card">
-      {% if item.imagem %}<img src="{{ item.imagem }}" alt="{{ item.title }}">{% endif %}
-      <div class="meta">{{ item.date | date: '%d/%m/%Y' }}</div>
-      <h3>{{ item.title }}</h3>
-      <span style="color:#1a73e8;font-size:12px;font-weight:700">Continuar lendo →</span>
+  <aside class="news-sidebar">
+    <div class="portal-widget">
+      <span class="eyebrow">EXPLORE O PORTAL</span>
+      <h2>Encontre mais conteúdos</h2>
+      <p>Use os atalhos para continuar sua jornada de fé, música e informação.</p>
+      <a href="/noticias/videos/">▶ Vídeos selecionados</a>
+      <a href="/noticias/top5/">★ Top 5 da semana</a>
+      <a href="/noticias/fotos/">▣ Fotos e momentos</a>
+      <a href="/tempo/">☀ Tempo e programação</a>
     </div>
-  </a>
-{% endfor %}
+    <div class="editorial-note"><strong>Sobre este portal</strong><p>Conteúdo selecionado para informar e edificar. Leia, confira as fontes e compartilhe com responsabilidade.</p><a href="/sobre.html">Conheça o propósito →</a></div>
+  </aside>
 </div>
-
-{% if site.posts.size == 0 and site.top5.size == 0 and site.videos.size == 0 %}
-<p>Em breve, novidades por aqui. 🙏</p>
+{% else %}
+<div class="empty-news"><h2>Em breve, novidades por aqui.</h2><p>Estamos preparando novos conteúdos para você.</p></div>
 {% endif %}
 
+<style>
+.news-intro{padding:30px 0 22px}.eyebrow{display:block;color:#b47a18;font-size:10px;font-weight:800;letter-spacing:.16em;text-transform:uppercase}.news-intro h1{margin:8px 0 7px;color:#3a3040;font:700 clamp(30px,5vw,48px) Georgia,serif}.news-intro p{max-width:620px;margin:0;color:#6b6470;font-size:14px;line-height:1.7}.news-lead-layout{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(260px,1fr);gap:14px;margin-bottom:30px}.hero-carousel{position:relative;min-height:350px;border-radius:18px;overflow:hidden;background:#231c29;box-shadow:0 14px 32px #5d4d4318}.hero-slide{position:absolute;inset:0;display:block;opacity:0;pointer-events:none;transition:opacity .5s ease;text-decoration:none;color:inherit}.hero-slide.is-active{opacity:1;pointer-events:auto}.hero-slide img{width:100%;height:100%;object-fit:cover;display:block}.hero-overlay{position:absolute;inset:auto 0 0;padding:55px 22px 24px;background:linear-gradient(transparent,rgba(20,14,25,.93));color:#fff}.hero-overlay span{color:#f5d77e;font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase}.hero-overlay h2{margin:7px 0 8px;font:700 clamp(20px,3vw,30px) Georgia,serif;line-height:1.12}.hero-overlay small{color:#fff2c5;font-size:12px;font-weight:700}.hero-dots{position:absolute;right:20px;bottom:16px;z-index:3;display:flex;gap:6px}.hero-dot{width:8px;height:8px;border-radius:50%;background:#fff8;cursor:pointer}.hero-dot.is-active{background:#f4d589}.side-stories{display:grid;grid-template-columns:1fr 1fr;gap:10px}.side-story{position:relative;min-height:170px;overflow:hidden;border-radius:14px;background:#30283a;text-decoration:none;color:#fff}.side-story img{width:100%;height:100%;object-fit:cover;display:block;opacity:.9}.side-story div{position:absolute;inset:auto 0 0;padding:34px 12px 12px;background:linear-gradient(transparent,rgba(20,14,25,.92))}.side-story span{display:block;color:#f5d77e;font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.06em}.side-story strong{display:block;margin-top:5px;font:700 14px Georgia,serif;line-height:1.2}.news-content-layout{display:grid;grid-template-columns:minmax(0,1fr) 245px;gap:24px;align-items:start}.section-heading{display:flex;align-items:end;justify-content:space-between;margin-bottom:13px}.section-heading h2{margin:5px 0 0;color:#403440;font:700 22px Georgia,serif}.count{color:#987b58;font-size:11px;font-weight:700}.news-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.news-card{display:block;overflow:hidden;border:1px solid #eee3cf;border-radius:15px;background:#fff;text-decoration:none;color:inherit;box-shadow:0 7px 20px #6c4b1510;transition:transform .18s ease,box-shadow .18s ease}.news-card:hover{transform:translateY(-3px);box-shadow:0 12px 26px #6c4b1522}.news-card-media{position:relative;height:150px;background:#efe4d1;overflow:hidden}.news-card-media img{width:100%;height:100%;display:block;object-fit:cover}.news-card-media span{position:absolute;left:10px;top:10px;padding:5px 7px;border-radius:999px;background:#fffdf5dd;color:#9b6a17;font-size:9px;font-weight:800;text-transform:uppercase}.news-card-body{padding:13px 14px 15px}.news-card-body time{color:#a29799;font-size:10px}.news-card-body h3{margin:6px 0;color:#302932;font:700 17px/1.18 Georgia,serif}.news-card-body p{margin:0 0 11px;color:#756c72;font-size:12px;line-height:1.5}.news-card-body strong{color:#b47717;font-size:11px}.news-sidebar{display:grid;gap:13px}.portal-widget,.editorial-note{padding:17px;border:1px solid #ead8ad;border-radius:16px;background:linear-gradient(145deg,#fffaf0,#fff);box-shadow:0 8px 20px #6c4b1510}.portal-widget h2{margin:7px 0 6px;color:#473846;font:700 21px Georgia,serif}.portal-widget p,.editorial-note p{margin:0 0 13px;color:#716871;font-size:12px;line-height:1.55}.portal-widget a{display:block;padding:10px 0;border-top:1px solid #eee3cf;color:#8f631b;text-decoration:none;font-size:12px;font-weight:700}.portal-widget a:hover,.editorial-note a:hover{color:#4f3b57}.editorial-note{background:#f6fbf7;border-color:#d7e9dc}.editorial-note strong{color:#46634d;font:700 17px Georgia,serif}.editorial-note a{color:#6b8a70;text-decoration:none;font-size:11px;font-weight:800}.empty-news{padding:50px 0}.empty-news h2{font:700 26px Georgia,serif;color:#473846}@media(max-width:760px){.news-lead-layout,.news-content-layout{grid-template-columns:1fr}.news-sidebar{grid-row:auto}.hero-carousel{min-height:280px}}@media(max-width:520px){.side-stories{grid-template-columns:1fr 1fr}.side-story{min-height:145px}.news-grid{grid-template-columns:1fr}.news-card-media{height:190px}}
+</style>
+
 <script>
-(function(){
-  function startCarousel(){
-    var carousel = document.getElementById('heroCarousel');
-    if(!carousel){ return; }
-    var slides = carousel.querySelectorAll('.hero-slide');
-    var dots = carousel.querySelectorAll('.hero-dot');
-    if(slides.length < 2){ return; }
-    var current = 0;
-    function show(i){
-      for(var a=0;a<slides.length;a++){ slides[a].classList.toggle('is-active', a===i); }
-      for(var b=0;b<dots.length;b++){ dots[b].classList.toggle('is-active', b===i); }
-      current = i;
-    }
-    window.setInterval(function(){
-      show((current+1) % slides.length);
-    }, 5000);
-  }
-  if(document.readyState === 'loading'){
-    document.addEventListener('DOMContentLoaded', startCarousel);
-  } else {
-    startCarousel();
-  }
-  window.addEventListener('load', function(){
-    if(!window.__heroCarouselStarted){
-      window.__heroCarouselStarted = true;
-      startCarousel();
-    }
-  });
-})();
+(function(){var c=document.getElementById('heroCarousel');if(!c)return;var s=c.querySelectorAll('.hero-slide'),d=c.querySelectorAll('.hero-dot'),i=0;function show(n){i=n;s.forEach(function(x,k){x.classList.toggle('is-active',k===n)});d.forEach(function(x,k){x.classList.toggle('is-active',k===n)})}d.forEach(function(x,k){x.addEventListener('click',function(){show(k)})});if(s.length>1)window.setInterval(function(){show((i+1)%s.length)},6000)})();
 </script>
