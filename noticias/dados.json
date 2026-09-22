@@ -1,1 +1,11 @@
-
+---
+layout: null
+permalink: /noticias/dados.json
+---
+{% assign vids = site.videos | sort: 'date' | reverse %}
+{% assign t5 = site.top5 | sort: 'date' | reverse %}
+{
+"posts":[{% for p in site.posts limit:8 %}{"t":{{ p.title | jsonify }},"u":{{ p.url | relative_url | jsonify }},"d":{{ p.date | date: '%d/%m/%Y' | jsonify }},"i":{{ p.imagem | default: p.image | jsonify }}}{% unless forloop.last %},{% endunless %}{% endfor %}],
+"top5":[{% for t in t5 limit:6 %}{"t":{{ t.title | jsonify }},"u":{{ t.url | relative_url | jsonify }},"d":{{ t.date | date: '%d/%m/%Y' | jsonify }},"i":{{ t.imagem | default: t.image | jsonify }}}{% unless forloop.last %},{% endunless %}{% endfor %}],
+"videos":[{% for v in vids limit:40 %}{"t":{{ v.title | jsonify }},"u":{{ v.url | relative_url | jsonify }},"d":{{ v.date | date: '%d/%m/%Y' | jsonify }},"i":{{ v.imagem | default: v.image | default: v.thumbnail | jsonify }},"y":{{ v.video_id | jsonify }},"r":{{ v.description | default: v.resumo | jsonify }}}{% unless forloop.last %},{% endunless %}{% endfor %}]
+}
