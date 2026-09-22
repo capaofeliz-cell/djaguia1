@@ -14,8 +14,9 @@ permalink: /noticias/
 {% for item in site.top5 %}{% assign todos = todos | push: item %}{% endfor %}
 {% for item in site.videos %}{% assign todos = todos | push: item %}{% endfor %}
 {% assign todos = todos | sort: "date" | reverse %}
-{% assign slides = todos | slice: 0, 5 %}
-{% assign resto = todos | slice: 1, 4 %}
+{% assign todos = todos | slice: 0, 4 %}
+{% assign slides = todos %}
+{% assign resto = todos | slice: 1, 3 %}
 
 {% if todos.size > 0 %}
 <div class="news-lead-layout">
