@@ -1017,11 +1017,11 @@ if(document.readyState==='loading') document.addEventListener('DOMContentLoaded'
     var videosSite = d.videos || [];
 
     if (d.posts && d.posts.length) {
-      document.getElementById('hwNoticias').innerHTML = widget('Últimas notícias', lista(d.posts.slice(0, 5)));
+      document.getElementById('hwNoticias').innerHTML = widget('Últimas notícias', lista(d.posts.slice(0, 5), 'imagens/capa-canal.jpg'));
       if (d.posts[0].i) setThumb('noticias/', d.posts[0].i);
     }
     if (d.top5 && d.top5.length) {
-      document.getElementById('hwTop5').innerHTML = widget('Top 5', lista(d.top5.slice(0, 4)));
+      document.getElementById('hwTop5').innerHTML = widget('Top 5', lista(d.top5.slice(0, 4), 'imagens/capa-canal.jpg'));
       if (d.top5[0].i) setThumb('noticias/top5/', d.top5[0].i);
     }
 
