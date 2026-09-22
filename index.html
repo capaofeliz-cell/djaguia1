@@ -262,9 +262,11 @@ body{background:linear-gradient(180deg,#fff 0%,#fffaf0 48%,#fff 100%)}
 .hw p{margin:0 0 10px;font-size:12.5px;line-height:1.5;color:#666}
 .hw ul{list-style:none;margin:0;padding:0}
 .hw li+li{border-top:1px solid #f0e6d6}
-.hw li a{display:block;padding:9px 0;color:#2b2b2b;text-decoration:none;font-size:13px;font-weight:600;line-height:1.35}
+.hw li a{display:flex;align-items:center;gap:10px;padding:9px 0;color:#2b2b2b;text-decoration:none;font-size:13px;font-weight:600;line-height:1.35}
 .hw li a:hover{color:#b97845}
 .hw li small{display:block;margin-top:2px;color:#999;font-size:10.5px;font-weight:500}
+.hw-thumb{width:44px;height:34px;border-radius:8px;object-fit:cover;flex:none;background:linear-gradient(135deg,#e9c98a,#b97845)}
+.hw li a span.hw-txt{min-width:0}
 .hw-btn{display:block;width:100%;box-sizing:border-box;text-align:center;padding:10px 12px;border:0;border-radius:10px;background:#b97845;color:#fff;font:700 12.5px Inter,sans-serif;text-decoration:none;cursor:pointer}
 .hw-btn:hover{filter:brightness(1.08)}
 .hw-btn.yt{background:#c4302b}
@@ -914,9 +916,12 @@ if(document.readyState==='loading') document.addEventListener('DOMContentLoaded'
   function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
   function limpa(t) { return String(t || '').replace(/\s+-\s*$/, '').trim(); }
   function shuffle(a) { for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
-  function lista(itens) {
+  function lista(itens, fallback) {
     return '<ul>' + itens.map(function (x) {
-      return '<li><a href="' + esc(x.u) + '">' + esc(limpa(x.t)) + '<small>' + esc(x.d) + '</small></a></li>';
+      var img = x.i || fallback || '';
+      return '<li><a href="' + esc(x.u) + '">' +
+        (img ? '<img class="hw-thumb" loading="lazy" alt="" src="' + esc(img) + '">' : '<span class="hw-thumb"></span>') +
+        '<span class="hw-txt">' + esc(limpa(x.t)) + '<small>' + esc(x.d) + '</small></span></a></li>';
     }).join('') + '</ul>';
   }
   function widget(titulo, html) { return '<section class="hw"><h3>' + esc(titulo) + '</h3>' + html + '</section>'; }
