@@ -288,13 +288,26 @@ body{background:linear-gradient(180deg,#fff 0%,#fffaf0 48%,#fff 100%)}
 .vd-body p{margin:0;color:#806b4c;font-size:11.5px;line-height:1.45}
 .vd-mais{margin-top:4px;color:#a86b00;font-size:11px;font-weight:800;text-decoration:underline}
 .vd-badge{position:absolute;top:10px;left:10px;z-index:1;background:#ffd15b;color:#5e3500;font:800 10px Inter,sans-serif;padding:5px 9px;border-radius:999px}
+
+/* ===== Botões do portal com imagem ===== */
+.portal-link .portal-icon{width:72px;height:56px;border-radius:12px;background-color:#f0d79b;background-size:cover;background-position:center;font-size:0;border:2px solid #e7bd4f;flex:none}
+/* ===== Vídeo em destaque (último do canal) ===== */
+.vd-destaque{grid-column:1/-1}
+.vd-play{position:relative;display:block;width:100%;padding:0;border:0;background:#000;cursor:pointer}
+.vd-play-ico{position:absolute;inset:0;margin:auto;width:66px;height:66px;border-radius:50%;background:rgba(196,48,43,.94);color:#fff;display:grid;place-items:center;font-size:26px;box-shadow:0 6px 20px rgba(0,0,0,.4)}
+.vd-embed{position:relative;width:100%;aspect-ratio:16/9;background:#000}
+.vd-embed iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.vd-destaque .vd-body h4 a::after{display:none}
+.vd-destaque .vd-body h4{font-size:22px}
+.vd-yt{display:inline-block;margin-top:6px;padding:9px 14px;border-radius:999px;background:#c4302b;color:#fff;font:800 12px Inter,sans-serif;text-decoration:none;align-self:flex-start}
+.vd-badge.canal{background:#c4302b;color:#fff}
 </style>
 </head>
 <body>
 <div id="offlineBanner">📶 Você está offline — o Pastor Virtual responde com mensagens prontas e a rádio fica indisponível até a conexão voltar.</div>
-<header class="top"><div class="topbar"><img class="avatar" src="imagens/avatar.jpg" alt="Virtual Pastor Virtual"><div class="brand"><h1>PASTOR VIRTUAL</h1><p>Respostas na visão do pastor virtual com base na Palavra de Deus!</p></div><nav class="site-nav" style="margin-left:auto;display:flex;gap:16px;flex-wrap:wrap;font-size:12px"><a href="estudio-ao-vivo.html">Ao Vivo</a><a href="noticias/">Notícias</a><a href="noticias/videos/">Vídeos</a><a href="noticias/fotos/">Fotos</a><a href="noticias/top5/">Top 5</a><a href="tempo/">Tempo</a><a href="sobre.html">Sobre</a><a href="contato.html">Contato</a></nav></div></header>
+<header class="top"><div class="topbar"><img class="avatar" src="imagens/avatar.jpg" alt="Pastor Virtual"><div class="brand"><h1>PASTOR VIRTUAL</h1><p>Respostas na visão do pastor virtual com base na Palavra de Deus!</p></div><nav class="site-nav" style="margin-left:auto;display:flex;gap:16px;flex-wrap:wrap;font-size:12px"><a href="estudio-ao-vivo.html">Ao Vivo</a><a href="noticias/">Notícias</a><a href="noticias/videos/">Vídeos</a><a href="noticias/fotos/">Fotos</a><a href="noticias/top5/">Top 5</a><a href="tempo/">Tempo</a><a href="sobre.html">Sobre</a><a href="contato.html">Contato</a></nav></div></header>
 <main class="page"><section class="welcome"><span class="badge">Palavra · acolhimento · oração</span><h2>Fique à vontade para <em>compartilhar</em>.</h2><p>Olá, eu sou o seu Pastor Virtual. Fui programado para lhe ajudar com as coisas de Deus e de Jesus, auxiliando em sua busca sobre a Palavra de Deus.
-Estou aqui para ouvir seu coração e conversar sobre Deus, Jesus e a Palavra. Pergunte, reflita ou desabafe; caminharemos juntos com fé e esperança.</p><section class="chat-inline" aria-label="Conversa com o Pastor Virtual"><div class="wa-topbar"><div class="wa-avatar" id="waAvatarBtn" role="button" tabindex="0" aria-label="Adicionar sua foto"><img id="waAvatarImg" alt="Sua foto" style="display:none"><span class="wa-avatar-placeholder" id="waAvatarPlaceholder">📷<small>Sua foto aqui</small></span><input type="file" id="waAvatarInput" accept="image/*" hidden></div><div class="wa-greeting"><strong id="waGreetingText">Bom dia!</strong><p>Escreva sua pergunta para o Pastor Virtual</p></div></div><div class="messages" id="messages" style="display:none"><div class="bubble virtual">A paz do Senhor esteja com você, meu irmão(ã). Que alegria ter você aqui. Como posso ouvir e acolher você hoje?<span class="ref">"O Senhor é o meu pastor; nada me faltará." — Salmos 23:1</span></div></div><div class="typing" id="typing">Jorge está preparando uma resposta...</div><div class="wa-suggestions" id="launchSuggestions"></div><div class="wa-composer" id="waComposer"><span class="wa-icon" id="waEmojiBtn" role="button" tabindex="0" aria-label="Emojis">😊</span><div class="wa-emoji-panel" id="waEmojiPanel"></div><textarea id="input" placeholder="Mensagem" aria-label="Sua pergunta" rows="1" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();send('input')}"></textarea><span class="wa-icon" aria-hidden="true">📎</span><span class="wa-icon" aria-hidden="true">📷</span><button type="button" class="wa-mic-btn" id="mic" onclick="toggleMic('input','mic')" aria-label="Falar pergunta" title="Falar pergunta">🎙</button><button type="button" class="wa-send-btn" id="send" onclick="send('input')" aria-label="Enviar">➤</button></div></section><div class="quote"><q>Sede uns para com os outros benignos, misericordiosos, perdoando-vos uns aos outros.</q>Efésios 4:32</div>
+Estou aqui para ouvir seu coração e conversar sobre Deus, Jesus e a Palavra. Pergunte, reflita ou desabafe; caminharemos juntos com fé e esperança.</p><section class="chat-inline" aria-label="Conversa com o Pastor Virtual"><div class="wa-topbar"><div class="wa-avatar" id="waAvatarBtn" role="button" tabindex="0" aria-label="Adicionar sua foto"><img id="waAvatarImg" alt="Sua foto" style="display:none"><span class="wa-avatar-placeholder" id="waAvatarPlaceholder">📷<small>Sua foto aqui</small></span><input type="file" id="waAvatarInput" accept="image/*" hidden></div><div class="wa-greeting"><strong id="waGreetingText">Bom dia!</strong><p>Escreva sua pergunta para o Pastor Virtual</p></div></div><div class="messages" id="messages" style="display:none"><div class="bubble virtual">A paz do Senhor esteja com você, meu irmão(ã). Que alegria ter você aqui. Como posso ouvir e acolher você hoje?<span class="ref">"O Senhor é o meu pastor; nada me faltará." — Salmos 23:1</span></div></div><div class="typing" id="typing">O Pastor Virtual está preparando uma resposta...</div><div class="wa-suggestions" id="launchSuggestions"></div><div class="wa-composer" id="waComposer"><span class="wa-icon" id="waEmojiBtn" role="button" tabindex="0" aria-label="Emojis">😊</span><div class="wa-emoji-panel" id="waEmojiPanel"></div><textarea id="input" placeholder="Mensagem" aria-label="Sua pergunta" rows="1" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();send('input')}"></textarea><span class="wa-icon" aria-hidden="true">📎</span><span class="wa-icon" aria-hidden="true">📷</span><button type="button" class="wa-mic-btn" id="mic" onclick="toggleMic('input','mic')" aria-label="Falar pergunta" title="Falar pergunta">🎙</button><button type="button" class="wa-send-btn" id="send" onclick="send('input')" aria-label="Enviar">➤</button></div></section><div class="quote"><q>Sede uns para com os outros benignos, misericordiosos, perdoando-vos uns aos outros.</q>Efésios 4:32</div>
 <div class="pillars">
 <div class="pillar"><span class="pillar-ico">📖</span><strong>Palavra</strong><span>Reflexões baseadas na Bíblia, todos os dias.</span></div>
 <div class="pillar"><span class="pillar-ico">🤝</span><strong>Acolhimento</strong><span>Um espaço sem julgamento para desabafar.</span></div>
@@ -345,7 +358,7 @@ Para usar: apague esta linha e a última linha deste comentário, e cole seu có
 </div>
 ===== FIM DO CÓDIGO HTML LIVRE ===== -->
 
-<div class="fixed-audio" id="radioPlayer"><div class="radio-player" id="radioPlayerBody"><img class="radio-cover" id="radioCover" src="imagens/avatar.jpg" alt="Capa da música atual"><div class="radio-info"><div class="radio-kicker"><span class="radio-live"></span> AO VIVO · RÁDIO</div><div class="radio-track radio-track-marquee" id="radioTrack" title="WEB RÁDIO DJ ÁGUIA1, PORQUE DEUS É BOM!"><span class="marquee-text">WEB RÁDIO DJ ÁGUIA1, PORQUE DEUS É BOM!&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;WEB RÁDIO DJ ÁGUIA1, PORQUE DEUS É BOM!</span></div><div class="radio-artist" id="radioArtist" style="display:none">Áudio Virtual</div><button class="radio-share" type="button" onclick="toggleShareMenu(event)">↗ Compartilhar</button><div class="radio-eq" aria-hidden="true"><svg class="vu-wave" viewBox="0 0 360 32" preserveAspectRatio="none"><defs><linearGradient id="vuWaveGradient" x1="0" x2="1"><stop offset="0%" stop-color="#ff3864"/><stop offset="25%" stop-color="#ffb52e"/><stop offset="50%" stop-color="#45f0b0"/><stop offset="75%" stop-color="#3ec9ff"/><stop offset="100%" stop-color="#b66dff"/></linearGradient></defs><path class="vu-wave-path" d="M0 16 C18 3 30 29 48 16 S78 3 96 16 S126 29 144 16 S174 3 192 16 S222 29 240 16 S270 3 288 16 S318 29 336 16 S352 8 360 16"><animate attributeName="d" dur="1.4s" repeatCount="indefinite" values="M0 16 C18 3 30 29 48 16 S78 3 96 16 S126 29 144 16 S174 3 192 16 S222 29 240 16 S270 3 288 16 S318 29 336 16 S352 8 360 16;M0 16 C18 27 30 5 48 16 S78 29 96 16 S126 3 144 16 S174 27 192 16 S222 5 240 16 S270 29 288 16 S318 3 336 16 S352 24 360 16;M0 16 C18 3 30 29 48 16 S78 3 96 16 S126 29 144 16 S174 3 192 16 S222 29 240 16 S270 3 288 16 S318 29 336 16 S352 8 360 16"/></path></svg></div></div><div class="radio-controls"><button class="radio-play" id="radioPlay" type="button" onclick="toggleRadio()" aria-label="Tocar rádio">▶</button><input class="radio-volume" id="radioVolume" type="range" min="0" max="1" step=".01" value=".85" aria-label="Volume"></div><audio id="radioAudio" preload="none" crossorigin="anonymous"></audio></div></div>
+<div class="fixed-audio" id="radioPlayer"><div class="radio-player" id="radioPlayerBody"><img class="radio-cover" id="radioCover" src="imagens/avatar.jpg" alt="Capa da música atual"><div class="radio-info"><div class="radio-kicker"><span class="radio-live"></span> AO VIVO · RÁDIO</div><div class="radio-track radio-track-marquee" id="radioTrack" title="WEB RÁDIO PASTOR VIRTUAL, PORQUE DEUS É BOM!"><span class="marquee-text">WEB RÁDIO PASTOR VIRTUAL, PORQUE DEUS É BOM!&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;WEB RÁDIO PASTOR VIRTUAL, PORQUE DEUS É BOM!</span></div><div class="radio-artist" id="radioArtist" style="display:none">Pastor Virtual</div><button class="radio-share" type="button" onclick="toggleShareMenu(event)">↗ Compartilhar</button><div class="radio-eq" aria-hidden="true"><svg class="vu-wave" viewBox="0 0 360 32" preserveAspectRatio="none"><defs><linearGradient id="vuWaveGradient" x1="0" x2="1"><stop offset="0%" stop-color="#ff3864"/><stop offset="25%" stop-color="#ffb52e"/><stop offset="50%" stop-color="#45f0b0"/><stop offset="75%" stop-color="#3ec9ff"/><stop offset="100%" stop-color="#b66dff"/></linearGradient></defs><path class="vu-wave-path" d="M0 16 C18 3 30 29 48 16 S78 3 96 16 S126 29 144 16 S174 3 192 16 S222 29 240 16 S270 3 288 16 S318 29 336 16 S352 8 360 16"><animate attributeName="d" dur="1.4s" repeatCount="indefinite" values="M0 16 C18 3 30 29 48 16 S78 3 96 16 S126 29 144 16 S174 3 192 16 S222 29 240 16 S270 3 288 16 S318 29 336 16 S352 8 360 16;M0 16 C18 27 30 5 48 16 S78 29 96 16 S126 3 144 16 S174 27 192 16 S222 5 240 16 S270 29 288 16 S318 3 336 16 S352 24 360 16;M0 16 C18 3 30 29 48 16 S78 3 96 16 S126 29 144 16 S174 3 192 16 S222 29 240 16 S270 3 288 16 S318 29 336 16 S352 8 360 16"/></path></svg></div></div><div class="radio-controls"><button class="radio-play" id="radioPlay" type="button" onclick="toggleRadio()" aria-label="Tocar rádio">▶</button><input class="radio-volume" id="radioVolume" type="range" min="0" max="1" step=".01" value=".85" aria-label="Volume"></div><audio id="radioAudio" preload="none" crossorigin="anonymous"></audio></div></div>
 <script>
 const answers={
 paz:[
@@ -601,7 +614,7 @@ const mark=document.createElement('button'); mark.type='button'; mark.className=
 mark.onclick=()=>toggleBookmark(exchange); actions.appendChild(mark);
 const download=document.createElement('button'); download.type='button'; download.className='exchange-btn'; download.textContent='Baixar';
 download.onclick=()=>downloadExchange(exchange); actions.appendChild(download);
-const share=document.createElement('button'); share.type='button'; share.className='exchange-btn'; share.textContent='↗ Compartilhar P&R'; share.title='Compartilhar somente esta pergunta e a resposta do Virtual'; share.setAttribute('aria-label','Compartilhar somente esta pergunta e a resposta do Virtual');
+const share=document.createElement('button'); share.type='button'; share.className='exchange-btn'; share.textContent='↗ Compartilhar P&R'; share.title='Compartilhar somente esta pergunta e a resposta do Pastor Virtual'; share.setAttribute('aria-label','Compartilhar somente esta pergunta e a resposta do Pastor Virtual');
 share.onclick=()=>shareExchange(exchange); actions.appendChild(share);
 exchange.appendChild(actions); updateBookmarkUI(exchange); return exchange;
 }
@@ -612,13 +625,13 @@ if(label)label.textContent=saved?'Pergunta e resposta marcadas':'';
 }
 function toggleBookmark(exchange){const id=exchange.dataset.id;if(exchange.dataset.marked==='true'){exchange.dataset.marked='false';markedExchanges.delete(id)}else{exchange.dataset.marked='true';markedExchanges.add(id)}persistMarked();updateBookmarkUI(exchange)}
 function deleteExchange(exchange){
-if(!confirm('Excluir esta pergunta e a resposta do Virtual?'))return;
+if(!confirm('Excluir esta pergunta e a resposta do Pastor Virtual?'))return;
 if(exchange._userEntry) conversationHistory=conversationHistory.filter(entry=>entry!==exchange._userEntry);
 if(exchange._assistantEntry) conversationHistory=conversationHistory.filter(entry=>entry!==exchange._assistantEntry);
 markedExchanges.delete(exchange.dataset.id); persistMarked();
 exchange.remove();
 }
-function exchangeText(exchange){const question=exchange.querySelector('.bubble.you')?.textContent.trim()||'';const answer=exchange.querySelector('.bubble.virtual')?.textContent.trim()||'A resposta ainda está sendo preparada.';return 'PERGUNTA:\n'+question+'\n\nRESPOSTA DO VIRTUAL:\n'+answer}
+function exchangeText(exchange){const question=exchange.querySelector('.bubble.you')?.textContent.trim()||'';const answer=exchange.querySelector('.bubble.virtual')?.textContent.trim()||'A resposta ainda está sendo preparada.';return 'PERGUNTA:\n'+question+'\n\nRESPOSTA DO PASTOR VIRTUAL:\n'+answer}
 function exchangePostText(exchange){const question=exchange.querySelector('.bubble.you')?.textContent.trim()||'';const answer=exchange.querySelector('.bubble.virtual')?.textContent.trim()||'A resposta ainda está sendo preparada.';return 'REFLEXÃO DO PASTOR VIRTUAL\n\nPergunta\n'+question+'\n\nResposta\n'+answer}
 function downloadText(filename,text){const blob=new Blob([text],{type:'text/plain;charset=utf-8'});const url=URL.createObjectURL(blob);const link=document.createElement('a');link.href=url;link.download=filename;document.body.appendChild(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),1000)}
 function downloadExchange(exchange){downloadText('pergunta-e-resposta-virtual.txt','PASTOR VIRTUAL\n\n'+exchangeText(exchange))}
@@ -789,7 +802,7 @@ document.getElementById('cookieBanner').classList.remove('show');
 const avatar = document.querySelector('.avatar');
 if (avatar) {
 avatar.style.cursor = 'pointer';
-avatar.title = 'Abrir a conversa com Virtual';
+avatar.title = 'Abrir a conversa com o Pastor Virtual';
 avatar.setAttribute('role', 'button');
 avatar.addEventListener('click', () => {
 document.querySelector('#messages')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -840,10 +853,11 @@ if(document.readyState==='loading') document.addEventListener('DOMContentLoaded'
 })();
 </script>
 <script id="home-widgets-js">
-/* Home: laterais (gadgets) + vídeos aleatórios com o mais recente fixo */
+/* Home: laterais + botões com imagem + último vídeo do canal + vídeos aleatórios */
 (function () {
-  var N_VIDEOS = 3; /* total exibido: 1 mais recente + (N-1) aleatórios */
+  var N_VIDEOS = 3; /* total exibido: 1 último do canal + (N-1) aleatórios do site */
   var YT_CANAL = 'https://www.youtube.com/@djaguia1?sub_confirmation=1';
+  var YT_WORKER = ''; /* COLE AQUI a URL do Worker do canal (veja as instruções) */
   var NEWSLETTER_ACTION = 'https://formspree.io/f/SEU_ID'; /* TROQUE pelo seu formulário */
 
   function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
@@ -855,6 +869,7 @@ if(document.readyState==='loading') document.addEventListener('DOMContentLoaded'
     }).join('') + '</ul>';
   }
   function widget(titulo, html) { return '<section class="hw"><h3>' + esc(titulo) + '</h3>' + html + '</section>'; }
+  function fmtData(iso) { var d = new Date(iso); return isNaN(d) ? '' : d.toLocaleDateString('pt-BR'); }
 
   /* 1. Estrutura: [lateral esq] [conteúdo] [lateral dir] */
   var page = document.querySelector('main.page');
@@ -865,8 +880,8 @@ if(document.readyState==='loading') document.addEventListener('DOMContentLoaded'
   page.parentNode.insertBefore(wrap, page);
   wrap.appendChild(esq); wrap.appendChild(page); wrap.appendChild(dir);
 
-  /* 2. Partes fixas (não dependem de dados) */
-  var esqFixo = widget('Inscreva-se', '<p>Receba os novos louvores do canal.</p><a class="hw-btn yt" href="' + YT_CANAL + '" target="_blank" rel="noopener">Inscrever-se no YouTube</a>');
+  /* 2. Partes fixas */
+  var esqFixo = widget('Inscreva-se', '<img src="imagens/inscreva-se.jpg" alt="Inscreva-se no canal" style="width:100%;border-radius:10px;margin-bottom:10px;display:block"><p>Receba os novos louvores do canal.</p><a class="hw-btn yt" href="' + YT_CANAL + '" target="_blank" rel="noopener">Inscrever-se no YouTube</a>');
   esq.innerHTML = '<div id="hwNoticias"></div><div id="hwTop5"></div>' + esqFixo + '<div id="hwHtml"></div>';
 
   dir.innerHTML =
@@ -895,7 +910,7 @@ if(document.readyState==='loading') document.addEventListener('DOMContentLoaded'
     document.getElementById('hwHtml').appendChild(box);
   }
 
-  /* 3. Tempo (Open-Meteo, sem chave) */
+  /* 3. Tempo */
   var nomes = {0:'Céu limpo',1:'Poucas nuvens',2:'Parcialmente nublado',3:'Nublado',45:'Neblina',48:'Neblina',51:'Garoa',53:'Garoa',55:'Garoa',61:'Chuva fraca',63:'Chuva',65:'Chuva forte',80:'Pancadas de chuva',81:'Pancadas de chuva',82:'Pancadas fortes',95:'Tempestade',96:'Tempestade',99:'Tempestade'};
   fetch('https://api.open-meteo.com/v1/forecast?latitude=-29.75&longitude=-50.01&current=temperature_2m,weather_code&daily=temperature_2m_max,temperature_2m_min&timezone=America%2FSao_Paulo')
     .then(function (r) { return r.json(); })
@@ -906,34 +921,90 @@ if(document.readyState==='loading') document.addEventListener('DOMContentLoaded'
     })
     .catch(function () { document.getElementById('hwTempo').textContent = 'Tempo indisponível no momento.'; });
 
-  /* 4. Dados do site (notícias, top5, vídeos) */
+  /* 4. Imagens nos botões "Explore o portal" */
+  function svg(c1, c2, corpo) {
+    return 'data:image/svg+xml;utf8,' + encodeURIComponent(
+      '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 56"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="' + c1 + '"/><stop offset="1" stop-color="' + c2 + '"/></linearGradient></defs><rect width="72" height="56" fill="url(#g)"/>' + corpo + '</svg>');
+  }
+  var ILUSTRACOES = {
+    'noticias/': svg('#7b4b00', '#d99a16', '<rect x="16" y="10" width="40" height="36" rx="3" fill="#fff"/><rect x="21" y="16" width="14" height="10" fill="#d9a441"/><g fill="#8a6a3a"><rect x="38" y="16" width="14" height="3"/><rect x="38" y="22" width="14" height="3"/><rect x="21" y="30" width="31" height="3"/><rect x="21" y="36" width="31" height="3"/></g>'),
+    'noticias/videos/': 'imagens/capa-canal.jpg',
+    'noticias/top5/': svg('#5a3a00', '#f2c14e', '<path d="M36 8 l6.5 13 14.5 2 -10.5 10 2.6 14.4 L36 40.6 23 47.4 25.5 33 15 23 l14.5 -2z" fill="#fff"/>'),
+    'tempo/': svg('#1f6f9c', '#7cc4e8', '<circle cx="24" cy="24" r="10" fill="#ffd15b"/><g stroke="#ffd15b" stroke-width="3" stroke-linecap="round"><path d="M24 6v5M24 37v5M6 24h5M37 24h5M11 11l3.5 3.5M33.5 33.5L37 37M11 37l3.5-3.5M33.5 14.5L37 11"/></g><path d="M26 46 h26 a8 8 0 0 0 0 -16 a11 11 0 0 0 -21 -2 a9 9 0 0 0 -5 18 z" fill="#fff"/>')
+  };
+  function setThumb(href, img) {
+    var el = document.querySelector('.portal-link[href="' + href + '"] .portal-icon');
+    if (!el) return;
+    el.textContent = '';
+    el.style.backgroundImage = 'url("' + String(img || ILUSTRACOES[href]).replace(/"/g, '%22') + '")';
+  }
+  Object.keys(ILUSTRACOES).forEach(function (h) { setThumb(h); });
+
+  /* 5. Dados: site (dados.json) + último vídeo do canal (Worker) */
+  function getJson(url) {
+    return fetch(url, { cache: 'no-store' }).then(function (r) { return r.json(); }).catch(function () { return null; });
+  }
+  var pDados = getJson('noticias/dados.json');
+  var pCanal = YT_WORKER ? getJson(YT_WORKER) : Promise.resolve(null);
+
   function cardVideo(v, primeiro) {
-    var img = v.i || (v.y ? 'https://img.youtube.com/vi/' + v.y + '/hqdefault.jpg' : '');
+    var img = v.i || (v.y ? 'https://img.youtube.com/vi/' + v.y + '/hqdefault.jpg' : 'imagens/capa-canal.jpg');
     return '<article class="vd-card">' +
       (primeiro ? '<span class="vd-badge">Mais recente</span>' : '') +
-      (img ? '<img class="vd-img" loading="lazy" alt="' + esc(limpa(v.t)) + '" src="' + esc(img) + '">' : '<div class="vd-img"></div>') +
+      '<img class="vd-img" loading="lazy" alt="' + esc(limpa(v.t)) + '" src="' + esc(img) + '">' +
       '<div class="vd-body"><h4><a href="' + esc(v.u) + '">' + esc(limpa(v.t)) + '</a></h4>' +
       '<p>' + esc(v.d) + (v.r ? ' · ' + esc(v.r) : '') + '</p><span class="vd-mais">Continuar lendo</span></div></article>';
   }
+  function cardCanal(c) {
+    return '<article class="vd-card vd-destaque" data-yt="' + esc(c.id) + '">' +
+      '<span class="vd-badge canal">Último vídeo do canal</span>' +
+      '<button class="vd-play" type="button" aria-label="Assistir: ' + esc(c.title) + '">' +
+      '<img class="vd-img" alt="' + esc(c.title) + '" src="' + esc(c.thumb) + '"><span class="vd-play-ico">▶</span></button>' +
+      '<div class="vd-body"><h4><a href="' + esc(c.url) + '" target="_blank" rel="noopener">' + esc(c.title) + '</a></h4>' +
+      '<p>Publicado em ' + esc(fmtData(c.published)) + '</p>' +
+      '<a class="vd-yt" href="' + esc(c.url) + '" target="_blank" rel="noopener">Assistir no YouTube</a></div></article>';
+  }
 
-  fetch('noticias/dados.json', { cache: 'no-store' })
-    .then(function (r) { return r.json(); })
-    .then(function (d) {
-      if (d.posts && d.posts.length) document.getElementById('hwNoticias').innerHTML = widget('Últimas notícias', lista(d.posts.slice(0, 5)));
-      if (d.top5 && d.top5.length) document.getElementById('hwTop5').innerHTML = widget('Top 5', lista(d.top5.slice(0, 4)));
+  Promise.all([pDados, pCanal]).then(function (res) {
+    var d = res[0] || { posts: [], top5: [], videos: [] };
+    var canal = res[1] && res[1].videos && res[1].videos.length ? res[1].videos : null;
+    var videosSite = d.videos || [];
 
-      /* Vídeos: [0] = mais recente (fixo), o resto sorteado */
-      var antigo = document.querySelector('.continue-card');
-      if (antigo && d.videos && d.videos.length) {
-        var maisRecente = d.videos[0];
-        var sorteados = shuffle(d.videos.slice(1)).slice(0, N_VIDEOS - 1);
-        var bloco = document.createElement('div'); bloco.className = 'video-destaque';
-        bloco.innerHTML = '<h4 class="vd-titulo">Vídeos</h4><div class="vd-grid">' +
-          cardVideo(maisRecente, true) + sorteados.map(function (v) { return cardVideo(v, false); }).join('') + '</div>';
-        antigo.parentNode.replaceChild(bloco, antigo);
-      }
-    })
-    .catch(function () { /* sem dados: mantém o card antigo e as partes fixas */ });
+    if (d.posts && d.posts.length) {
+      document.getElementById('hwNoticias').innerHTML = widget('Últimas notícias', lista(d.posts.slice(0, 5)));
+      if (d.posts[0].i) setThumb('noticias/', d.posts[0].i);
+    }
+    if (d.top5 && d.top5.length) {
+      document.getElementById('hwTop5').innerHTML = widget('Top 5', lista(d.top5.slice(0, 4)));
+      if (d.top5[0].i) setThumb('noticias/top5/', d.top5[0].i);
+    }
+
+    /* Botão "Vídeos": miniatura do último vídeo */
+    if (canal) setThumb('noticias/videos/', canal[0].thumb);
+    else if (videosSite.length) setThumb('noticias/videos/', videosSite[0].i || (videosSite[0].y ? 'https://img.youtube.com/vi/' + videosSite[0].y + '/hqdefault.jpg' : ''));
+
+    /* Bloco de vídeos: [1º] último do canal (ou do site, se o Worker faltar) + aleatórios do site */
+    var antigo = document.querySelector('.continue-card');
+    if (!antigo || (!canal && !videosSite.length)) return;
+    var primeiroSite = canal ? null : videosSite[0];
+    var restantes = videosSite.filter(function (v) {
+      return v !== primeiroSite && !(canal && v.y && v.y === canal[0].id);
+    });
+    var sorteados = shuffle(restantes).slice(0, N_VIDEOS - 1);
+    var bloco = document.createElement('div'); bloco.className = 'video-destaque';
+    bloco.innerHTML = '<h4 class="vd-titulo">Vídeos</h4><div class="vd-grid">' +
+      (canal ? cardCanal(canal[0]) : cardVideo(primeiroSite, true)) +
+      sorteados.map(function (v) { return cardVideo(v, false); }).join('') + '</div>';
+    bloco.addEventListener('click', function (e) {
+      var btn = e.target.closest ? e.target.closest('.vd-play') : null;
+      if (!btn) return;
+      var card = btn.closest('.vd-destaque');
+      var wrapEmbed = document.createElement('div'); wrapEmbed.className = 'vd-embed';
+      wrapEmbed.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + encodeURIComponent(card.getAttribute('data-yt')) + '?autoplay=1&rel=0" title="Vídeo do canal Pastor Virtual" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>';
+      btn.parentNode.replaceChild(wrapEmbed, btn);
+    });
+    antigo.parentNode.replaceChild(bloco, antigo);
+  });
 })();
 </script>
 
