@@ -1,6 +1,5 @@
-
 // Service Worker do Pastor Virtual — permite abrir o app sem internet.
-const CACHE_NAME = 'pastor-virtual-shell-v1';
+const CACHE_NAME = 'pastor-virtual-shell-v2';
 const SHELL_URLS = [
   './',
   './index.html',
@@ -41,10 +40,12 @@ self.addEventListener('fetch', event => {
   if (req.method !== 'GET' || url.origin !== self.location.origin) return;
 
   const isPage = req.mode === 'navigate' || url.pathname.endsWith('/index.html') || url.pathname === '/';
+  const isDados = url.pathname.endsWith('/noticias/dados.json');
 
-  if (isPage) {
-    // Página principal: tenta a rede primeiro (pega atualizações),
-    // e cai para a cópia salva em cache se estiver sem internet.
+  if (isPage || isDados) {
+    // Página principal e dados.json: sempre tenta a rede primeiro
+    // (pega notícias, top5 e vídeos atualizados), e só usa a cópia
+    // salva em cache se estiver sem internet.
     event.respondWith(
       fetch(req)
         .then(res => {
@@ -52,7 +53,7 @@ self.addEventListener('fetch', event => {
           caches.open(CACHE_NAME).then(cache => cache.put(req, copy));
           return res;
         })
-        .catch(() => caches.match('./index.html').then(res => res || caches.match('./')))
+        .catch(() => caches.match(req).then(res => res || (isPage ? caches.match('./index.html') : undefined)))
     );
     return;
   }
