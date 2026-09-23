@@ -21,7 +21,7 @@ permalink: /noticias/
 <div class="news-lead-layout">
   <div id="heroCarousel" class="hero-carousel">
     {% for item in slides %}
-    {% assign thumb = item.imagem | default: "/imagens/noticias/sem-título.png" %}
+    {% capture thumb %}{% include thumb.html item=item %}{% endcapture %}{% assign thumb = thumb | strip %}
     <a href="{{ item.url }}" class="hero-slide{% if forloop.first %} is-active{% endif %}" data-index="{{ forloop.index0 }}">
       <img src="{{ thumb }}" alt="{{ item.title }}" loading="{% if forloop.first %}eager{% else %}lazy{% endif %}">
       <div class="hero-overlay">
@@ -38,7 +38,7 @@ permalink: /noticias/
 
   <div class="side-stories">
     {% for item in resto %}
-    {% assign thumb = item.imagem | default: "/imagens/noticias/sem-título.png" %}
+    {% capture thumb %}{% include thumb.html item=item %}{% endcapture %}{% assign thumb = thumb | strip %}
     <a href="{{ item.url }}" class="side-story">
       <img src="{{ thumb }}" alt="{{ item.title }}" loading="lazy">
       <div><span>{{ item.categoria | default: "Conteúdo gospel" }}</span><strong>{{ item.title | truncate: 72 }}</strong></div>
@@ -52,7 +52,7 @@ permalink: /noticias/
     <div class="section-heading"><div><span class="eyebrow">ATUALIZAÇÕES</span><h2>Todas as publicações</h2></div><span class="count">{{ todos.size }} conteúdos</span></div>
     <div class="news-grid">
       {% for item in todos %}
-      {% assign thumb = item.imagem | default: "/imagens/noticias/sem-título.png" %}
+      {% capture thumb %}{% include thumb.html item=item %}{% endcapture %}{% assign thumb = thumb | strip %}
       <a href="{{ item.url }}" class="news-card">
         <div class="news-card-media"><img src="{{ thumb }}" alt="{{ item.title }}" loading="lazy"><span>{{ item.categoria | default: "Gospel" }}</span></div>
         <div class="news-card-body"><time datetime="{{ item.date | date_to_xmlschema }}">{{ item.date | date: "%d/%m/%Y" }}</time><h3>{{ item.title }}</h3><p>{{ item.excerpt | strip_html | strip_newlines | truncate: 110 | default: "Leia a matéria completa e acompanhe esta história." }}</p><strong>Continuar lendo →</strong></div>
