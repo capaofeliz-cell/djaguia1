@@ -1,14 +1,16 @@
-{%- assign vurl = include.item.youtube | default: include.item.video_url | default: include.item.url_video | default: include.item.link | default: include.item.video | default: "" -%}
-{%- assign vid = "" -%}
-{%- if vurl contains "youtu" -%}
-  {%- if vurl contains "youtu.be/" -%}
-    {%- assign vid = vurl | split: "youtu.be/" | last | split: "?" | first -%}
-  {%- elsif vurl contains "shorts/" -%}
-    {%- assign vid = vurl | split: "shorts/" | last | split: "?" | first -%}
-  {%- elsif vurl contains "embed/" -%}
-    {%- assign vid = vurl | split: "embed/" | last | split: "?" | first -%}
-  {%- elsif vurl contains "v=" -%}
-    {%- assign vid = vurl | split: "v=" | last | split: "&" | first -%}
+{%- assign vid = include.item.youtube_id | default: "" | strip -%}
+{%- if vid == "" -%}
+  {%- assign vurl = include.item.youtube | default: include.item.video_url | default: include.item.url_video | default: include.item.link | default: include.item.video | default: "" -%}
+  {%- if vurl contains "youtu" -%}
+    {%- if vurl contains "youtu.be/" -%}
+      {%- assign vid = vurl | split: "youtu.be/" | last | split: "?" | first -%}
+    {%- elsif vurl contains "shorts/" -%}
+      {%- assign vid = vurl | split: "shorts/" | last | split: "?" | first -%}
+    {%- elsif vurl contains "embed/" -%}
+      {%- assign vid = vurl | split: "embed/" | last | split: "?" | first -%}
+    {%- elsif vurl contains "v=" -%}
+      {%- assign vid = vurl | split: "v=" | last | split: "&" | first -%}
+    {%- endif -%}
   {%- endif -%}
 {%- endif -%}
 {%- if vid != "" -%}https://img.youtube.com/vi/{{ vid }}/hqdefault.jpg
