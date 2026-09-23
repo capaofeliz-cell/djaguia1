@@ -3,7 +3,7 @@ title: "Fé e Medicina: Deus não nos chama a ignorar o cuidado"
 categoria: Saúde
 autor: Pastor Virtual Jorge
 date: 2026-09-23T07:32:00.000-03:00
-imagem: /imagens/noticias/46b3cabd-0f59-47e3-8bc6-8fb3cf8669a4.png
+imagem: ""
 ---
 “Medicina e fé podem andar lado a lado. Buscar ajuda médica não significa abandonar Deus.”
 
