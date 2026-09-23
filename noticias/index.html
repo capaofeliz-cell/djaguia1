@@ -11,7 +11,6 @@ permalink: /noticias/
 
 {% assign todos = "" | split: "" %}
 {% for post in site.posts %}{% assign todos = todos | push: post %}{% endfor %}
-{% for item in site.top5 %}{% assign todos = todos | push: item %}{% endfor %}
 {% for item in site.videos %}{% assign todos = todos | push: item %}{% endfor %}
 {% assign todos = todos | sort: "date" | reverse %}
 {% assign slides = todos | slice: 0, 5 %}
