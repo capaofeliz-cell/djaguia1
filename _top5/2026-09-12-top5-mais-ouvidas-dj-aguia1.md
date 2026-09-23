@@ -1,7 +1,7 @@
 ---
-title: Top 5 — 01
+title: Top 5 - 01
 date: 2026-09-12T19:38:00.000-03:00
-intro: "- Confira as cinco músicas mais ouvidas do canal DJ ÁGUIA1 no YouTube."
+intro: ""
 itens:
   - titulo: Jesus Vai Voltar
     imagem: ""
