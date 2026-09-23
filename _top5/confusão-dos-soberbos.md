@@ -1,5 +1,5 @@
 ---
-title: Confusão dos Soberbos -
+title: TO5 - 02
 date: 2026-09-13T14:11:00.000-03:00
 intro: "- Uma canção profética que denuncia a idolatria aos homens corruptos."
 ---
