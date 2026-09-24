@@ -368,7 +368,23 @@ Estou aqui para ouvir seu coração e conversar sobre Deus, Jesus e a Palavra. P
     <div class="carousel-nav" aria-label="Navegação das notícias"><button class="carousel-dot active" type="button" aria-label="Notícia 1"></button><button class="carousel-dot" type="button" aria-label="Notícia 2"></button><button class="carousel-dot" type="button" aria-label="Notícia 3"></button></div>
   </div>
   <div class="portal-grid">
-    <aside class="portal-card"><h4>Em alta</h4><p class="sub">Artigos com imagem e leitura rápida.</p><a class="portal-article" href="noticias/"><img class="article-image" src="imagens/noticias/112.jpg" alt="Notícia gospel em destaque"><span><strong>Raquel Santos lança nova música como uma oração</strong><small class="article-meta">Música gospel · continuar lendo</small></span></a><a class="portal-article" href="noticias/"><img class="article-image" src="imagens/noticias/114.jpg" alt="Notícia gospel em destaque"><span><strong>Douglas Borges apresenta mensagem de fé e esperança</strong><small class="article-meta">Lançamento · continuar lendo</small></span></a><a class="portal-article" href="noticias/"><img class="article-image" src="imagens/noticias/115.jpg" alt="Notícia gospel em destaque"><span><strong>Testemunhos que inspiram a comunidade cristã</strong><small class="article-meta">Mundo cristão · continuar lendo</small></span></a><div class="mini-weather"><span>Tempo em Capão da Canoa</span><strong id="portalTemp">—°</strong></div></aside>
+   <aside class="portal-card"><h4>Em alta</h4><p class="sub">Artigos com imagem e leitura rápida.</p>
+<script>
+(function(){
+  // LISTA DE ARTIGOS: para adicionar, copie uma linha e mude os dados
+  var artigos=[
+    {img:"imagens/noticias/114.jpg", titulo:"Douglas Borges apresenta mensagem de fé e esperança", cat:"Lançamento", link:"noticias/"},
+    {img:"imagens/noticias/115.jpg", titulo:"Testemunhos que inspiram a comunidade cristã", cat:"Mundo cristão", link:"noticias/"}
+  ];
+  // sorteio a cada carregamento
+  for(var i=artigos.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=artigos[i];artigos[i]=artigos[j];artigos[j]=t;}
+  var html=artigos.slice(0,3).map(function(a){
+    return `<a class="portal-article" href="${a.link}"><img class="article-image" src="${a.img}" alt="${a.titulo}" onerror="this.closest('.portal-article').remove()"><span><strong>${a.titulo}</strong><small class="article-meta">${a.cat} · continuar lendo</small></span></a>`;
+  }).join('');
+  document.currentScript.insertAdjacentHTML('beforebegin', html);
+})();
+</script>
+<div class="mini-weather"><span>Tempo em Capão da Canoa</span><strong id="portalTemp">—°</strong></div></aside>
   </div>
   <article class="continue-card"><img src="imagens/noticias/top1.jpg" alt="Jesus vai voltar"><div><h4>Jesus Vai Voltar</h4><p>13/09/2026 · Uma mensagem forte e profética em forma de música.</p><a href="noticias/top5/jesus-vai-voltar/">Continuar lendo</a></div></article>
 </section>
