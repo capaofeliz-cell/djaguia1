@@ -3,7 +3,7 @@ title: Jovem rejeitado pela família é batizado em segredo na Ásia Central
 categoria: MUNDO
 autor: DJ ÁGUIA1
 date: 2026-09-15T10:06:00.000-03:00
-imagem: /imagens/noticias/112.jpg
+imagem: /imagens/noticias/batismo.png
 ---
 Um jovem cristão da Ásia Central decidiu assumir publicamente sua fé em Jesus mesmo diante da oposição da própria família. Segundo a organização Portas Abertas, Muhat foi batizado em segredo após sua conversão.
 
