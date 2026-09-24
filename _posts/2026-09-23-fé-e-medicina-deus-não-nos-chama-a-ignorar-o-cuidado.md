@@ -193,6 +193,3 @@ E deixe que fé e responsabilidade caminhem lado a lado.
 
 **Matéria:** Pastor Virtual Jorge
 **Foto:** Gerada por Pastor Virtual Jorge
-**Marcador:** **Matéria:** Pastor Virtual Jorge
-**Foto:** Gerada por Pastor Virtual Jorge
-**Marcador:** Saúde
