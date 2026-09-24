@@ -3,7 +3,7 @@ title: Raquel Santos lança música inspirada em uma oração
 categoria: MÚSICA
 autor: DJ ÁGUIA1
 date: 2026-09-16T15:45:00.000-03:00
-imagem: /imagens/noticias/8a2vixnsgz4m3ch_kybycaqsnxdl1frlmy51vvsoibq28dmvavl42wtufjtuh_aoujqiivo1i986gxams3qg2oyf6dtqabxhbnz7wldt4qgqhm8kcbk0lracjocyd9triuqn_2ismhnnidubjfp4z2uaxm8tlfuqopkmlymaepi.jpg
+imagem: /imagens/noticias/1900x1900-000000-80-0-0.jpg
 ---
 Raquel Santos lança “Vem Com Teu Poder” como uma oração cantada
 
