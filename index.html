@@ -1077,6 +1077,25 @@ if(document.readyState==='loading') document.addEventListener('DOMContentLoaded'
   });
 })();
 </script>
-
+<script id="em-alta-sorteio">
+(function(){
+  var QTD=5, PADRAO="imagens/capa-canal.jpg";
+  var card=[].slice.call(document.querySelectorAll('.portal-card')).filter(function(c){var h=c.querySelector('h4');return h&&h.textContent.trim()==='Em alta';})[0];
+  if(!card)return;
+  var clima=card.querySelector('.mini-weather');
+  function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+  function embaralha(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+  fetch('noticias/dados.json',{cache:'no-store'}).then(function(r){return r.json();}).then(function(d){
+    if(!d||!d.posts||!d.posts.length)return;
+    var vistos={},unicos=[];
+    d.posts.forEach(function(x){var t=String(x.t||'').replace(/\s+-\s*$/,'').trim();if(t&&!vistos[t]){vistos[t]=1;x.t=t;unicos.push(x);}});
+    var html=embaralha(unicos).slice(0,QTD).map(function(x){
+      return '<a class="portal-article" href="'+esc(x.u)+'"><img class="article-image" loading="lazy" alt="" src="'+esc(x.i||PADRAO)+'" onerror="this.onerror=null;this.src=\''+PADRAO+'\'"><span><strong>'+esc(x.t)+'</strong><small class="article-meta">'+esc(x.c||x.cat||x.r||'Notícia')+' · continuar lendo</small></span></a>';
+    }).join('');
+    card.querySelectorAll('.portal-article').forEach(function(a){a.remove();});
+    if(clima)clima.insertAdjacentHTML('beforebegin',html);
+  }).catch(function(){});
+})();
+</script>
 </body>
 </html>
