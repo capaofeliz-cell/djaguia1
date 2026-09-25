@@ -48,9 +48,10 @@ permalink: /noticias/
 
 <div class="news-content-layout">
   <section>
-    <div class="section-heading"><div><span class="eyebrow">ATUALIZAÇÕES</span><h2>Todas as publicações</h2></div><span class="count">{{ todos.size }} conteúdos</span></div>
+    {% assign exibidos = todos | slice: 0, 5 %}
+    <div class="section-heading"><div><span class="eyebrow">ATUALIZAÇÕES</span><h2>Todas as publicações</h2></div><span class="count">{{ exibidos.size }} conteúdos</span></div>
     <div class="news-grid">
-      {% for item in todos %}
+      {% for item in exibidos %}
       {% capture thumb %}{% include thumb.html item=item %}{% endcapture %}{% assign thumb = thumb | strip %}
       <a href="{{ item.url }}" class="news-card">
         <div class="news-card-media"><img src="{{ thumb }}" alt="{{ item.title }}" loading="lazy"><span>{{ item.categoria | default: "Gospel" }}</span></div>
