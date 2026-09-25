@@ -3,50 +3,198 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0A1428">
   <title>Página não encontrada (404) | Pastor Virtual</title>
   <meta name="description" content="A página que você procura não foi encontrada. Volte ao Pastor Virtual, leia notícias gospel ou entre em contato.">
   <meta name="robots" content="noindex, follow">
-
   <style>
+    :root {
+      color-scheme: light;
+      --navy: #0A1428;
+      --navy-light: #142541;
+      --gold: #D7B56D;
+      --paper: #F7F5EF;
+      --ink: #172238;
+      --muted: #667085;
+      --white: #fff;
+    }
+    * { box-sizing: border-box; }
     body {
-      margin: 0;
       min-height: 100vh;
+      margin: 0;
+      padding: 24px;
       display: grid;
       place-items: center;
-      padding: 24px;
-      box-sizing: border-box;
-      background: #0A1428;
-      color: #fff;
-      font-family: Arial, sans-serif;
+      color: var(--ink);
+      background: radial-gradient(ellipse at 50% 0%, #203454 0, var(--navy) 65%);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    .card {
+      width: min(760px, 100%);
+      overflow: hidden;
+      border: 1px solid rgba(215,181,109,.52);
+      border-radius: 24px;
+      background: var(--paper);
+      box-shadow: 0 28px 90px rgba(0,0,0,.38);
+    }
+    .scene {
+      display: block;
+      width: 100%;
+      height: auto;
+      background: #9fc6ce;
+    }
+    .copy {
+      padding: 28px 32px 34px;
       text-align: center;
     }
-
-    main {
-      width: min(560px, 100%);
-      padding: 48px 32px;
-      box-sizing: border-box;
-      border: 1px solid #D7B56D;
-      border-radius: 16px;
-      background: #152440;
+    .brand {
+      margin: 0 0 8px;
+      color: #94763b;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .17em;
+      text-transform: uppercase;
     }
+    h1 {
+      margin: 0;
+      color: var(--navy);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(32px, 6vw, 46px);
+      line-height: 1.12;
+    }
+    .message {
+      max-width: 510px;
+      margin: 13px auto 0;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.65;
+    }
+    .actions {
+      margin-top: 23px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 11px;
+    }
+    .button {
+      min-height: 46px;
+      padding: 12px 19px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--navy);
+      border-radius: 999px;
+      background: var(--navy);
+      color: var(--white);
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: transform .18s ease, background .18s ease;
+    }
+    .button:hover { transform: translateY(-2px); background: var(--navy-light); }
+    .button.secondary { background: transparent; color: var(--navy); }
+    .button.secondary:hover { background: #ebe8df; }
+    .footer {
+      margin-top: 23px;
+      color: #737b87;
+      font-size: 13px;
+    }
+    .footer a { color: #806633; text-underline-offset: 3px; }
+    a:focus-visible { outline: 3px solid var(--gold); outline-offset: 4px; }
 
-    h1 { color: #D7B56D; }
+    /* O personagem começa olhando para o lado e, ao abrir, volta o olhar para você. */
+    .pupils {
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: look-at-camera 1.05s cubic-bezier(.2,.8,.3,1) .35s both;
+    }
+    @keyframes look-at-camera {
+      0% { transform: translate(-2.5px, 0); }
+      58% { transform: translate(2px, .4px); }
+      78% { transform: translate(-.7px, 0); }
+      100% { transform: translate(0, 0); }
+    }
+    .water-glimmer { animation: shimmer 3.2s ease-in-out infinite alternate; }
+    @keyframes shimmer { from { opacity: .35; } to { opacity: .8; } }
 
-    p { line-height: 1.6; }
-
-    a {
-      color: #D7B56D;
-      text-underline-offset: 3px;
+    @media (max-width: 560px) {
+      body { padding: 14px; }
+      .card { border-radius: 18px; }
+      .copy { padding: 24px 20px 28px; }
+      .message { font-size: 15px; }
+      .actions { flex-direction: column; }
+      .button { width: 100%; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; }
     }
   </style>
 </head>
 <body>
-  <main>
-    <h1>Página não encontrada</h1>
-    <p>O endereço pode estar incorreto ou a página pode ter mudado.</p>
-    <p><a href="/">Voltar para o início</a></p>
-    <p><a href="/noticias/">Ver notícias gospel</a></p>
-    <p><a href="/contato.html">Falar com a gente</a></p>
+  <main class="card">
+    <svg class="scene" viewBox="0 0 900 390" role="img" aria-labelledby="scene-title scene-desc" xmlns="http://www.w3.org/2000/svg">
+      <title id="scene-title">Pescador à beira do lago</title>
+      <desc id="scene-desc">Ilustração em estilo anime de um pescador tranquilo junto à água, com o olhar se voltando para quem visita a página.</desc>
+      <defs>
+        <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#8cb8c7"/><stop offset="1" stop-color="#e7cfaa"/></linearGradient>
+        <linearGradient id="lake" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#477f91"/><stop offset="1" stop-color="#193a55"/></linearGradient>
+        <linearGradient id="jacket" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#d0785d"/><stop offset="1" stop-color="#8f4050"/></linearGradient>
+        <linearGradient id="hair" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#563e3b"/><stop offset="1" stop-color="#272b39"/></linearGradient>
+        <clipPath id="scene-clip"><rect width="900" height="390"/></clipPath>
+      </defs>
+      <g clip-path="url(#scene-clip)">
+        <rect width="900" height="245" fill="url(#sky)"/>
+        <circle cx="708" cy="91" r="39" fill="#f6e3b6" opacity=".9"/>
+        <circle cx="708" cy="91" r="53" fill="#f6e3b6" opacity=".14"/>
+        <path d="M0 202Q105 118 222 191Q340 109 459 190Q571 122 685 186Q792 120 900 173V270H0Z" fill="#577b79"/>
+        <path d="M0 222Q137 169 260 217Q391 156 532 220Q677 165 900 211V278H0Z" fill="#355d66"/>
+        <rect y="237" width="900" height="153" fill="url(#lake)"/>
+        <path class="water-glimmer" d="M0 267q120-11 245 0t255 0 250 0 150 0M0 299q90-8 185 0t198 0 200 0 185 0 132 0M0 341q100-9 204 0t193 0 203 0 180 0 120 0" fill="none" stroke="#c3d2c3" stroke-width="2" opacity=".55"/>
+        <path d="M0 367q106-29 218-4 80 18 138 27H0Z" fill="#172f42"/>
+        <path d="M633 390q43-74 142-50 51 12 125 2v48Z" fill="#172f42"/>
+        <path d="M251 319q66-19 135-1" fill="none" stroke="#d7b56d" stroke-width="2" opacity=".7"/>
+        <path d="M402 291Q355 182 318 69" fill="none" stroke="#302d32" stroke-width="5" stroke-linecap="round"/>
+        <path d="M318 69Q333 130 351 200Q367 239 380 257" fill="none" stroke="#f2e4c6" stroke-width="1.5" opacity=".9"/>
+        <path d="M379 256q-9 8-2 15 8 6 14-2" fill="none" stroke="#f2e4c6" stroke-width="1.5"/>
+        <ellipse cx="484" cy="339" rx="91" ry="22" fill="#101f30" opacity=".42"/>
+        <path d="M398 295q-30 16-40 41l-22 23q-7 8 5 12l85 1q24-3 32-20l4-39Z" fill="#283c55"/>
+        <path d="M492 299q26 12 37 38l36 23q9 8-2 13l-86-2q-17-4-23-20l-8-38Z" fill="#354c68"/>
+        <path d="M424 252q-25 17-26 53l-9 37q35 25 99 8l9-59q-9-35-39-44Z" fill="url(#jacket)" stroke="#713c49" stroke-width="3"/>
+        <path d="M428 258l20 18 25-19" fill="none" stroke="#f1c79d" stroke-width="5" stroke-linecap="round"/>
+        <path d="M397 278q-19 2-28 22l-25 31q-5 8 3 11 8 2 14-6l37-27" fill="#e4ab86" stroke="#794c50" stroke-width="3" stroke-linecap="round"/>
+        <path d="M489 278q20 0 34 17l20 22q7 8 0 13-8 4-15-4l-31-21" fill="#e4ab86" stroke="#794c50" stroke-width="3" stroke-linecap="round"/>
+        <path d="M528 315l-6-6 8-5 7 7-5 8Z" fill="#d7b56d" stroke="#694e36" stroke-width="2"/>
+        <path d="M451 245q-5 17-1 26l14 14 17-14q4-12-2-28" fill="#d99b78"/>
+        <ellipse cx="461" cy="226" rx="39" ry="46" fill="#f0bd94" stroke="#503c3c" stroke-width="3"/>
+        <path d="M424 222q-5-34 21-48 28-15 52 6 15 14 8 42l-7-12-7-15q-18 7-39 0-9 11-24 14Z" fill="url(#hair)" stroke="#302b38" stroke-width="3" stroke-linejoin="round"/>
+        <path d="M426 212q-13 3-10 17 2 10 10 11M496 211q13 0 12 15-1 10-9 12" fill="#f0bd94" stroke="#503c3c" stroke-width="3"/>
+        <path d="M438 222q9-7 17 0M468 221q9-7 17 0" fill="none" stroke="#50353a" stroke-width="3.2" stroke-linecap="round"/>
+        <g class="pupils" fill="#243447">
+          <ellipse cx="447" cy="230" rx="3.2" ry="5.2"/>
+          <ellipse cx="477" cy="229" rx="3.2" ry="5.2"/>
+          <circle cx="448" cy="228" r="1.1" fill="#fff"/>
+          <circle cx="478" cy="227" r="1.1" fill="#fff"/>
+        </g>
+        <path d="M459 230q-3 8 2 9" fill="none" stroke="#bd806d" stroke-width="2" stroke-linecap="round"/>
+        <path d="M452 246q9 8 19-1" fill="none" stroke="#9e5c5d" stroke-width="2.3" stroke-linecap="round"/>
+        <path d="M428 210q13-15 25-23M468 188q13 4 22 15" fill="none" stroke="#79605a" stroke-width="2" opacity=".8"/>
+        <path d="M415 277q17 10 31 3M481 280q14 6 25-2" fill="none" stroke="#efb093" stroke-width="2" opacity=".65"/>
+        <circle cx="376" cy="296" r="3" fill="#f6e3b6"/>
+        <path d="M0 0h900v390H0z" fill="none" stroke="#d7b56d" stroke-opacity=".28" stroke-width="2"/>
+      </g>
+    </svg>
+
+    <section class="copy" aria-labelledby="page-title">
+      <p class="brand">Pastor Virtual · Erro 404</p>
+      <h1 id="page-title">Esta página não foi encontrada.</h1>
+      <p class="message">O endereço pode estar incorreto ou a página pode ter mudado. O pescador já olhou para você — agora vamos encontrar o caminho de volta.</p>
+      <nav class="actions" aria-label="Sugestões de navegação">
+        <a class="button" href="/">Voltar para o início</a>
+        <a class="button secondary" href="/noticias/">Ver notícias gospel</a>
+      </nav>
+      <p class="footer">Porque Deus é bom. · <a href="/contato.html">Falar com a gente</a> · <a href="/privacidade/">Privacidade</a></p>
+    </section>
   </main>
 </body>
 </html>
