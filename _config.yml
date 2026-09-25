@@ -49,4 +49,3 @@ defaults:
 
 exclude:
   - README.md
-  - admin
