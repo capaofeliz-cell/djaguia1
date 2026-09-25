@@ -13,7 +13,7 @@ permalink: /noticias/
 {% for post in site.posts %}{% assign todos = todos | push: post %}{% endfor %}
 {% for item in site.videos %}{% assign todos = todos | push: item %}{% endfor %}
 {% assign todos = todos | sort: "date" | reverse %}
-{% assign slides = todos | slice: 0, 5 %}
+{% assign slides = todos | slice: 0, 4 %}
 {% assign resto = todos | slice: 1, 4 %}
 
 {% if todos.size > 0 %}
