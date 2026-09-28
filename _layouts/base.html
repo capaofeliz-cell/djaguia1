@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 {% assign og_title = page.title | default: 'Notícias Gospel' | strip_html | escape %}
 {% assign og_desc = page.description | default: 'Notícias gospel, vídeos, fotos e reflexões baseadas na Palavra de Deus. Converse com o Pastor Virtual e receba acolhimento e orientação.' | strip_html | escape %}
-{% assign og_img = page.imagem | default: '/icons/icon-512.png' %}
+{% assign og_img = page.imagem | default: '/icons/og-image.jpg' %}
 {% assign og_first = og_img | slice: 0, 4 %}
 {% if og_first != 'http' %}
   {% assign og_c = og_img | slice: 0, 1 %}
@@ -22,9 +22,9 @@
 <meta property="og:description" content="{{ og_desc }}">
 <meta property="og:url" content="https://djrenatobravo.com.br{{ page.url }}">
 <meta property="og:image" content="{{ og_img }}">
-{% unless page.imagem %}<meta property="og:image:width" content="512">
-<meta property="og:image:height" content="512">{% endunless %}
-<meta name="twitter:card" content="{% if page.imagem %}summary_large_image{% else %}summary{% endif %}">
+{% unless page.imagem %}<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">{% endunless %}
+<meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{{ og_title }} | Pastor Virtual">
 <meta name="twitter:description" content="{{ og_desc }}">
 <meta name="twitter:image" content="{{ og_img }}">
