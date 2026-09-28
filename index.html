@@ -347,6 +347,7 @@ body{background:linear-gradient(180deg,#fff 0%,#fffaf0 48%,#fff 100%)}
 .vd-titulo{font-size:18px!important}
 }
 </style>
+<style id="devocional-col">.portal-grid{grid-template-columns:1fr 1fr!important;align-items:start}.card-texto p{font-size:12.5px;line-height:1.65;color:#5b545e;margin:0 0 10px}.card-texto p.sub{font-size:10px;color:#8b8086;margin:0 0 12px}@media(max-width:760px){.portal-grid{grid-template-columns:1fr!important}}</style>
 </head>
 <body>
 <div id="offlineBanner">📶 Você está offline — o Pastor Virtual responde com mensagens prontas e a rádio fica indisponível até a conexão voltar.</div>
@@ -385,13 +386,10 @@ Estou aqui para ouvir seu coração e conversar sobre Deus, Jesus e a Palavra. P
 })();
 </script>
 <div class="mini-weather"><span>Tempo em Capão da Canoa</span><strong id="portalTemp">—°</strong></div></aside>
+  <aside class="portal-card card-texto"><h4>Devocional</h4><p class="sub">Reflexões sobre a Palavra</p><p>A Bíblia não é só um livro antigo — é como uma carta viva, escrita pra cada geração. Nos Salmos encontramos um Deus que acolhe a dor sem julgar; nos Evangelhos, um Jesus que caminha ao lado de quem está cansado ou tentando recomeçar.</p><p>Não existe resposta pronta pra tudo, mas existe um caminho: buscar, orar, ler a Palavra de coração aberto. E ninguém precisa caminhar sozinho — a igreja, a família, os irmãos na fé continuam sendo um dos maiores presentes de Deus pros momentos difíceis.</p><p>Este espaço não substitui o cuidado pastoral presencial, mas quer ser um ponto de apoio: um lugar pra parar, respirar e lembrar que a graça de Deus é nova a cada manhã.</p><h4 style="margin-top:22px">Bastidores</h4><p class="sub">Sobre o projeto</p><p>O Pastor Virtual nasceu do desejo de tornar a Palavra de Deus mais acessível no dia a dia, especialmente pra quem não tem, no momento, alguém por perto pra conversar sobre fé. Ele foi pensado pra acolher, não pra substituir — por isso sempre incentiva a busca por uma igreja, um pastor de confiança e a leitura direta da Bíblia.</p><p>O projeto segue crescendo aos poucos, com o cuidado de manter respostas acolhedoras e distantes de qualquer julgamento. Sugestões e testemunhos são bem-vindos pelos canais de contato.</p></aside>
   </div>
   <article class="continue-card"><img src="imagens/noticias/top1.jpg" alt="Jesus vai voltar"><div><h4>Jesus Vai Voltar</h4><p>13/09/2026 · Uma mensagem forte e profética em forma de música.</p><a href="noticias/top5/jesus-vai-voltar/">Continuar lendo</a></div></article>
 </section>
-<section class="section"><span class="section-kicker">Devocional</span><h3>Reflexões sobre a Palavra</h3><p>A Bíblia não é só um livro antigo — é como uma carta viva, escrita pra cada geração. Nos Salmos encontramos um Deus que acolhe a dor sem julgar; nos Evangelhos, um Jesus que caminha ao lado de quem está cansado ou tentando recomeçar.
-Não existe resposta pronta pra tudo, mas existe um caminho: buscar, orar, ler a Palavra de coração aberto. E ninguém precisa caminhar sozinho — a igreja, a família, os irmãos na fé continuam sendo um dos maiores presentes de Deus pros momentos difíceis.
-Este espaço não substitui o cuidado pastoral presencial, mas quer ser um ponto de apoio: um lugar pra parar, respirar e lembrar que a graça de Deus é nova a cada manhã.</p></section><section class="section"><span class="section-kicker">Bastidores</span><h3>Sobre o projeto</h3><p>O Pastor Virtual nasceu do desejo de tornar a Palavra de Deus mais acessível no dia a dia, especialmente pra quem não tem, no momento, alguém por perto pra conversar sobre fé. Ele foi pensado pra acolher, não pra substituir — por isso sempre incentiva a busca por uma igreja, um pastor de confiança e a leitura direta da Bíblia.
-O projeto segue crescendo aos poucos, com o cuidado de manter respostas acolhedoras e distantes de qualquer julgamento. Sugestões e testemunhos são bem-vindos pelos canais de contato.</p></section>
 <div class="footer-actions" style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center;padding:20px 0 4px">
 <button class="small-btn danger" onclick="clearChat()">Excluir conversa</button>
 <button class="small-btn" onclick="downloadConversation('marked')">Baixar marcadas</button>
@@ -1089,8 +1087,11 @@ if(document.readyState==='loading') document.addEventListener('DOMContentLoaded'
     if(!d||!d.posts||!d.posts.length)return;
     var vistos={},unicos=[];
     d.posts.forEach(function(x){var t=String(x.t||'').replace(/\s+-\s*$/,'').trim();if(t&&!vistos[t]){vistos[t]=1;x.t=t;unicos.push(x);}});
+    var comImg=embaralha(unicos.filter(function(x){return x.i&&x.i.indexOf('capa-canal')<0;}));
+    var vistasImg={};comImg=comImg.filter(function(x){if(vistasImg[x.i])return false;vistasImg[x.i]=1;return true;});
+    if(comImg.length){unicos=comImg;}
     var html=embaralha(unicos).slice(0,QTD).map(function(x){
-      return '<a class="portal-article" href="'+esc(x.u)+'"><img class="article-image" loading="lazy" alt="" src="'+esc(x.i||PADRAO)+'" onerror="this.onerror=null;this.src=\''+PADRAO+'\'"><span><strong>'+esc(x.t)+'</strong><small class="article-meta">'+esc(x.c||x.cat||x.r||'Notícia')+' · continuar lendo</small></span></a>';
+      return '<a class="portal-article" href="'+esc(x.u)+'"><img class="article-image" loading="lazy" alt="" src="'+esc(x.i||PADRAO)+'" onerror="this.closest(\'.portal-article\').remove()"><span><strong>'+esc(x.t)+'</strong><small class="article-meta">'+esc(x.c||x.cat||x.r||'Notícia')+' · continuar lendo</small></span></a>';
     }).join('');
     card.querySelectorAll('.portal-article').forEach(function(a){a.remove();});
     if(clima)clima.insertAdjacentHTML('beforebegin',html);
