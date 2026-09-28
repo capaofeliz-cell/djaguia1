@@ -14,7 +14,7 @@ crossorigin="anonymous"></script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#0A1428">
-<meta name="description" content="Pastor Virtual — respostas acolhedoras baseadas na Palavra de Deus.">
+<meta name="description" content="Converse com o Pastor Virtual e receba orientação, reflexão e versículos baseados na Palavra de Deus.">
 <link rel="manifest" href="./manifest.json?v=3">
 <link rel="icon" type="image/png" sizes="32x32" href="./icons/icon-32.png?v=3">
 <link rel="icon" type="image/png" sizes="192x192" href="./icons/icon-192.png?v=3">
@@ -23,14 +23,21 @@ crossorigin="anonymous"></script>
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Pastor Virtual">
-<title>PASTOR VIRTUAL</title>
-<meta property="og:title" content="Pastor Virtual">
-<meta property="og:description" content="Respostas acolhedoras baseadas na Palavra de Deus.">
+<title>Pastor Virtual | Acolhimento e Palavra de Deus</title>
+<link rel="canonical" href="https://djrenatobravo.com.br/">
 <meta property="og:type" content="website">
-<meta property="og:image" content="./icons/pastorvirtualvirtual.png">
+<meta property="og:site_name" content="Pastor Virtual">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="Pastor Virtual | Acolhimento e Palavra de Deus">
+<meta property="og:description" content="Converse com o Pastor Virtual e receba orientação, reflexão e versículos baseados na Palavra de Deus. Notícias gospel, vídeos e rádio ao vivo.">
+<meta property="og:url" content="https://djrenatobravo.com.br/">
+<meta property="og:image" content="https://djrenatobravo.com.br/icons/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Pastor Virtual">
-<meta name="twitter:image" content="./icons/pastorvirtualvirtual.png">
+<meta name="twitter:title" content="Pastor Virtual | Acolhimento e Palavra de Deus">
+<meta name="twitter:description" content="Orientação e reflexão baseadas na Palavra de Deus, com notícias gospel, vídeos e rádio ao vivo.">
+<meta name="twitter:image" content="https://djrenatobravo.com.br/icons/og-image.jpg">
 <link rel="preload" as="image" href="./icons/pastorvirtualvirtual.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -511,7 +518,7 @@ menu.classList.remove('open');
 function shareVia(network){
 const pageUrl=location.href;
 const encodedUrl=encodeURIComponent(pageUrl);
-const message='Converse com o Pastor Virtual — respostas acolhedoras baseadas na Palavra de Deus';
+const message='Pastor Virtual — acolhimento e orientação baseados na Palavra de Deus. Acesse:';
 const encodedMessage=encodeURIComponent(message);
 let shareUrl='';
 if(network==='whatsapp') shareUrl='https://api.whatsapp.com/send?text='+encodedMessage+'%20'+encodedUrl;
